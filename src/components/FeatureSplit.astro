@@ -1,0 +1,53 @@
+---
+export interface Props {
+  image: string;
+  alt: string;
+  credit?: string;
+  eyebrow?: string;
+  heading: string;
+  headingLevel?: "h2" | "h3";
+  flip?: boolean;
+  bullets?: string[];
+  linkHref?: string;
+  linkLabel?: string;
+}
+
+const {
+  image,
+  alt,
+  credit = "Image: WarmlyYours",
+  eyebrow,
+  heading,
+  headingLevel = "h2",
+  flip = false,
+  bullets = [],
+  linkHref,
+  linkLabel,
+} = Astro.props;
+
+const Heading = headingLevel;
+---
+
+<div class={`fs ${flip ? "fs--flip" : ""}`}>
+  <figure class="fs__frame">
+    <img src={image} alt={alt} loading="lazy" width="640" height="440" />
+    <figcaption>{credit}</figcaption>
+  </figure>
+  <div class="fs__copy">
+    {eyebrow && <p>{eyebrow}</p>}
+    <Heading set:html={heading} />
+    <div class="fs__body prose">
+      <slot />
+      {bullets.length > 0 && (
+        <ul>
+          {bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      )}
+      {linkHref && linkLabel && (
+        <p><a href={linkHref}>{linkLabel} →</a></p>
+      )}
+    </div>
+  </div>
+</div>

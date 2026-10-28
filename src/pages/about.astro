@@ -1,0 +1,160 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import StepList from "../components/StepList.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const title = "About MeltGrid Canada | Snow Melting Systems";
+const description =
+  "MeltGrid Canada designs and coordinates automatic snow and ice-melting systems for Canadian homes and businesses, using WarmlyYours technology.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/about/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "About" },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/about/" structuredData={structuredData}>
+  <section class="phero phero--text">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>About MeltGrid Canada</p>
+          <h1>One point of contact for snow melting</h1>
+          <p>
+            MeltGrid Canada designs and coordinates automatic snow and ice-melting systems for Canadian homes and
+            businesses. We bring together the technology, the design and the trades so you deal with one project
+            relationship.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+            <a class="btn btn--outline btn--lg" href="/contact/">Contact us</a>
+          </div>
+        </div>
+        <div class="phero__aside">
+          <div class="hfacts">
+            <p><strong>Homes and businesses</strong> — Residential driveways, walkways and steps, and commercial entrances and ramps.</p>
+            <p><strong>Manufacturer technology</strong> — Heating systems, controls and sensors from WarmlyYours.</p>
+            <p><strong>Coordinated project</strong> — Design, quotation and the installation trades through one contact.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-split">
+      <h2>What we do</h2>
+      <div class="prose about-prose">
+        <p>
+          Snow melting is a system, not a product. It involves the heating layer in the surface, sensors, controls,
+          the electrical supply and the trades that build the surface. When these are handled separately, gaps
+          appear between them.
+        </p>
+        <p>
+          MeltGrid Canada coordinates the snow-melting system, manufacturer-supported design and the installation
+          trades your project needs, through one project relationship. We look at your surface, coverage, controls,
+          electrical requirements and construction conditions together, rather than treating every property as the
+          same installation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container about-split">
+      <h2>Who makes the technology</h2>
+      <div class="prose about-prose">
+        <p>
+          MeltGrid Canada is not a manufacturer. The heating cable, mats, controls and sensors we design around are
+          made by WarmlyYours, and technical information and design support come from the manufacturer.
+        </p>
+        <p>
+          Where this website shows manufacturer imagery or diagrams, it is credited to WarmlyYours. Manufacturer
+          project examples are not MeltGrid Canada installations, and we say so wherever they appear.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>How we work</h2>
+        <p>Three habits that shape every project.</p>
+      </div>
+      <StepList
+        items={[
+          {
+            title: "We design before we quote",
+            body: "You get a design and an estimate built on your surface, area and electrical situation, not a generic price list.",
+          },
+          {
+            title: "Clear recommendations. Transparent scope. No guesswork on technical requirements.",
+            body: "We verify what a project actually requires against manufacturer and qualified-trade input, rather than assuming — so what we recommend is what your surface and electrical situation actually call for.",
+          },
+          {
+            title: "We coordinate the trades",
+            body: "The electrician and the surface contractors work to the same plan, with one point of contact for you.",
+          },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container about-split">
+      <h2>Built around Canadian winters</h2>
+      <div class="prose about-prose">
+        <p>
+          Our project support is built around Canadian winters and construction, starting in Ontario and the
+          Greater Toronto Area. If your property is elsewhere, send us the details and we will tell you what is
+          possible.
+        </p>
+        <p>Contact us at <a href="tel:+14377745305">437-774-5305</a> or <a href="mailto:info@meltgridcanada.ca">info@meltgridcanada.ca</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <RelatedLinks
+    heading="Explore"
+    items={[
+      { href: "/how-it-works/", title: "How it works", body: "Sensors, controls and the heating layer." },
+      { href: "/technology/", title: "The technology", body: "Mats, cables, controls and sensors." },
+      { href: "/cost/", title: "Cost and planning", body: "What shapes the cost of a project." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Start with a free design and estimate"
+    body="Tell us about your property and we come back with a design and an estimate."
+    primaryHref="/contact/"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>
+
+<style>
+  .about-split {
+    max-width: 48rem;
+  }
+  .about-prose {
+    margin-top: 1rem;
+  }
+</style>

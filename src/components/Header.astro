@@ -1,0 +1,158 @@
+---
+export interface Props {
+  variant?: "overlay" | "solid";
+}
+const { variant = "solid" } = Astro.props;
+---
+
+<header class="site-header on-dark" data-scrolled="false" data-variant={variant}>
+  <div class="site-header__bar">
+    <a aria-label="MeltGrid Canada, home" class="site-header__logo" href="/">
+      <img
+        alt="MeltGrid Canada, snow and ice-melting systems"
+        class="logo-img"
+        decoding="async"
+        height="46"
+        loading="eager"
+        src="/images/logo-on-dark.png"
+        width="159"
+      />
+    </a>
+    <nav aria-label="Main" class="site-nav">
+      <ul class="site-nav__list">
+        <li class="site-nav__item site-nav__item--group">
+          <button aria-controls="menu-solutions" aria-expanded="false" class="site-nav__link" data-menu-button type="button">
+            Solutions
+            <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <ul class="site-nav__menu" id="menu-solutions">
+            <li><a href="/heated-driveways/">Heated driveways</a></li>
+            <li><a href="/residential/">Residential snow melting</a></li>
+            <li><a href="/technology/">Technology</a></li>
+          </ul>
+        </li>
+        <li class="site-nav__item site-nav__item--group">
+          <button aria-controls="menu-applications" aria-expanded="false" class="site-nav__link" data-menu-button type="button">
+            Applications
+            <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <ul class="site-nav__menu" id="menu-applications">
+            <li><a href="/snow-melting/asphalt/">Asphalt</a></li>
+            <li><a href="/snow-melting/concrete/">Concrete</a></li>
+            <li><a href="/snow-melting/pavers/">Pavers / interlock</a></li>
+          </ul>
+        </li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/commercial/">Commercial</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/how-it-works/">How it works</a></li>
+        <li class="site-nav__item"><a class="site-nav__link" href="/cost/">Cost &amp; planning</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a aria-label="Call 437-774-5305" class="site-header__phone" href="tel:+14377745305">
+        <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
+        <span class="site-header__phone-text">437-774-5305</span>
+      </a>
+      <a class="btn btn--primary btn--md site-header__cta" href="/contact/">Request free design</a>
+      <a class="site-header__call" href="tel:+14377745305">
+        <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
+        <span>Call</span>
+      </a>
+      <button aria-controls="mobile-menu" aria-haspopup="dialog" class="site-header__menu-btn" data-open-menu type="button">
+        <svg aria-hidden="true" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M3 7h18M3 12h18M3 17h18"></path></svg>
+        <span>Menu</span>
+      </button>
+    </div>
+  </div>
+  <dialog aria-label="Site menu" class="mobile-menu on-dark" id="mobile-menu">
+    <div class="mobile-menu__top">
+      <a aria-label="MeltGrid Canada, home" href="/">
+        <img alt="MeltGrid Canada, snow and ice-melting systems" class="logo-img" decoding="async" height="46" loading="eager" src="/images/logo-on-dark.png" width="159" />
+      </a>
+      <button class="site-header__menu-btn" data-close-menu type="button">
+        <svg aria-hidden="true" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+        <span>Close</span>
+      </button>
+    </div>
+    <nav aria-label="Mobile">
+      <ul class="mobile-menu__list">
+        <li>
+          <p class="mobile-menu__group">Solutions</p>
+          <ul>
+            <li><a href="/heated-driveways/">Heated driveways</a></li>
+            <li><a href="/residential/">Residential snow melting</a></li>
+            <li><a href="/technology/">Technology</a></li>
+          </ul>
+        </li>
+        <li>
+          <p class="mobile-menu__group">Applications</p>
+          <ul>
+            <li><a href="/snow-melting/asphalt/">Asphalt</a></li>
+            <li><a href="/snow-melting/concrete/">Concrete</a></li>
+            <li><a href="/snow-melting/pavers/">Pavers / interlock</a></li>
+          </ul>
+        </li>
+        <li><a class="mobile-menu__top-link" href="/commercial/">Commercial</a></li>
+        <li><a class="mobile-menu__top-link" href="/how-it-works/">How it works</a></li>
+        <li><a class="mobile-menu__top-link" href="/cost/">Cost &amp; planning</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu__actions">
+      <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+      <a class="btn btn--ghost btn--lg" href="tel:+14377745305">Call 437-774-5305</a>
+    </div>
+  </dialog>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const menu = document.querySelector<HTMLDialogElement>("#mobile-menu");
+
+  if (header) {
+    let ticking = false;
+    const update = () => {
+      header.dataset.scrolled = String(window.scrollY > 24);
+      ticking = false;
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true },
+    );
+    update();
+  }
+
+  document.querySelector("[data-open-menu]")?.addEventListener("click", () => menu?.showModal());
+  document.querySelector("[data-close-menu]")?.addEventListener("click", () => menu?.close());
+  menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => menu.close()));
+
+  const menuButtons = document.querySelectorAll<HTMLButtonElement>("[data-menu-button]");
+  const closeAll = (except?: HTMLButtonElement) =>
+    menuButtons.forEach((btn) => {
+      if (btn !== except) btn.setAttribute("aria-expanded", "false");
+    });
+
+  menuButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      closeAll(btn);
+      btn.setAttribute("aria-expanded", String(!isOpen));
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target as HTMLElement)?.closest(".site-nav__item--group")) closeAll();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      const open = document.querySelector<HTMLButtonElement>('[data-menu-button][aria-expanded="true"]');
+      closeAll();
+      open?.focus();
+    }
+  });
+</script>

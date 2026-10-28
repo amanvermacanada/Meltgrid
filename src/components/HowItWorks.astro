@@ -1,0 +1,259 @@
+---
+// Interactive "follow one snowfall" explainer. Used on the homepage, the
+// /how-it-works/ page and /heated-driveways/. Steps auto-advance and can
+// be selected manually; "Pause animation" stops the auto-advance.
+const steps = [
+  {
+    title: "Snow begins",
+    body: "Snow starts to fall and the surface is cold. Nothing is running yet.",
+  },
+  {
+    title: "Sensor detects conditions",
+    body: "A sensor picks up the moisture and temperature conditions that mean snow or ice is forming.",
+  },
+  {
+    title: "System activates",
+    body: "The controller switches on the heating elements. Nobody has to be home or lift a finger.",
+  },
+  {
+    title: "Surface heats",
+    body: "Heat spreads up through the surface, warming it so snow melts instead of building up.",
+  },
+  {
+    title: "Snow and ice melt",
+    body: "Snow and ice melt and the meltwater drains off the surface. The path stays clear.",
+  },
+  {
+    title: "Controls manage shutdown",
+    body: "The controls keep the system running long enough to clear remaining moisture, then shut it down. Exact after-run depends on how your controls are set up.",
+  },
+];
+---
+
+<div class="how" data-how>
+  <div class="how__stage">
+    <div class="how__snow" data-how-snow></div>
+    <div class="how__section">
+      <img
+        src="/images/snow-melting-mat-asphalt-cross-section.jpg"
+        alt="Cutaway of an asphalt driveway showing finished asphalt, a snow melt mat, the base coat of asphalt and compacted gravel"
+        loading="lazy"
+        width="640"
+        height="420"
+      />
+      <div class="how__heat" data-how-heat></div>
+    </div>
+    <p class="how__credit">Image: WarmlyYours</p>
+  </div>
+  <div class="how__side">
+    <ol class="how__list" data-how-list>
+      {steps.map((step, i) => (
+        <li data-how-step={i}>
+          <button type="button" data-how-trigger={i} aria-pressed={i === 0 ? "true" : "false"}>
+            {String(i + 1).padStart(2, "0")} {step.title}
+          </button>
+          <p>{step.body}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="how__logic">
+      <figure>
+        <img src="/images/snow-melting-sensor.jpg" alt="Snow and ice sensor" loading="lazy" width="200" height="200" />
+        <figcaption>Sensor</figcaption>
+      </figure>
+      <figure>
+        <img
+          src="/images/snow-melting-controller-premium.jpg"
+          alt="Snow and ice melt controller"
+          loading="lazy"
+          width="200"
+          height="200"
+        />
+        <figcaption>Controller</figcaption>
+      </figure>
+      <div class="how__node how__node--heat"></div>
+    </div>
+  </div>
+  <button type="button" class="how__pause" data-how-pause>Pause animation</button>
+  <p class="how__fine-print">Components shown are WarmlyYours products. Your design confirms which ones your project uses.</p>
+</div>
+
+<style>
+  .how {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .how__stage {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--night-900);
+  }
+
+  .how__section {
+    position: relative;
+  }
+
+  .how__section img {
+    width: 100%;
+    display: block;
+  }
+
+  .how__heat {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 35%;
+    background: linear-gradient(180deg, rgba(255, 116, 23, 0) 0%, rgba(255, 116, 23, 0.55) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .how[data-active-step]:not([data-active-step="0"]):not([data-active-step="1"]) .how__heat {
+    opacity: 1;
+  }
+
+  .how__credit {
+    padding: 0.5rem 1rem;
+    font-size: var(--text-sm);
+    color: var(--slate-300);
+  }
+
+  .how__list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .how__list li button {
+    width: 100%;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+    color: inherit;
+    font-weight: 700;
+  }
+
+  .how__list li button[aria-pressed="true"] {
+    background: var(--heat);
+    border-color: var(--heat);
+  }
+
+  .how__list li p {
+    margin-top: 0.5rem;
+    padding: 0 0.25rem;
+    font-size: var(--text-sm);
+    color: var(--slate-300);
+    display: none;
+  }
+
+  .how__list li[data-active="true"] p {
+    display: block;
+  }
+
+  .how__logic {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .how__logic figure {
+    text-align: center;
+  }
+
+  .how__logic img {
+    border-radius: var(--radius);
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+
+  .how__logic figcaption {
+    margin-top: 0.4rem;
+    font-size: var(--text-sm);
+    color: var(--slate-300);
+  }
+
+  .how__node--heat {
+    display: none;
+  }
+
+  .how__pause {
+    margin-top: 1.25rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: inherit;
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    font-size: var(--text-sm);
+  }
+
+  .how__fine-print {
+    margin-top: 0.75rem;
+    font-size: var(--text-sm);
+    color: var(--slate-300);
+  }
+
+  @media (min-width: 900px) {
+    .how {
+      grid-template-columns: 1.1fr 1fr;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-how]");
+  if (root) {
+    const items = Array.from(root.querySelectorAll<HTMLLIElement>("[data-how-step]"));
+    const triggers = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-how-trigger]"));
+    const pauseBtn = root.querySelector<HTMLButtonElement>("[data-how-pause]");
+
+    let active = 0;
+    let playing = true;
+    let timer: number | undefined;
+
+    function render() {
+      root!.setAttribute("data-active-step", String(active));
+      items.forEach((item, i) => {
+        item.dataset.active = String(i === active);
+      });
+      triggers.forEach((btn, i) => {
+        btn.setAttribute("aria-pressed", String(i === active));
+      });
+    }
+
+    function next() {
+      active = (active + 1) % items.length;
+      render();
+    }
+
+    function startTimer() {
+      stopTimer();
+      timer = window.setInterval(next, 3200);
+    }
+
+    function stopTimer() {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    }
+
+    triggers.forEach((btn, i) => {
+      btn.addEventListener("click", () => {
+        active = i;
+        render();
+      });
+    });
+
+    pauseBtn?.addEventListener("click", () => {
+      playing = !playing;
+      pauseBtn.textContent = playing ? "Pause animation" : "Play animation";
+      if (playing) startTimer();
+      else stopTimer();
+    });
+
+    render();
+    startTimer();
+  }
+</script>

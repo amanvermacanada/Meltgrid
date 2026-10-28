@@ -1,0 +1,242 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import FeatureSplit from "../components/FeatureSplit.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import StepList from "../components/StepList.astro";
+
+const title = "Snow Melting Mats, Cables & Controls | MeltGrid Canada";
+const description =
+  "The technology under a heated surface: snow melting mats, heating cable, sensors and controls from WarmlyYours, and how each is chosen for your project.";
+
+const faqItems = [
+  {
+    q: "What is the difference between a snow melting mat and cable?",
+    a: ["A mat is heating cable pre-spaced on a mesh, rolled out over open areas. Cable is laid loose and fixed to a frame or grid, so it follows curves, stairs and irregular shapes and can be laid at different spacings. Your design chooses one or uses both."],
+  },
+  {
+    q: "Who makes the heating technology?",
+    a: ["WarmlyYours is the manufacturer of the heating cable, mats, controls and sensors described here. MeltGrid Canada is not a manufacturer: we coordinate design, the trades and the project."],
+  },
+  {
+    q: "What controls are available?",
+    a: ["Automatic controls that work with sensors, a timer control, Wi-Fi control and a multi-zone controller for larger systems. Your design picks the control approach for how you use the property."],
+  },
+  {
+    q: "What sensors are used?",
+    a: ["Sensors detect temperature and moisture. Options include aerial-mounted sensors and slab or pavement sensors, depending on the controller and the surface."],
+  },
+  {
+    q: "Can I choose the products myself?",
+    a: ["The design determines which products suit your surface, area and electrical situation. We explain the choices as part of your design and estimate."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/technology/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Technology" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/technology/" headerVariant="overlay" structuredData={structuredData}>
+  <section class="tech-hero on-dark">
+    <div class="tech-hero__media">
+      <img
+        src="/images/snow-melting-mat-close-up.jpg"
+        alt="Snow melting mat rolled out over a mesh on grey pavement, the WarmlyYours name printed on the mat tapes"
+        loading="eager"
+        width="1600"
+        height="900"
+      />
+    </div>
+    <div class="tech-hero__shade"></div>
+    <div class="container tech-hero__inner">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Technology" }]} />
+      <p>The technology</p>
+      <h1>Mats, cable, sensors and controls</h1>
+      <p>The engineered parts under the surface: what each one does, and how the right combination is chosen for your project.</p>
+      <div class="tech-hero__actions">
+        <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+        <a class="btn btn--ghost btn--lg" href="/how-it-works/">How it works</a>
+      </div>
+    </div>
+    <p class="fg-muted" style="position:relative;z-index:1;padding:0 0 1rem;text-align:center;font-size:var(--text-sm);">Image: WarmlyYours</p>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>What is in a snow-melting system?</p>
+      <div class="answer__body">
+        <p>
+          Four things: a heating layer of mats or cable in or beneath the surface, sensors that detect snow and ice
+          conditions, a controller that runs the system, and the electrical connection. All the technology here is
+          from WarmlyYours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stack">
+      <FeatureSplit
+        image="/images/snow-melting-mat.jpg"
+        alt="Rolled snow melting mat with green heating cable woven through a mesh, and a black cold lead"
+        eyebrow="Heating layer"
+        heading="Snow Melting Mat"
+        bullets={["Installs in asphalt, concrete or beneath pavers", "Available in 2 ft and 3 ft widths and a range of lengths", "Cable spaced 3 in apart on the mat", "Cold lead supplied for connection to the power supply"]}
+      >
+        <p>
+          Heating cable attached to a mesh at a set spacing, rolled out over the area. Suited to square and
+          rectangular driveways, walkways and patios.
+        </p>
+      </FeatureSplit>
+
+      <FeatureSplit
+        image="/images/snow-melting-cable-coil.jpg"
+        alt="Coil of green snow melting heating cable"
+        eyebrow="Heating layer"
+        heading="Snow Melting Cable"
+        flip
+        bullets={["Installs in asphalt, concrete or beneath pavers", "Can be laid at different spacings, so the design can raise or lower heat output", "Available in a range of lengths and voltages", "Suited to steps and stairways"]}
+      >
+        <p>Heating cable laid loose and fixed to a frame or grid, so it follows curves, stairs and irregular shapes.</p>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Controls</h2>
+        <p>The controller decides when the heating runs. The range covers small timer-run areas through large, zoned properties.</p>
+      </div>
+      <ul class="layers__group__list tech-controls">
+        <li>
+          <img src="/images/snow-melting-controller-premium.jpg" alt="Snow and ice melt controller with its weatherproof cover open" loading="lazy" width="320" height="220" />
+          <h3>Automatic controller, premium</h3>
+          <p>Automatic operation with sensors, including a hold-on period after snow stops and support for more than one sensor.</p>
+        </li>
+        <li>
+          <img src="/images/snow-melting-controller-economy.jpg" alt="Wall-mounted metal snow-melting controller with a digital display" loading="lazy" width="320" height="220" />
+          <h3>Automatic controller, economy</h3>
+          <p>Automatic detection of temperature and moisture with a digital interface, for straightforward systems.</p>
+        </li>
+        <li>
+          <img src="/images/snow-melting-timer-control.jpg" alt="Snow and ice melting timer control in a grey enclosure with a rotary timer dial" loading="lazy" width="320" height="220" />
+          <h3>Timer control</h3>
+          <p>You turn a dial to set how long the system runs. Suited to smaller areas.</p>
+        </li>
+        <li>
+          <img src="/images/snow-melting-controller-multi-zone.jpg" alt="ZoneBraker touchscreen multi-zone snow-melting controller in a wall-mounted enclosure" loading="lazy" width="320" height="220" />
+          <h3>Multi-zone controller</h3>
+          <p>Splits a larger system into zones that run independently, for bigger properties.</p>
+        </li>
+      </ul>
+      <p class="fg-muted" style="margin-top:1.5rem;font-size:var(--text-sm);">Image: WarmlyYours. Wi-Fi control is also available.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <FeatureSplit
+        image="/images/snow-melting-sensor.jpg"
+        alt="White snow and ice sensor with a conical cap on a short stem"
+        eyebrow="Sensing"
+        heading="Sensors"
+        bullets={["Aerial-mounted sensors above ground", "Slab and pavement sensors set in the surface", "Placed in an open area where snow falls directly on them"]}
+      >
+        <p>Sensors detect the temperature and moisture that mean snow or ice is forming, so the system runs when it is needed rather than all winter.</p>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>How the right combination is chosen</h2>
+        <p>You do not pick from a parts list. Your design matches the technology to the project.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "The shape of the area", body: "Open rectangles suit mats. Curves, steps and stairs suit cable." },
+          { title: "The surface", body: "Asphalt, concrete and pavers each have their own installation method." },
+          { title: "The electrical situation", body: "Available power and the distance to the area affect the system and its controls." },
+          { title: "How you want it to run", body: "Automatic with a sensor, on a timer, from a phone, or in zones on a larger property." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <Faq heading="Technology questions" intro="Straight answers about the products." items={faqItems} />
+
+  <RelatedLinks
+    heading="Related pages"
+    dark
+    items={[
+      { href: "/how-it-works/", title: "How it works", body: "How the parts work together." },
+      { href: "/resources/electrical-requirements/", title: "Electrical requirements", body: "Power draw, amps and what your electrician confirms." },
+      { href: "/cost/", title: "Cost and planning", body: "What shapes the cost of a project." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Let the design choose the technology"
+    body="Tell us about your property. We come back with a design and an estimate."
+    primaryHref="/contact/"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>
+
+<style>
+  .tech-controls {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-top: 2rem;
+  }
+  .tech-controls li {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .tech-controls img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+  .tech-controls h3 {
+    font-size: var(--text-lg);
+    margin: 1rem 1.1rem 0.4rem;
+  }
+  .tech-controls p {
+    margin: 0 1.1rem 1.1rem;
+    color: var(--fg-muted);
+  }
+</style>

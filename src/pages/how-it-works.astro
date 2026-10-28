@@ -1,0 +1,198 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import FeatureSplit from "../components/FeatureSplit.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const title = "How Snow Melting Systems Work | MeltGrid Canada";
+const description =
+  "How a snow and ice melting system works: heating elements in the surface, a sensor that detects conditions and a controller that runs it.";
+
+const faqItems = [
+  {
+    q: "How does a snow-melting system know when to turn on?",
+    a: ["A sensor detects the temperature and moisture conditions that mean snow or ice is forming, and the controller switches the heating on. Sensors can be mounted above ground (aerial) or in the surface (slab), depending on the design."],
+  },
+  {
+    q: "Does the system keep running after the snow stops?",
+    a: ["Automatic controls typically include an adjustable hold-on period that keeps the heating on after snow stops, so remaining snow and moisture clear before the system shuts down. The exact behaviour depends on the controls in your design."],
+  },
+  {
+    q: "Can I switch it on myself?",
+    a: ["Depending on the controls, yes. Options include automatic sensor control, a timer, a manual override and Wi-Fi control from a phone. Your design chooses the approach that suits how you use the property."],
+  },
+  {
+    q: "Is the heating visible?",
+    a: ["No. The heating cable or mat is installed in or beneath the surface. What you see is the finished asphalt, concrete or paving. A sensor and a controller enclosure are the visible parts."],
+  },
+  {
+    q: "What happens to the meltwater?",
+    a: ["It drains off the surface as any rain or meltwater would, so the design of the surface and its drainage matters. We consider this as part of the project."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/how-it-works/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "How it works" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/how-it-works/" structuredData={structuredData}>
+  <section class="phero phero--text">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "How it works" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>How it works</p>
+          <h1>From first snowflake to a clear surface</h1>
+          <p>
+            A snow-melting system has three parts: heating elements in the surface, a sensor that detects
+            conditions and a controller that decides when to run. Here is what each does and how they work
+            together.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+            <a class="btn btn--outline btn--lg" href="/technology/">The technology</a>
+          </div>
+        </div>
+        <div class="phero__aside">
+          <div class="hfacts">
+            <p><strong>1. The heating layer</strong> — Cable or mats in or beneath the surface.</p>
+            <p><strong>2. The sensor</strong> — Detects the temperature and moisture that mean snow or ice.</p>
+            <p><strong>3. The controller</strong> — Switches the heating on and off.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush-top">
+    <div class="container">
+      <p>How does a snow-melting system work?</p>
+      <div class="answer__body">
+        <p>
+          Electric heating cable or mats sit in or beneath the surface. A sensor detects snow and ice conditions,
+          the controller switches the heating on, and the warmth melts snow and ice so it drains off. Controls keep
+          the system running long enough to clear remaining moisture, then shut it down.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>Follow one snowfall, step by step</h2>
+        <p>Select a step to see the snow, the heat and the components involved.</p>
+      </div>
+      <HowItWorks />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stack">
+      <FeatureSplit
+        image="/images/snow-melting-mat.jpg"
+        alt="Rolled snow melting mat with green heating cable woven through a mesh, and a black cold lead"
+        eyebrow="Part 1"
+        heading="The heating layer"
+        bullets={["Mats suit open, square or rectangular areas", "Cable suits curves, stairs and irregular shapes", "Hidden inside the finished surface"]}
+        linkHref="/technology/"
+        linkLabel="Mats and cables in detail"
+      >
+        <p>
+          Heating cable, either pre-spaced on a mat or laid loose, sits in or beneath the surface. The layout and
+          spacing are set in your design so heat reaches the whole area you chose.
+        </p>
+      </FeatureSplit>
+
+      <FeatureSplit
+        image="/images/snow-melting-sensor.jpg"
+        alt="White snow and ice sensor with a conical cap on a short stem"
+        eyebrow="Part 2"
+        heading="The sensor"
+        flip
+        bullets={["Aerial and slab sensor options", "Lets the system run when needed rather than all winter"]}
+      >
+        <p>
+          A sensor detects the temperature and moisture that mean snow or ice is forming. It can sit above ground
+          or in the surface, in an open spot where snow falls directly on it.
+        </p>
+      </FeatureSplit>
+
+      <FeatureSplit
+        image="/images/snow-melting-controller-premium.jpg"
+        alt="Snow and ice melt controller with its weatherproof cover open"
+        eyebrow="Part 3"
+        heading="The controller"
+        bullets={["Automatic sensor control, timer, manual override or Wi-Fi", "Zoned control for larger systems"]}
+      >
+        <p>
+          The controller reads the sensor and switches the heating on and off. Automatic controls can include a
+          hold-on period that keeps the system running after snow stops, so remaining moisture clears.
+        </p>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ways to control a system</h2>
+        <p>The same heating layer can be run in different ways. Your design picks the one that suits you.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Automatic with a sensor</h3><p>Runs when the sensor detects snow or ice conditions. The most common approach for driveways.</p></li>
+        <li><h3>Timer</h3><p>You set how long the system runs. Suited to small areas.</p></li>
+        <li><h3>Manual override</h3><p>A switch to run the system yourself, on top of automatic control where needed.</p></li>
+        <li><h3>Wi-Fi control</h3><p>Switch the system on and off from a phone, useful for remote properties.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq heading="How it works: questions" intro="Direct answers about sensors, controls and running the system." items={faqItems} />
+
+  <RelatedLinks
+    heading="Next steps"
+    dark
+    items={[
+      { href: "/heated-driveways/", title: "Heated driveways", body: "What a heated driveway involves." },
+      { href: "/cost/", title: "Cost and planning", body: "What shapes the cost of a project." },
+      { href: "/resources/", title: "Resources", body: "Running cost, electrical requirements and retrofits." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="See how it would work on your property"
+    body="Tell us about it. We come back with a design and an estimate."
+    primaryHref="/contact/"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+export interface FaqItem {
+  q: string;
+  a: string[];
+}
+
+export interface Props {
+  heading: string;
+  intro: string;
+  items: FaqItem[];
+  dark?: boolean;
+}
+
+const { heading, intro, items, dark = false } = Astro.props;
+---
+
+<section class={`section ${dark ? "section--ice" : ""}`}>
+  <div class="container faq-layout">
+    <div class="faq-layout__intro">
+      <h2>{heading}</h2>
+      <p>{intro}</p>
+    </div>
+    <div class="faq">
+      {items.map((item) => (
+        <div>
+          <h3>{item.q}</h3>
+          <div class="faq__a prose">
+            {item.a.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

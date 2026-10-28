@@ -1,0 +1,192 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import StepList from "../components/StepList.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const title = "Heated Driveway Cost & Planning | MeltGrid Canada";
+const description =
+  "What determines the cost of a heated driveway or snow melting system: size, coverage, surface, electrical work, controls and site conditions.";
+
+const faqItems = [
+  {
+    q: "How much does a heated driveway cost?",
+    a: ["It depends on the size of the area you heat, how much of it you cover, the surface, the electrical work, the controls and the construction conditions. Every property is different, so we do not publish fixed prices. A free design and estimate gives you a number for your property."],
+  },
+  {
+    q: "Why don't you publish prices?",
+    a: ["A price per square foot would hide the things that move the cost most: the surface, the electrical work and how much you choose to heat. We would rather give you a real number for your design than a misleading range."],
+  },
+  {
+    q: "What does it cost to run a heated driveway?",
+    a: ["Running cost depends on the size of the heated area, the power rating of the system, the controls, how long the system runs and your electricity rates. Systems with sensors run when conditions call for it, not all winter. Your design specifies the electrical load so you know what to expect."],
+  },
+  {
+    q: "Can I reduce the cost by heating less?",
+    a: ["Heating less area generally means less material to install and less power to run. Options include heated tire tracks, the entrance and apron, or targeted areas such as steps and walkways."],
+  },
+  {
+    q: "Is the design and estimate really free?",
+    a: ["Yes, for a request that is a fit for us. We review every request first; where we can help, the design and estimate that follows is free."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/cost/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Cost and planning" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/cost/" structuredData={structuredData}>
+  <section class="phero phero--text">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Cost and planning" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>Cost and planning</p>
+          <h1>What determines the cost of snow melting</h1>
+          <p>
+            No two properties are the same, so we do not publish fixed installation prices. Here is what moves the
+            cost, so you know what to expect before you ask for a number.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+          </div>
+        </div>
+        <div class="phero__aside">
+          <div class="hfacts">
+            <p><strong>Free design and estimate</strong> — You get a number for your own property.</p>
+            <p><strong>No fixed price list</strong> — Surface, electrical work and coverage move the cost most.</p>
+            <p><strong>You choose how much to heat</strong> — Heating less area generally means less material and less power.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush-top">
+    <div class="container">
+      <p>How much does a heated driveway cost?</p>
+      <div class="answer__body">
+        <p>
+          It depends on six things: the size of the area, how much of it you heat, the surface, the electrical
+          work, the controls and the construction conditions. We give you a real number for your property in a
+          free design and estimate, rather than a range that could mislead.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Six things that shape the cost</h2>
+        <p>Each one changes what has to be designed, supplied and installed.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Size", body: "More area means more heating elements, more power and more installation work." },
+          { title: "Coverage", body: "Full coverage, tire tracks or targeted areas heat different amounts of surface." },
+          { title: "Surface", body: "Asphalt, concrete and pavers are built differently, which shapes the system and the installation approach." },
+          { title: "Electrical requirements", body: "Available power, panel capacity and the distance to the driveway all affect the electrical work." },
+          { title: "Controls", body: "Sensors and control options change what the system needs and how it runs." },
+          { title: "Construction conditions", body: "New build or replacement, access, base preparation and site conditions all play a part." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>You control how much you heat</h2>
+        <p>Coverage is the factor you have the most say in. Heating less area generally means less material and less power.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Full coverage</h3><p>The whole surface. The most complete result, with the most area to heat.</p></li>
+        <li><h3>Tire tracks</h3><p>Two strips where the wheels run, leaving the middle unheated.</p></li>
+        <li><h3>Entrance and apron</h3><p>The garage-door end and where the driveway meets the street.</p></li>
+        <li><h3>Targeted areas</h3><p>Steps, a walkway or the spots that cause the most trouble.</p></li>
+      </ul>
+      <p style="margin-top:1.5rem;"><a href="/heated-driveways/">See coverage options on the heated driveways page →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cost-run">
+      <h2>What affects running cost</h2>
+      <p>We do not quote a single operating figure, because it varies by design and by your electricity rates.</p>
+      <StepList
+        numbered={false}
+        items={[
+          { title: "Size of the heated area", body: "More heated area draws more power when the system runs." },
+          { title: "Power rating of the system", body: "Set in the design and shown in your electrical specification." },
+          { title: "Controls and sensors", body: "Sensor-based control runs the system when conditions call for it, not all winter." },
+          { title: "Run time and electricity rates", body: "How long the system runs in a given winter, and what you pay per unit of electricity." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>Getting your number</h2>
+        <p>A free design and estimate, in four steps.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Tell us about the property", body: "Project type, surface, size and any photos or plans." },
+          { title: "We review it", body: "Surfaces, areas, electrical situation and goals, and whether it's a fit for us." },
+          { title: "Design", body: "A manufacturer-supported layout and controls." },
+          { title: "Estimate", body: "A number for your design, based on the six factors above." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <Faq heading="Cost questions" intro="Straight answers, without a price list." items={faqItems} />
+
+  <RelatedLinks
+    heading="Related pages"
+    dark
+    items={[
+      { href: "/heated-driveways/", title: "Heated driveways", body: "How they work and what to plan." },
+      { href: "/how-it-works/", title: "How it works", body: "Sensors, controls and the heating layer." },
+      { href: "/resources/heated-driveway-running-cost/", title: "Running cost, worked example", body: "A step-by-step way to estimate your own number." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Get a number for your property"
+    body="Free design and estimate. Tell us about the area and the surface."
+    primaryHref="/contact/"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

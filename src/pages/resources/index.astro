@@ -1,0 +1,108 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const title = "Resources | MeltGrid Canada";
+const description =
+  "Direct answers on heated-driveway running cost, electrical requirements and retrofitting an existing driveway, grounded in WarmlyYours technical documentation.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/resources/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Resources" },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/resources/" structuredData={structuredData}>
+  <section class="phero phero--text">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resources" }]} />
+      <div class="phero__grid phero__grid--solo">
+        <div class="phero__copy">
+          <p>Resources</p>
+          <h1>Straight answers on snow melting</h1>
+          <p>
+            Direct, technical answers to the questions people ask before starting a project — grounded in the
+            manufacturer documentation behind every MeltGrid design.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush-top">
+    <div class="container">
+      <h2>Guides</h2>
+      <p>A short, growing library. We add to it as new questions come up.</p>
+      <ul class="related-list">
+        <li>
+          <a href="/resources/heated-driveway-running-cost/">
+            <strong>How Much Does It Cost to Run a Heated Driveway?</strong>
+            What actually drives running cost, and how to work out a rough figure for your own property. →
+          </a>
+        </li>
+        <li>
+          <a href="/resources/electrical-requirements/">
+            <strong>Electrical Requirements for Snow-Melting Systems</strong>
+            How power draw scales with area, what the controls are rated for, and what a qualified electrician confirms. →
+          </a>
+        </li>
+        <li>
+          <a href="/resources/existing-driveway-retrofit/">
+            <strong>Can Snow Melting Be Added to an Existing Driveway?</strong>
+            Retrofit methods for asphalt and concrete, and why pavers are a different case. →
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <h2>Or start with the basics</h2>
+      <ul class="related-list">
+        <li><a href="/how-it-works/"><strong>How it works</strong> Sensors, controls and the heating layer. →</a></li>
+        <li><a href="/cost/"><strong>Cost and planning</strong> What shapes the cost of a project. →</a></li>
+        <li><a href="/technology/"><strong>The technology</strong> Mats, cables, controls and sensors. →</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .related-list {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .related-list a {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    color: var(--fg-muted);
+  }
+  .related-list strong {
+    display: block;
+    color: var(--fg);
+    margin-bottom: 0.3rem;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+// Site-wide click tracking + UTM / landing-page capture.
+// Loaded once from BaseLayout on every page.
+---
+
+<script>
+  import { trackEvent } from "../lib/analytics";
+
+  // Capture UTM parameters (if present) and the first-touch landing page
+  // into sessionStorage, for the current visit only.
+  (function captureAttribution() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+      for (const key of utmKeys) {
+        const value = params.get(key);
+        if (value) sessionStorage.setItem(key, value);
+      }
+      if (!sessionStorage.getItem("landing_page")) {
+        sessionStorage.setItem("landing_page", window.location.pathname);
+      }
+    } catch {
+      // sessionStorage unavailable (private mode, etc.) — safe to ignore.
+    }
+  })();
+
+  document.addEventListener("click", (event) => {
+    const link = (event.target as HTMLElement)?.closest("a");
+    if (!link) return;
+    const href = link.getAttribute("href") || "";
+    const label = link.textContent?.trim() || "";
+
+    if (href.startsWith("tel:")) {
+      trackEvent("phone_click", { href });
+    } else if (href.startsWith("mailto:")) {
+      trackEvent("email_click", { href });
+    } else if (/project=commercial|\/commercial\//.test(href)) {
+      trackEvent("commercial_cta_click", { href, label });
+    }
+  });
+</script>

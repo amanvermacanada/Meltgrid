@@ -1,0 +1,975 @@
+---
+// Multi-step "Request my free design & estimate" wizard, used on /contact/.
+// Posts to Formspree as multipart/form-data when a `data-endpoint` is set;
+// otherwise runs in a "preview" mode that validates but never sends.
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
+---
+
+<form
+  class="dr"
+  data-dr
+  data-endpoint={FORMSPREE_ENDPOINT}
+  novalidate
+  autocomplete="on"
+  aria-labelledby="dr-title"
+  action={FORMSPREE_ENDPOINT}
+  method="post"
+  enctype="multipart/form-data"
+>
+  <h2 class="dr__title" id="dr-title">Project details</h2>
+
+  <ol aria-label="Form progress" class="dr__progress" data-dr-progress>
+    <li data-progress="0"><span aria-hidden="true" class="dr__dot">1</span><span class="dr__plabel">Project</span></li>
+    <li data-progress="1"><span aria-hidden="true" class="dr__dot">2</span><span class="dr__plabel">Surface</span></li>
+    <li data-progress="2"><span aria-hidden="true" class="dr__dot">3</span><span class="dr__plabel">Size</span></li>
+    <li data-progress="3"><span aria-hidden="true" class="dr__dot">4</span><span class="dr__plabel">Location</span></li>
+    <li data-progress="4"><span aria-hidden="true" class="dr__dot">5</span><span class="dr__plabel">Contact</span></li>
+  </ol>
+
+  <p aria-live="polite" class="dr__live visually-hidden" data-dr-live></p>
+
+  <!-- 1. Project -->
+  <fieldset class="dr__step" data-step="0">
+    <legend class="dr__legend" tabindex="-1">What is the project?</legend>
+    <div aria-describedby="err-project" class="dr__group" role="radiogroup">
+      <div class="dr__cards dr__cards--2">
+        <label class="opt">
+          <input name="project" type="radio" value="residential" />
+          <span class="opt__body">
+            <span class="opt__label">Residential</span>
+            <span class="opt__hint">Home driveway, walkway, steps or patio</span>
+          </span>
+        </label>
+        <label class="opt">
+          <input name="project" type="radio" value="commercial" />
+          <span class="opt__body">
+            <span class="opt__label">Commercial</span>
+            <span class="opt__hint">Business, multi-unit or institutional property</span>
+          </span>
+        </label>
+      </div>
+      <p class="dr__err" data-err="project" id="err-project" role="alert"></p>
+    </div>
+    <div class="dr__group">
+      <p class="dr__q" id="q-areas">Which areas do you want to keep clear?</p>
+      <div aria-describedby="err-areas" aria-labelledby="q-areas" class="dr__chips" role="group">
+        {[
+          ["driveway", "Driveway"],
+          ["walkway", "Walkway or entrance"],
+          ["steps", "Steps"],
+          ["patio", "Patio"],
+          ["ramp", "Ramp"],
+          ["other", "Something else"],
+        ].map(([value, label]) => (
+          <label class="chip">
+            <input name="areas" type="checkbox" value={value} />
+            <span class="chip__body">{label}</span>
+          </label>
+        ))}
+      </div>
+      <p class="dr__err" data-err="areas" id="err-areas" role="alert"></p>
+    </div>
+  </fieldset>
+
+  <!-- 2. Surface + coverage -->
+  <fieldset class="dr__step" data-step="1">
+    <legend class="dr__legend" tabindex="-1">Surface and coverage</legend>
+    <div class="dr__group">
+      <p class="dr__q" id="q-surface">What is the surface?</p>
+      <div aria-describedby="err-surface" aria-labelledby="q-surface" class="dr__chips" role="radiogroup">
+        {[
+          ["asphalt", "Asphalt"],
+          ["concrete", "Concrete"],
+          ["pavers", "Pavers / interlock"],
+          ["other", "Something else"],
+          ["not-sure", "Not sure yet"],
+        ].map(([value, label]) => (
+          <label class="chip">
+            <input name="surface" type="radio" value={value} />
+            <span class="chip__body">{label}</span>
+          </label>
+        ))}
+      </div>
+      <p class="dr__err" data-err="surface" id="err-surface" role="alert"></p>
+    </div>
+    <div class="dr__group">
+      <p class="dr__q" id="q-coverage">How much do you want to heat?</p>
+      <div aria-describedby="err-coverage" aria-labelledby="q-coverage" class="dr__cards" role="radiogroup">
+        {[
+          ["full", "Full coverage", "Heat the whole area"],
+          ["tire-tracks", "Tire tracks", "Heat where the wheels run"],
+          ["entrance-apron", "Entrance and apron", "Garage door and street end"],
+          ["targeted", "Targeted areas", "Steps, walkways or key spots"],
+          ["not-sure", "Not sure, help me choose", "Your design compares options"],
+        ].map(([value, label, hint]) => (
+          <label class="opt">
+            <input name="coverage" type="radio" value={value} />
+            <span class="opt__body">
+              <span class="opt__label">{label}</span>
+              <span class="opt__hint">{hint}</span>
+            </span>
+          </label>
+        ))}
+      </div>
+      <p class="dr__err" data-err="coverage" id="err-coverage" role="alert"></p>
+    </div>
+  </fieldset>
+
+  <!-- 3. Size + upload -->
+  <fieldset class="dr__step" data-step="2">
+    <legend class="dr__legend" tabindex="-1">Size and photos</legend>
+    <div class="dr__group">
+      <p class="dr__q" id="q-size">Approximate size of the area</p>
+      <div aria-labelledby="q-size" class="dr__size" role="group">
+        <div class="field">
+          <label for="dr-length">Length</label>
+          <input data-size id="dr-length" inputmode="decimal" min="0" name="length" step="any" type="number" />
+          <p class="dr__err" data-err="length" role="alert"></p>
+        </div>
+        <span aria-hidden="true" class="dr__x">×</span>
+        <div class="field">
+          <label for="dr-width">Width</label>
+          <input data-size id="dr-width" inputmode="decimal" min="0" name="width" step="any" type="number" />
+          <p class="dr__err" data-err="width" role="alert"></p>
+        </div>
+        <div class="field field--unit">
+          <label for="dr-unit">Unit</label>
+          <select data-size id="dr-unit" name="unit">
+            <option value="ft">feet</option>
+            <option value="m">metres</option>
+          </select>
+        </div>
+      </div>
+      <p aria-live="polite" class="dr__calc" data-dr-area></p>
+      <label class="check">
+        <input name="dimensionsUnknown" type="checkbox" />
+        <span>I don&rsquo;t know the size yet</span>
+      </label>
+    </div>
+    <div class="dr__group">
+      <p class="dr__q" id="q-files">Photo or plan <span class="dr__opt">(optional)</span></p>
+      <p class="dr__help" id="help-files">
+        A photo of the area, a site plan or a sketch helps us design your system. Up to 5 files, 10 MB each. JPG,
+        PNG, WebP, HEIC or PDF.
+      </p>
+      <div class="drop" data-drop>
+        <input
+          accept=".jpg,.jpeg,.png,.webp,.heic,.pdf,image/jpeg,image/png,image/webp,image/heic,application/pdf"
+          aria-describedby="help-files err-files"
+          class="drop__input"
+          id="dr-files"
+          multiple
+          name="files-picker"
+          type="file"
+        />
+        <label class="drop__label" for="dr-files">
+          <span class="drop__title">Choose files or drop them here</span>
+          <span class="drop__sub">Photos, plans or sketches</span>
+        </label>
+      </div>
+      <p class="dr__err" data-err="files" id="err-files" role="alert"></p>
+      <ul aria-label="Attached files" class="files" data-files></ul>
+    </div>
+  </fieldset>
+
+  <!-- 4. Location + timeline -->
+  <fieldset class="dr__step" data-step="3">
+    <legend class="dr__legend" tabindex="-1">Location and timing</legend>
+    <div class="dr__group">
+      <div class="field field--narrow">
+        <label for="dr-postal">Postal code of the property</label>
+        <input
+          aria-describedby="err-postalCode"
+          autocomplete="postal-code"
+          id="dr-postal"
+          maxlength="7"
+          name="postalCode"
+          placeholder="L6P 1A1"
+          type="text"
+        />
+        <p class="dr__err" data-err="postalCode" id="err-postalCode" role="alert"></p>
+      </div>
+    </div>
+    <div class="dr__group">
+      <p class="dr__q" id="q-timeline">When are you hoping to have this done?</p>
+      <div aria-describedby="err-timeline" aria-labelledby="q-timeline" class="dr__chips" role="radiogroup">
+        {[
+          ["asap", "As soon as possible"],
+          ["within-3-months", "Within 3 months"],
+          ["3-6-months", "3 to 6 months"],
+          ["next-season", "Next construction season"],
+          ["planning", "Just planning for now"],
+        ].map(([value, label]) => (
+          <label class="chip">
+            <input name="timeline" type="radio" value={value} />
+            <span class="chip__body">{label}</span>
+          </label>
+        ))}
+      </div>
+      <p class="dr__err" data-err="timeline" id="err-timeline" role="alert"></p>
+    </div>
+  </fieldset>
+
+  <!-- 5. Contact -->
+  <fieldset class="dr__step" data-step="4">
+    <legend class="dr__legend" tabindex="-1">How can we reach you?</legend>
+    <div class="dr__fields">
+      <div class="field">
+        <label for="dr-name">Name</label>
+        <input aria-describedby="err-name" autocomplete="name" id="dr-name" name="name" type="text" />
+        <p class="dr__err" data-err="name" id="err-name" role="alert"></p>
+      </div>
+      <div class="field">
+        <label for="dr-phone">Phone</label>
+        <input aria-describedby="err-phone" autocomplete="tel" id="dr-phone" inputmode="tel" name="phone" type="tel" />
+        <p class="dr__err" data-err="phone" id="err-phone" role="alert"></p>
+      </div>
+      <div class="field field--wide">
+        <label for="dr-email">Email</label>
+        <input aria-describedby="err-email" autocomplete="email" id="dr-email" name="email" type="email" />
+        <p class="dr__err" data-err="email" id="err-email" role="alert"></p>
+      </div>
+      <div class="field field--wide">
+        <label for="dr-notes">Anything else we should know? <span class="dr__opt">(optional)</span></label>
+        <textarea id="dr-notes" name="notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- Honeypot: humans never see or fill this. Named _gotcha so Formspree's own
+         honeypot check also catches it if JS never loads. -->
+    <div aria-hidden="true" class="dr__hp">
+      <label>
+        Leave this field empty
+        <input autocomplete="off" name="_gotcha" tabindex={-1} type="text" />
+      </label>
+    </div>
+
+    <div class="dr__group">
+      <label class="check">
+        <input aria-describedby="err-consent" name="consent" type="checkbox" />
+        <span>I agree that MeltGrid Canada may contact me about this request.</span>
+      </label>
+      <p class="dr__err" data-err="consent" id="err-consent" role="alert"></p>
+    </div>
+  </fieldset>
+
+  <p class="dr__fail" data-dr-fail hidden role="alert"></p>
+
+  <div class="dr__nav">
+    <button class="dr__back" data-dr-back hidden type="button">Back</button>
+    <button class="dr__next" data-dr-next hidden type="button">Continue</button>
+    <button class="dr__submit" data-dr-submit type="submit">Request my free design &amp; estimate</button>
+  </div>
+
+  <div class="dr__done" data-dr-done hidden tabindex={-1}>
+    <h2 class="dr__done-title" data-done-title>Request received</h2>
+    <p data-done-text></p>
+    <dl class="dr__summary" data-done-summary></dl>
+    <p class="dr__done-contact">
+      Questions? Call <a href="tel:+14377745305">437-774-5305</a> or email
+      <a href="mailto:info@meltgridcanada.ca">info@meltgridcanada.ca</a>.
+    </p>
+  </div>
+</form>
+
+<style>
+  .dr__title {
+    font-size: var(--text-lg);
+    margin-bottom: 1.25rem;
+  }
+
+  .dr__progress {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .dr__progress li {
+    flex: 1;
+    text-align: center;
+  }
+
+  .dr__dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto 0.4rem;
+    border-radius: 50%;
+    background: var(--ice);
+    color: var(--fg-muted);
+    font-weight: 700;
+    font-size: var(--text-sm);
+  }
+
+  .dr__progress li[data-current="true"] .dr__dot {
+    background: var(--heat);
+    color: var(--white);
+  }
+
+  .dr__progress li[data-done="true"] .dr__dot {
+    background: var(--night-800);
+    color: var(--white);
+  }
+
+  .dr__plabel {
+    font-size: var(--text-sm);
+    color: var(--fg-muted);
+  }
+
+  .dr__step {
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+  }
+
+  .dr__step[data-current="true"] {
+    display: block;
+  }
+
+  .dr__legend {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    padding: 0;
+  }
+
+  .dr__group + .dr__group {
+    margin-top: 1.75rem;
+  }
+
+  .dr__q {
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .dr__cards {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .dr__cards--2 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .dr__err {
+    color: #c0392b;
+    font-size: var(--text-sm);
+    margin-top: 0.4rem;
+    min-height: 1.1em;
+  }
+
+  .dr__size {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .dr__x {
+    padding-bottom: 0.75rem;
+    color: var(--fg-muted);
+  }
+
+  .field--unit {
+    min-width: 120px;
+  }
+
+  .dr__calc {
+    margin-top: 0.75rem;
+    font-weight: 600;
+    color: var(--heat);
+    min-height: 1.2em;
+  }
+
+  .check {
+    margin-top: 0.85rem;
+  }
+
+  .dr__help {
+    color: var(--fg-muted);
+    font-size: var(--text-sm);
+    margin-bottom: 0.75rem;
+  }
+
+  .drop {
+    border: 2px dashed var(--line);
+    border-radius: var(--radius);
+    position: relative;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .drop[data-dragover="true"] {
+    border-color: var(--heat);
+    background: var(--ice);
+  }
+
+  .drop__input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .drop__title {
+    display: block;
+    font-weight: 700;
+  }
+
+  .drop__sub {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: var(--text-sm);
+    color: var(--fg-muted);
+  }
+
+  .files {
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .files li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--ice);
+    border-radius: var(--radius);
+    padding: 0.5rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  .files button {
+    background: none;
+    border: none;
+    color: var(--fg-muted);
+    font-weight: 700;
+  }
+
+  .field--narrow {
+    max-width: 16rem;
+  }
+
+  .dr__fields {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .dr__opt {
+    color: var(--fg-muted);
+    font-weight: 400;
+  }
+
+  .dr__fail {
+    margin-top: 1.5rem;
+    background: #fdecea;
+    color: #8a2c20;
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+
+  .dr__nav {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+
+  .dr__back {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+  }
+
+  .dr__next,
+  .dr__submit {
+    background: var(--heat);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.75rem 1.75rem;
+    font-weight: 700;
+  }
+
+  .dr__done {
+    margin-top: 1rem;
+  }
+
+  .dr__summary {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.4rem;
+    background: var(--ice);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+
+  .dr__summary div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: var(--text-sm);
+  }
+
+  .dr__summary dt {
+    color: var(--fg-muted);
+  }
+
+  .dr__done-contact {
+    margin-top: 1.25rem;
+    color: var(--fg-muted);
+  }
+</style>
+
+<script>
+  import { trackEvent } from "../lib/analytics";
+
+  const POSTAL_CODE_RE = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const ALLOWED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".heic", ".pdf"];
+  const MAX_FILES = 5;
+  const MAX_FILE_BYTES = 10 * 1024 * 1024;
+
+  const STEP_NAMES = ["project", "surface", "size", "location", "contact"];
+
+  const form = document.querySelector<HTMLFormElement>("[data-dr]");
+
+  if (form) {
+    const endpoint = form.dataset.endpoint || "";
+    const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>(".dr__step"));
+    const progressItems = Array.from(form.querySelectorAll<HTMLLIElement>("[data-progress]"));
+    const liveRegion = form.querySelector<HTMLElement>("[data-dr-live]");
+    const failBox = form.querySelector<HTMLElement>("[data-dr-fail]");
+    const backBtn = form.querySelector<HTMLButtonElement>("[data-dr-back]");
+    const nextBtn = form.querySelector<HTMLButtonElement>("[data-dr-next]");
+    const submitBtn = form.querySelector<HTMLButtonElement>("[data-dr-submit]");
+    const doneBox = form.querySelector<HTMLElement>("[data-dr-done]");
+    const doneTitle = form.querySelector<HTMLElement>("[data-done-title]");
+    const doneText = form.querySelector<HTMLElement>("[data-done-text]");
+    const doneSummary = form.querySelector<HTMLElement>("[data-done-summary]");
+
+    const dropZone = form.querySelector<HTMLElement>("[data-drop]");
+    const fileInput = form.querySelector<HTMLInputElement>("#dr-files");
+    const filesList = form.querySelector<HTMLElement>("[data-files]");
+    const areaReadout = form.querySelector<HTMLElement>("[data-dr-area]");
+
+    let current = 0;
+    let started = false;
+    let attachedFiles: File[] = [];
+
+    // ---- Pre-fill from query params --------------------------------------
+    const params = new URLSearchParams(window.location.search);
+    const project = params.get("project");
+    const surface = params.get("surface");
+    const intent = params.get("intent");
+
+    if (project) {
+      const input = form.querySelector<HTMLInputElement>(`input[name="project"][value="${project}"]`);
+      if (input) input.checked = true;
+    }
+    if (surface) {
+      const input = form.querySelector<HTMLInputElement>(`input[name="surface"][value="${surface}"]`);
+      if (input) input.checked = true;
+    }
+    if (intent === "coverage-help") {
+      const input = form.querySelector<HTMLInputElement>('input[name="coverage"][value="not-sure"]');
+      if (input) input.checked = true;
+    }
+
+    // ---- Step rendering -----------------------------------------------------
+    function renderStep() {
+      steps.forEach((step, i) => {
+        step.dataset.current = String(i === current);
+      });
+      progressItems.forEach((item, i) => {
+        item.dataset.current = String(i === current);
+        item.dataset.done = String(i < current);
+      });
+      backBtn?.toggleAttribute("hidden", current === 0);
+      nextBtn?.toggleAttribute("hidden", current === steps.length - 1);
+      submitBtn?.toggleAttribute("hidden", current !== steps.length - 1);
+      const legend = steps[current]?.querySelector<HTMLElement>(".dr__legend");
+      legend?.focus();
+      if (liveRegion) liveRegion.textContent = `Step ${current + 1} of ${steps.length}: ${legend?.textContent ?? ""}`;
+    }
+
+    function markStarted() {
+      if (!started) {
+        started = true;
+        trackEvent("design_form_start");
+      }
+    }
+
+    form.addEventListener(
+      "focusin",
+      () => markStarted(),
+      { once: true },
+    );
+
+    // ---- Validation -----------------------------------------------------
+    function setError(name: string, message: string) {
+      const errorEl = form!.querySelector<HTMLElement>(`[data-err="${name}"]`);
+      if (errorEl) errorEl.textContent = message;
+      const field = errorEl?.closest(".field");
+      field?.setAttribute("data-invalid", message ? "true" : "false");
+    }
+
+    function clearErrors(step: HTMLFieldSetElement) {
+      step.querySelectorAll<HTMLElement>(".dr__err").forEach((el) => (el.textContent = ""));
+      step.querySelectorAll<HTMLElement>(".field[data-invalid]").forEach((el) => el.removeAttribute("data-invalid"));
+    }
+
+    function validateStep(index: number): boolean {
+      const step = steps[index];
+      clearErrors(step);
+      let valid = true;
+
+      const fail = (name: string, message: string) => {
+        setError(name, message);
+        valid = false;
+      };
+
+      if (index === 0) {
+        if (!form!.querySelector<HTMLInputElement>('input[name="project"]:checked')) {
+          fail("project", "Choose residential or commercial.");
+        }
+        if (!form!.querySelector<HTMLInputElement>('input[name="areas"]:checked')) {
+          fail("areas", "Choose at least one area.");
+        }
+      }
+
+      if (index === 1) {
+        if (!form!.querySelector<HTMLInputElement>('input[name="surface"]:checked')) {
+          fail("surface", "Choose a surface.");
+        }
+        if (!form!.querySelector<HTMLInputElement>('input[name="coverage"]:checked')) {
+          fail("coverage", "Choose a coverage option.");
+        }
+      }
+
+      if (index === 2) {
+        const unknown = form!.querySelector<HTMLInputElement>('input[name="dimensionsUnknown"]')?.checked;
+        const length = form!.querySelector<HTMLInputElement>("#dr-length");
+        const width = form!.querySelector<HTMLInputElement>("#dr-width");
+        if (!unknown) {
+          if (!length?.value || Number(length.value) <= 0) fail("length", "Enter a length.");
+          if (!width?.value || Number(width.value) <= 0) fail("width", "Enter a width.");
+        }
+      }
+
+      if (index === 3) {
+        const postal = form!.querySelector<HTMLInputElement>("#dr-postal");
+        if (!postal?.value.trim()) {
+          fail("postalCode", "Enter a postal code.");
+        } else if (!POSTAL_CODE_RE.test(postal.value.trim())) {
+          fail("postalCode", "Enter a valid Canadian postal code, e.g. L6P 1A1.");
+        }
+        if (!form!.querySelector<HTMLInputElement>('input[name="timeline"]:checked')) {
+          fail("timeline", "Choose a timeline.");
+        }
+      }
+
+      if (index === 4) {
+        const name = form!.querySelector<HTMLInputElement>("#dr-name");
+        const phone = form!.querySelector<HTMLInputElement>("#dr-phone");
+        const email = form!.querySelector<HTMLInputElement>("#dr-email");
+        const consent = form!.querySelector<HTMLInputElement>('input[name="consent"]');
+        if (!name?.value.trim()) fail("name", "Enter your name.");
+        if (!phone?.value.trim()) fail("phone", "Enter a phone number.");
+        if (!email?.value.trim() || !EMAIL_RE.test(email.value.trim())) fail("email", "Enter a valid email.");
+        if (!consent?.checked) fail("consent", "Please agree so we can contact you.");
+      }
+
+      return valid;
+    }
+
+    nextBtn?.addEventListener("click", () => {
+      markStarted();
+      if (!validateStep(current)) return;
+      current = Math.min(current + 1, steps.length - 1);
+      renderStep();
+      trackEvent("design_form_step", { step: current + 1, step_name: STEP_NAMES[current] });
+    });
+
+    backBtn?.addEventListener("click", () => {
+      current = Math.max(current - 1, 0);
+      renderStep();
+      trackEvent("design_form_step", { step: current + 1, step_name: STEP_NAMES[current] });
+    });
+
+    // ---- Postal code auto-format on blur ---------------------------------
+    const postalInput = form.querySelector<HTMLInputElement>("#dr-postal");
+    postalInput?.addEventListener("blur", () => {
+      const raw = postalInput.value.trim().toUpperCase().replace(/[\s-]/g, "");
+      if (raw.length === 6) {
+        postalInput.value = `${raw.slice(0, 3)} ${raw.slice(3)}`;
+      }
+    });
+
+    // ---- Size calculator --------------------------------------------------
+    const lengthInput = form.querySelector<HTMLInputElement>("#dr-length");
+    const widthInput = form.querySelector<HTMLInputElement>("#dr-width");
+    const unitSelect = form.querySelector<HTMLSelectElement>("#dr-unit");
+    const dimensionsUnknown = form.querySelector<HTMLInputElement>('input[name="dimensionsUnknown"]');
+
+    function updateArea() {
+      if (!areaReadout) return;
+      if (dimensionsUnknown?.checked) {
+        areaReadout.textContent = "";
+        return;
+      }
+      const length = Number(lengthInput?.value);
+      const width = Number(widthInput?.value);
+      if (length > 0 && width > 0) {
+        const unit = unitSelect?.value === "m" ? "m²" : "sq ft";
+        const area = length * width;
+        areaReadout.textContent = `Approximately ${area.toLocaleString(undefined, { maximumFractionDigits: 1 })} ${unit}`;
+      } else {
+        areaReadout.textContent = "";
+      }
+    }
+
+    [lengthInput, widthInput, unitSelect].forEach((el) => el?.addEventListener("input", updateArea));
+
+    dimensionsUnknown?.addEventListener("change", () => {
+      const disabled = dimensionsUnknown.checked;
+      [lengthInput, widthInput, unitSelect].forEach((el) => {
+        if (el) el.disabled = disabled;
+      });
+      updateArea();
+    });
+
+    // ---- File upload --------------------------------------------------------
+    function fileExtensionOk(file: File) {
+      const name = file.name.toLowerCase();
+      return ALLOWED_EXTENSIONS.some((ext) => name.endsWith(ext));
+    }
+
+    function renderFiles() {
+      if (!filesList) return;
+      filesList.innerHTML = "";
+      attachedFiles.forEach((file, i) => {
+        const li = document.createElement("li");
+        const sizeKb = Math.round(file.size / 1024);
+        li.innerHTML = `<span>${file.name} (${sizeKb} KB)</span>`;
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.textContent = "Remove";
+        removeBtn.addEventListener("click", () => {
+          attachedFiles.splice(i, 1);
+          renderFiles();
+        });
+        li.appendChild(removeBtn);
+        filesList.appendChild(li);
+      });
+    }
+
+    function addFiles(fileList: FileList | File[]) {
+      const incoming = Array.from(fileList);
+      const errors: string[] = [];
+
+      for (const file of incoming) {
+        if (attachedFiles.length >= MAX_FILES) {
+          errors.push(`Up to ${MAX_FILES} files.`);
+          break;
+        }
+        if (!fileExtensionOk(file)) {
+          errors.push(`${file.name}: unsupported file type.`);
+          continue;
+        }
+        if (file.size > MAX_FILE_BYTES) {
+          errors.push(`${file.name}: larger than 10 MB.`);
+          continue;
+        }
+        attachedFiles.push(file);
+      }
+
+      setError("files", errors.join(" "));
+      renderFiles();
+    }
+
+    fileInput?.addEventListener("change", () => {
+      if (fileInput.files) addFiles(fileInput.files);
+      fileInput.value = "";
+    });
+
+    if (dropZone) {
+      ["dragenter", "dragover"].forEach((type) =>
+        dropZone.addEventListener(type, (event) => {
+          event.preventDefault();
+          dropZone.dataset.dragover = "true";
+        }),
+      );
+      ["dragleave", "drop"].forEach((type) =>
+        dropZone.addEventListener(type, (event) => {
+          event.preventDefault();
+          dropZone.dataset.dragover = "false";
+        }),
+      );
+      dropZone.addEventListener("drop", (event) => {
+        const dropped = (event as DragEvent).dataTransfer?.files;
+        if (dropped) addFiles(dropped);
+      });
+    }
+
+    // ---- Submit -----------------------------------------------------------
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      for (let i = 0; i <= current; i++) {
+        if (!validateStep(i)) {
+          current = i;
+          renderStep();
+          return;
+        }
+      }
+
+      trackEvent("design_form_submit");
+
+      if (failBox) {
+        failBox.hidden = true;
+        failBox.textContent = "";
+      }
+
+      const honeypot = form.querySelector<HTMLInputElement>('input[name="_gotcha"]')?.value;
+      if (honeypot) return; // bot — silently stop.
+
+      const getValue = (selector: string) => form.querySelector<HTMLInputElement>(selector)?.value ?? "";
+      const getChecked = (name: string) =>
+        Array.from(form.querySelectorAll<HTMLInputElement>(`input[name="${name}"]:checked`)).map((el) => el.value);
+
+      const dimensionsUnknownChecked = form.querySelector<HTMLInputElement>('input[name="dimensionsUnknown"]')?.checked;
+      const length = getValue("#dr-length");
+      const width = getValue("#dr-width");
+      const unit = form.querySelector<HTMLSelectElement>("#dr-unit")?.value ?? "ft";
+      const dimensions = dimensionsUnknownChecked
+        ? "Not sure yet"
+        : length && width
+          ? `${length} × ${width} ${unit}`
+          : "";
+
+      const projectType = getValue('input[name="project"]:checked');
+      const surface = getValue('input[name="surface"]:checked');
+      const coverage = getValue('input[name="coverage"]:checked');
+      const postalCode = getValue("#dr-postal");
+      const timeline = getValue('input[name="timeline"]:checked');
+      const name = getValue("#dr-name");
+      const phone = getValue("#dr-phone");
+      const email = getValue("#dr-email");
+      const notes = getValue("#dr-notes");
+
+      let utm: Record<string, string> = {};
+      try {
+        utm = {
+          utm_source: sessionStorage.getItem("utm_source") ?? "",
+          utm_medium: sessionStorage.getItem("utm_medium") ?? "",
+          utm_campaign: sessionStorage.getItem("utm_campaign") ?? "",
+          utm_content: sessionStorage.getItem("utm_content") ?? "",
+          utm_term: sessionStorage.getItem("utm_term") ?? "",
+        };
+      } catch {
+        // sessionStorage unavailable — fine, fields stay blank.
+      }
+
+      const summary: Record<string, string> = {
+        Project: projectType,
+        Areas: getChecked("areas").join(", "),
+        Surface: surface,
+        Coverage: coverage,
+        Size: dimensions,
+        "Postal code": postalCode,
+        Timeline: timeline,
+        Name: name,
+        Phone: phone,
+        Email: email,
+      };
+
+      function showDone(sent: boolean) {
+        steps.forEach((step) => (step.hidden = true));
+        form!.querySelector(".dr__progress")?.setAttribute("hidden", "true");
+        form!.querySelector(".dr__nav")?.setAttribute("hidden", "true");
+        if (doneTitle) doneTitle.textContent = sent ? "Request received" : "Request ready (not sent)";
+        if (doneText) {
+          doneText.textContent = sent
+            ? "Thanks — we review every request and will follow up with a design and an estimate where it's a fit."
+            : "This form isn't connected to a live endpoint in this environment, so nothing was sent. Here is what would have been submitted.";
+        }
+        if (doneSummary) {
+          doneSummary.innerHTML = "";
+          Object.entries(summary)
+            .filter(([, value]) => value)
+            .forEach(([label, value]) => {
+              const wrap = document.createElement("div");
+              const dt = document.createElement("dt");
+              dt.textContent = label;
+              const dd = document.createElement("dd");
+              dd.textContent = value;
+              wrap.append(dt, dd);
+              doneSummary.appendChild(wrap);
+            });
+        }
+        doneBox?.removeAttribute("hidden");
+        doneBox?.focus();
+      }
+
+      if (!endpoint) {
+        showDone(false);
+        return;
+      }
+
+      const body = new FormData();
+      body.append("_subject", "New design & estimate request — MeltGrid Canada");
+      body.append("_replyto", email);
+      body.append("_gotcha", "");
+      body.append("project_type", projectType);
+      body.append("areas", getChecked("areas").join(", "));
+      body.append("surface", surface);
+      body.append("coverage", coverage);
+      body.append("dimensions", dimensions);
+      body.append("postal_code", postalCode);
+      body.append("timeline", timeline);
+      body.append("name", name);
+      body.append("phone", phone);
+      body.append("email", email);
+      body.append("notes", notes);
+      body.append("consent", String(form.querySelector<HTMLInputElement>('input[name="consent"]')?.checked ?? false));
+      body.append("referring_page", window.location.pathname);
+      body.append("intent", new URLSearchParams(window.location.search).get("intent") ?? "");
+      body.append("referrer", document.referrer || "");
+      Object.entries(utm).forEach(([key, value]) => body.append(key, value));
+      body.append("submitted_at", new Date().toISOString());
+      attachedFiles.forEach((file) => body.append("files[]", file, file.name));
+
+      submitBtn?.setAttribute("disabled", "true");
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body,
+          headers: { Accept: "application/json" },
+        });
+
+        if (!response.ok) throw new Error(`Request failed (${response.status})`);
+
+        trackEvent("design_form_success");
+        showDone(true);
+      } catch (error) {
+        if (failBox) {
+          failBox.hidden = false;
+          failBox.textContent =
+            "Something went wrong sending your request. Please try again, or call 437-774-5305 / email info@meltgridcanada.ca.";
+        }
+      } finally {
+        submitBtn?.removeAttribute("disabled");
+      }
+    });
+
+    renderStep();
+  }
+</script>

@@ -1,0 +1,190 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import StepList from "../components/StepList.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import TradePartnerForm from "../components/TradePartnerForm.astro";
+
+const title = "Trade Partners | MeltGrid Canada";
+const description =
+  "Keep your customer and your scope. MeltGrid handles snow-melting system design and coordination for contractors, electricians and builders.";
+
+const faqItems = [
+  {
+    q: "Do I lose my customer relationship?",
+    a: ["No. You keep your customer and your agreed construction scope. MeltGrid works alongside you on the snow-melting portion of the project."],
+  },
+  {
+    q: "Does MeltGrid compete with my services?",
+    a: ["MeltGrid's role is centered on the snow-melting system: design, manufacturer coordination and the trades that specific system needs. Roles and scope are established for each project, and your agreed construction scope remains yours."],
+  },
+  {
+    q: "What do you need from me to get started?",
+    a: ["Send us your company name, trade and contact details using the form on this page. We'll follow up to talk through how a partnership could work for the kind of projects you take on."],
+  },
+  {
+    q: "Is there a cost to become a partner?",
+    a: ["No cost to register your interest as a trade partner."],
+  },
+  {
+    q: "Which trades do you work with?",
+    a: ["Asphalt and paving contractors, concrete contractors, paver and interlock installers, electricians, landscapers, builders and general contractors, architects and design professionals, and property managers."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/trade-partners/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Trade partners" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "MeltGrid trade partnerships",
+    serviceType: "Snow-melting system design, manufacturer coordination and project support for construction trades",
+    description,
+    url: "https://meltgridcanada.ca/trade-partners/",
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/trade-partners/" headerVariant="solid" structuredData={structuredData}>
+  <section class="phero phero--dark on-dark">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Trade partners" }]} />
+      <div class="phero__grid phero__grid--solo">
+        <div class="phero__copy">
+          <p>For trades and construction professionals</p>
+          <h1>Keep your customer. Keep your scope. We handle the snow-melting system.</h1>
+          <p>
+            Asphalt, concrete, interlock, electrical and construction professionals can work with MeltGrid to add
+            snow-melting systems to their projects without taking on the system design themselves.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="#partner-form">Become a trade partner</a>
+            <a class="btn btn--ghost btn--lg" href="/how-it-works/">How it works</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>What does a MeltGrid partnership mean?</p>
+      <div class="answer__body">
+        <p>
+          You keep the client relationship and your core scope. MeltGrid handles the parts specific to the
+          snow-melting system: design, manufacturer coordination with WarmlyYours, and support for the trades that
+          system needs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why partner with MeltGrid</h2>
+        <p>A few things that make adding snow melting to a project easier, not harder.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "One point of contact for the system", body: "We coordinate the snow-melting design and the trades it needs, so it is one relationship, not several." },
+          { title: "Manufacturer-supported design", body: "Systems are designed around WarmlyYours technology, with access to manufacturer technical support." },
+          { title: "Fits around your schedule", body: "The snow-melting work is coordinated to your project timeline, not the other way around." },
+          { title: "Support outside your specialty", body: "Technical questions about the heating system don't have to become your problem to solve." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Trades we work with</h2>
+        <p>How a partnership typically looks depends on what you do.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Asphalt / paving contractors</h3><p>Snow-melting elements are installed as part of your base-coat-to-surface sequence.</p></li>
+        <li><h3>Concrete contractors</h3><p>Elements are tied in near the top of the slab before your pour.</p></li>
+        <li><h3>Paver / interlock installers</h3><p>Elements sit in the base build-up beneath your setting bed.</p></li>
+        <li><h3>Electricians</h3><p>Connection, controls and sensor wiring is core to every project we design.</p></li>
+        <li><h3>Landscapers</h3><p>Often the first point of contact for a property's winter plan.</p></li>
+        <li><h3>Builders / general contractors</h3><p>Coordinated as part of new construction or a major renovation.</p></li>
+        <li><h3>Architects / design professionals</h3><p>Specified early, alongside the building's other systems.</p></li>
+        <li><h3>Property managers</h3><p>A recurring point of contact across a portfolio of properties.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>How the partnership works</h2>
+        <p>From a first referral to an ongoing relationship.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Referral or enquiry", body: "You bring us in on a project, or send us your details to start the relationship." },
+          { title: "We scope and design", body: "We review the property and prepare a manufacturer-supported snow-melting design." },
+          { title: "We coordinate the trades", body: "The snow-melting work is coordinated around your project, including the electrical connection." },
+          { title: "The project completes", body: "Your scope and ours are each delivered as planned, to the same project." },
+          { title: "The relationship continues", body: "For your next project with a snow-melting component, the same partnership applies." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <Faq heading="Trade partner questions" intro="Direct answers for contractors, electricians and other trades." items={faqItems} />
+
+  <section class="section section--ice" id="partner-form">
+    <div class="container tp-form-layout">
+      <h2>Become a Trade Partner</h2>
+      <p>Send us your details and we'll follow up to talk through how a partnership could work for the projects you take on.</p>
+      <TradePartnerForm />
+    </div>
+  </section>
+
+  <RelatedLinks
+    heading="Keep reading"
+    items={[
+      { href: "/how-it-works/", title: "How it works", body: "Sensors, controls and the heating layer." },
+      { href: "/technology/", title: "The technology", body: "Mats, cables, controls and sensors." },
+      { href: "/about/", title: "About MeltGrid", body: "How we work and who we work with." },
+    ]}
+  />
+</BaseLayout>
+
+<style>
+  .tp-form-layout {
+    max-width: 48rem;
+  }
+  .tp-form-layout > form {
+    margin-top: 1.5rem;
+  }
+</style>

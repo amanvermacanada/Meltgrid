@@ -1,5 +1,7 @@
 # MeltGrid Canada — Keyword Research (Real Keyword Planner Data)
 
+> **2026-10-29 update:** this file's core findings stand, but two corrections were made after a validation pass against the full 628-row export — see `04b-keyword-validation-findings.md` for the detail. (1) The "heated driveway mats" opportunity described below as ~6,250/mo is smaller than stated once DIY-retail-purchase-intent keywords (HeatTrak/Amazon/Costco/Home Depot) are excluded. (2) A categorization bug ("heated driveway brampton" mistagged as commercial, from a "ramp"-in-"brampton" substring match) has been fixed in `04-keyword-research.csv`. The final, corrected keyword package is `04-keyword-research.csv` (139-row master, now fixed) + `04a-top30-keyword-opportunities.csv` (the scored Top 30) + `04c-keyword-to-page-mapping.md` (cluster-to-page mapping) — read those alongside this file, not in place of it.
+
 **Status: supersedes the earlier `keyword-research.csv` / `keyword-research-notes.md` placeholder pass.** Those files were built before real data was available and marked every volume/competition/bid field "NOT AVAILABLE." The user has since exported real Google Ads Keyword Planner data (logged-in account) and a self-curated prioritization workbook. This file and `keyword-research-master.csv` are the authoritative keyword deliverable going forward. The two source files are preserved for audit trail:
 
 - `MeltGrid_Google_Keyword_Planner_Raw.csv` — 628 keyword rows, raw Keyword Planner "Discover new keywords" export.

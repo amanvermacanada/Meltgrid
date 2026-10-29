@@ -1,0 +1,225 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import FeatureSplit from "../components/FeatureSplit.astro";
+import heatedDrivewayWinterDusk from "../assets/images/heated-driveway-winter-dusk.jpg";
+import heatedWalkwayWinterEntrance from "../assets/images/heated-walkway-winter-entrance.jpg";
+import heatedStepsWinter from "../assets/images/heated-steps-winter.jpg";
+import heatedPatioWinter from "../assets/images/heated-patio-winter.jpg";
+import StepList from "../components/StepList.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const title = "Residential Snow Melting Systems | MeltGrid Canada";
+const description =
+  "Automatic snow and ice melting for home driveways, walkways, entrances, steps and patios. See what can be heated and request a free design and estimate.";
+
+const faqItems = [
+  {
+    q: "What parts of a home can have snow melting?",
+    a: ["Driveways, front walkways and entrances, steps and patios are the usual places. The system can be laid out for open areas with mats or for shaped areas and stairways with heating cable."],
+  },
+  {
+    q: "Can I heat just my steps and walkway?",
+    a: ["Yes. Snow melting does not have to cover the whole property. Many projects heat only the places where snow and ice cause the most trouble, and your design sizes the system to those areas."],
+  },
+  {
+    q: "Can steps be heated?",
+    a: ["Yes. Heating cable is suited to stairways and irregular shapes. It is installed to the manufacturer's instructions by qualified trades, and your design specifies the layout and the electrical requirements for the steps."],
+  },
+  {
+    q: "Will it work with the surface I already have?",
+    a: ["Snow melting can be installed in asphalt, concrete and pavers or interlock. Whether it suits an existing surface depends on its condition and construction; an assessment confirms the options."],
+  },
+  {
+    q: "Do I need to be home for it to work?",
+    a: ["Not with an automatic control. A sensor detects conditions and the controller switches the system on and off, so nobody has to be home."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/residential/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Residential snow melting" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Residential snow melting systems",
+    serviceType: "Residential snow and ice melting system design and installation coordination",
+    description,
+    url: "https://meltgridcanada.ca/residential/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/residential/" structuredData={structuredData}>
+  <section class="phero phero--split phero--flip">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Residential snow melting" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>For homeowners</p>
+          <h1>Snow melting for the parts of your home you use every day</h1>
+          <p>
+            Driveways, walkways, entrances, steps and patios: heat only the places where snow and ice cause the
+            most trouble, and let a sensor decide when the system runs.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?project=residential">Request my free design &amp; estimate</a>
+            <a class="btn btn--outline btn--lg" href="/heated-driveways/">Heated driveways</a>
+          </div>
+        </div>
+        <figure class="phero__frame">
+          <img
+            src="/images/winter-home-dusk.jpg"
+            alt="Modern stone and glass home at dusk in winter, warmly lit windows, snow on the roof and along the edge of a clear concrete patio"
+            loading="eager"
+            width="900"
+            height="700"
+          />
+          <figcaption>Manufacturer imagery courtesy of WarmlyYours</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>What can be heated at a home?</p>
+      <div class="answer__body">
+        <p>
+          Most residential projects heat the driveway, the front walkway and entrance, the steps, or a patio, often
+          in combination. Each area has its own layout, and the system can be sized to only the places you choose.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stack">
+      <FeatureSplit
+        image={heatedDrivewayWinterDusk}
+        alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement wet and clear with snow only along the edge"
+        credit="Manufacturer imagery courtesy of WarmlyYours"
+        heading="Driveways"
+        bullets={["Full coverage, tire tracks, entrance and apron, or targeted areas", "Installed in asphalt, concrete or beneath pavers", "Electrical supply planned with the design"]}
+        linkHref="/heated-driveways/"
+        linkLabel="Heated driveways in detail"
+      >
+        <p>
+          The largest heated surface at most homes. Heat the whole driveway, only the tire tracks, or just the
+          garage apron and the end at the street.
+        </p>
+      </FeatureSplit>
+
+      <div id="walkways">
+        <FeatureSplit
+          image={heatedWalkwayWinterEntrance}
+          alt="Clear walkway leading to a front door between two banks of snow"
+          credit="Manufacturer imagery courtesy of WarmlyYours"
+          heading="Walkways and entrances"
+          flip
+          bullets={["Straight runs suit heating mats; curves suit heating cable", "Can be added to a new or replacement walkway", "Often planned together with the driveway"]}
+        >
+          <p>
+            A clear path from the driveway to the front door is often the first place people want snow melting.
+            Heating the walkway and landing keeps the route to the door clear.
+          </p>
+        </FeatureSplit>
+      </div>
+
+      <div id="steps">
+        <FeatureSplit
+          image={heatedStepsWinter}
+          alt="Exposed-aggregate steps clear of snow beside snow-covered shrubs"
+          credit="Manufacturer imagery courtesy of WarmlyYours"
+          heading="Steps"
+          bullets={["Heating cable is suited to stairways and irregular shapes", "Layout and electrical requirements specified in your design"]}
+        >
+          <p>
+            Steps are shaped areas, so they are usually heated with cable. The design covers the treads, and the
+            layout is set to the manufacturer's installation instructions.
+          </p>
+        </FeatureSplit>
+      </div>
+
+      <div id="patios">
+        <FeatureSplit
+          image={heatedPatioWinter}
+          alt="Covered patio beside a hot tub with a clear floor while snow lies around it"
+          credit="Manufacturer imagery courtesy of WarmlyYours"
+          heading="Patios and outdoor living spaces"
+          flip
+          bullets={["Suited to mats on open areas and cable at edges and shapes", "Installed within the patio surface"]}
+        >
+          <p>
+            A patio, hot tub landing or covered outdoor space can be heated the same way, so the area stays usable
+            when snow falls around it.
+          </p>
+        </FeatureSplit>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Planning a residential project</h2>
+        <p>Four things shape almost every home project.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Which areas", body: "List the places snow and ice cause the most trouble. Your design can cover all of them or start with the most important." },
+          { title: "Which surface", body: "Asphalt, concrete or pavers. Each is built differently, which shapes the layout and the installation method." },
+          { title: "New build or existing", body: "Snow melting goes in most simply with new or replacement surfaces, and may be possible on existing ones." },
+          { title: "Power and controls", body: "A qualified electrician connects the system. You choose between automatic sensing, a timer or a manual switch." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <RelatedLinks
+    heading="Choose by surface"
+    intro="The installation method depends on what you are heating."
+    items={[
+      { href: "/snow-melting/asphalt/", title: "Asphalt", body: "Snow melting under an asphalt driveway." },
+      { href: "/snow-melting/concrete/", title: "Concrete", body: "Snow melting in concrete slabs and walkways." },
+      { href: "/snow-melting/pavers/", title: "Pavers and interlock", body: "Snow melting beneath pavers." },
+    ]}
+  />
+
+  <Faq dark heading="Residential questions" intro="Short answers to what homeowners ask most." items={faqItems} />
+
+  <CtaStrip
+    heading="Tell us about your home"
+    body="Share the areas, the surface and a photo if you have one. We come back with a design and an estimate."
+    primaryHref="/contact/?project=residential"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

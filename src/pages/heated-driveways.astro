@@ -1,0 +1,266 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import CoveragePicker from "../components/CoveragePicker.astro";
+import { Picture } from "astro:assets";
+import heatedDrivewayWinterDusk from "../assets/images/heated-driveway-winter-dusk.jpg";
+import StepList from "../components/StepList.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const title = "Heated Driveways in Ontario & the GTA | MeltGrid Canada";
+const description =
+  "Heated driveway design and installation coordination across Ontario and the Greater Toronto Area. How it works, your surface and coverage options, electric or hydronic.";
+
+const faqItems = [
+  {
+    q: "Does a heated driveway run all winter?",
+    a: [
+      "No. With a sensor-based control the system switches on when conditions call for it, that is, when the sensor detects the temperature and moisture that mean snow or ice is forming, and switches off after the surface has cleared.",
+      "Timer and manual controls are also available. Your design chooses the control approach that suits how you use the property.",
+    ],
+  },
+  {
+    q: "Can a heated driveway be added to an existing driveway?",
+    a: [
+      "Often, yes. The manufacturer's installation manual includes methods for existing surfaces: heating cable set into cut grooves in finished asphalt or concrete, or a new layer of concrete over heating cable on an existing slab.",
+      "Which method suits your driveway depends on its condition and construction, so an assessment confirms the options.",
+    ],
+  },
+  {
+    q: "Which driveway surfaces can be heated?",
+    a: ["Asphalt, concrete and pavers or interlock. Each is built differently, so the heating layout and installation method are designed for the surface you have or are about to build."],
+  },
+  {
+    q: "Do I have to heat the whole driveway?",
+    a: ["No. You can heat the whole surface, only the tire tracks, only the entrance and apron, or targeted areas such as steps and walkways. Your design compares the options for your driveway."],
+  },
+  {
+    q: "Who installs a heated driveway?",
+    a: ["Snow melting is installed as part of the surface work. A qualified electrician connects the system, and the paving, concrete or interlock contractor works to the design. MeltGrid coordinates the design and the trades through one project relationship."],
+  },
+  {
+    q: "How much does a heated driveway cost?",
+    a: ["It depends on the size of the area, how much of it you heat, the surface, the electrical work, the controls and the site conditions, so we do not publish fixed prices. A free design and estimate gives you a number for your property."],
+  },
+  {
+    q: "Can a heated driveway be hydronic instead of electric?",
+    a: ["Yes. A hydronic system uses a boiler and a glycol loop in place of electric heating cable. It suits some properties and projects better than electric, and some worse — see electric vs. hydronic for how they compare, or ask for a design that looks at both."],
+  },
+  {
+    q: "Do you work with contractors across the GTA?",
+    a: ["Yes. We coordinate heated driveway design and installation for properties across Ontario and the Greater Toronto Area, working with qualified electricians and the paving, concrete or interlock contractor on your project."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/heated-driveways/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Heated driveways" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Heated driveway snow melting systems",
+    serviceType: "Snow and ice melting system design and installation coordination",
+    description,
+    url: "https://meltgridcanada.ca/heated-driveways/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/heated-driveways/" structuredData={structuredData}>
+  <section class="phero phero--split">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Heated driveways" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>Heated driveways</p>
+          <h1>Heated driveways for Canadian winters</h1>
+          <p>
+            A heated driveway uses electric heating in or beneath the surface to melt snow and ice, so you are not
+            out there with a shovel. Here is how it works, what your options are and how a project comes together.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?project=residential">Request my free design &amp; estimate</a>
+            <a class="btn btn--outline btn--lg" href="/how-it-works/">See how it works</a>
+          </div>
+        </div>
+        <figure class="phero__frame">
+          <Picture
+            src={heatedDrivewayWinterDusk}
+            alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement wet and clear with snow only along the edge"
+            widths={[450, 675, 900]}
+            sizes="(min-width: 900px) 450px, 100vw"
+            formats={["avif", "webp", "jpeg"]}
+            loading="eager"
+          />
+          <figcaption>Manufacturer imagery courtesy of WarmlyYours</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>What is a heated driveway?</p>
+      <div class="answer__body">
+        <p>
+          A heated driveway is a driveway with electric heating cable or mats installed in or beneath the surface.
+          A sensor and controller switch the heat on when snow or ice conditions call for it, and the warmth melts
+          snow and ice on the surface so it does not build up.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>How a heated driveway works</h2>
+        <p>Snow, then a sensor, then a controller, then heat in the surface. Select a step to see what happens.</p>
+      </div>
+      <HowItWorks />
+      <p style="margin-top:1.5rem;"><a href="/how-it-works/">The full explanation, with the components →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What is your driveway made of?</h2>
+      <p>The heating is installed as part of the surface, so the method depends on whether you have asphalt, concrete or pavers.</p>
+      <ul class="related-list" style="margin-top:1.5rem;">
+        <li><a href="/snow-melting/asphalt/"><strong>Asphalt</strong> Elements set between a base coat and the finished asphalt. →</a></li>
+        <li><a href="/snow-melting/concrete/"><strong>Concrete</strong> Elements tied near the top of the slab before the finish layer. →</a></li>
+        <li><a href="/snow-melting/pavers/"><strong>Pavers and interlock</strong> Elements in the base build-up beneath the pavers. →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>You do not have to heat everything</h2>
+        <p>Heat the whole driveway, or only the parts you use most. Heating less area generally means less material to install and less power to run.</p>
+      </div>
+      <CoveragePicker name="coverage-preview-hd" ctaHrefBase="/contact/?project=residential&intent=coverage-help" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Electric or hydronic</h2>
+      <p>
+        Most heated driveways in Canada use electric cable or mats, but hydronic — a boiler and a glycol loop — is
+        a real option, especially for larger driveways. <a href="/hydronic-snow-melting/">See how hydronic snow melting works</a>,
+        or go straight to <a href="/electric-vs-hydronic-snow-melting/">electric vs. hydronic</a> to compare the two for your property.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Serving Ontario and the Greater Toronto Area</h2>
+        <p>Heated driveway projects we design and coordinate across the region.</p>
+      </div>
+      <div class="prose">
+        <p>
+          We coordinate heated driveway design and installation for homeowners and contractors across Ontario and
+          the Greater Toronto Area — Toronto, Mississauga, Vaughan, Markham, Richmond Hill, Brampton, Oakville,
+          Burlington, Aurora, Newmarket, King City and Caledon among them. If you're elsewhere in Ontario, send us
+          the details and we'll tell you what's possible for your property.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What to plan before you build or resurface</h2>
+        <p>Snow melting goes in with the surface, so decisions made early save rework later.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "The surface and how it is built", body: "A new driveway or a replacement is the simplest case. An existing driveway may be an option, depending on its condition and construction." },
+          { title: "Electrical supply", body: "Available power, panel capacity and the distance from the panel to the driveway all shape the electrical work. A qualified electrician connects the system." },
+          { title: "How much to heat", body: "Full coverage, tire tracks, the entrance and apron, or targeted areas. The right choice depends on how you use the driveway." },
+          { title: "Controls and sensors", body: "Automatic sensor-based control, a timer, or a manual switch. The control approach affects how the system runs." },
+          { title: "Timing with the construction", body: "Installation follows the paving, concrete or interlock schedule, so planning ahead helps." },
+          { title: "Who coordinates", body: "The design, the electrician and the surface trades need to work to the same plan. That is the part MeltGrid coordinates." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <Faq
+    dark
+    heading="Heated driveway questions"
+    intro="Direct answers first. For anything specific to your property, ask us and we will look at it in your design."
+    items={faqItems}
+  />
+
+  <RelatedLinks
+    heading="Keep reading"
+    items={[
+      { href: "/residential/", title: "Residential snow melting", body: "Driveways, walkways, steps and patios at home." },
+      { href: "/cost/", title: "Cost and planning", body: "What shapes the cost of a heated driveway." },
+      { href: "/hydronic-snow-melting/", title: "Hydronic snow melting", body: "Boilers, glycol and where hydronic fits." },
+      { href: "/resources/", title: "Resources", body: "Running cost, electrical requirements and retrofits." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Ready to plan your driveway?"
+    body="Tell us about your property. We come back with a design and an estimate."
+    primaryHref="/contact/?project=residential"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>
+
+<style>
+  .related-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .related-list a {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    color: var(--fg-muted);
+  }
+  .related-list strong {
+    display: block;
+    color: var(--fg);
+    margin-bottom: 0.3rem;
+  }
+</style>

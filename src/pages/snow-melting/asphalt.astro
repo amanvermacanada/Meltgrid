@@ -1,0 +1,218 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FeatureSplit from "../../components/FeatureSplit.astro";
+import snowMeltingMatAsphaltCrossSection from "../../assets/images/snow-melting-mat-asphalt-cross-section.jpg";
+import StepList from "../../components/StepList.astro";
+import Faq from "../../components/Faq.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import CtaStrip from "../../components/CtaStrip.astro";
+
+const title = "Snow Melting Under Asphalt Driveways | MeltGrid Canada";
+const description =
+  "How snow melting is installed under an asphalt driveway: the layers, the order of work with the paving crew and electrician, and options for existing driveways.";
+
+const faqItems = [
+  {
+    q: "Can snow melting be installed under an asphalt driveway?",
+    a: ["Yes. Heating mats or cable are laid on the base (binder) coat of asphalt and covered by the finished top coat, so the system sits inside the pavement and is not visible once the driveway is finished."],
+  },
+  {
+    q: "Does the heat damage asphalt?",
+    a: ["The systems are designed and specified for use in asphalt, and the manufacturer publishes an installation method for it. The design, the paving contractor and the electrician follow that method so the elements are protected while the asphalt is laid."],
+  },
+  {
+    q: "Can I add snow melting to an existing asphalt driveway?",
+    a: ["Often, yes — see our full retrofit guide for the groove-cutting method and what an assessment checks."],
+  },
+  {
+    q: "Who does the work on an asphalt driveway?",
+    a: ["The paving contractor lays the base and asphalt, and a qualified electrician places, connects and tests the heating elements. MeltGrid coordinates the design and the two trades."],
+  },
+  {
+    q: "Should I choose a mat or a cable for asphalt?",
+    a: ["Mats suit open, square or rectangular areas. Cable suits curves and irregular shapes, and can be laid at different spacings. Your design chooses between them, or uses both."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/snow-melting/asphalt/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Heated driveways", item: "https://meltgridcanada.ca/heated-driveways/" },
+      { "@type": "ListItem", position: 3, name: "Asphalt" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Asphalt snow melting",
+    serviceType: "Snow and ice melting system design and installation coordination for asphalt",
+    description,
+    url: "https://meltgridcanada.ca/snow-melting/asphalt/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/snow-melting/asphalt/" structuredData={structuredData}>
+  <section class="phero phero--split">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Heated driveways", href: "/heated-driveways/" }, { label: "Asphalt" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>Snow melting: Asphalt</p>
+          <h1>Snow melting under an asphalt driveway</h1>
+          <p>
+            The heating goes into the pavement itself, between the base coat and the finished top coat, so an
+            asphalt driveway can melt snow without anything visible on the surface.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?surface=asphalt">Request my free design &amp; estimate</a>
+            <a class="btn btn--outline btn--lg" href="/how-it-works/">How snow melting works</a>
+          </div>
+        </div>
+        <figure class="phero__frame">
+          <img
+            src="/images/snow-melting-cable-asphalt-cross-section.jpg"
+            alt="Cutaway of an asphalt driveway showing snow melt cable fixed to a metal frame between finished asphalt, a base coat and compacted gravel"
+            loading="eager"
+            width="900"
+            height="700"
+          />
+          <figcaption>Image: WarmlyYours</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>Can asphalt have snow melting?</p>
+      <div class="answer__body">
+        <p>
+          Yes. Heating mats or cable are laid over the base coat of asphalt and covered by the finished top coat. A
+          qualified electrician connects and tests the system, and the paving contractor works to the design. It
+          is simplest on a new or replaced driveway, and methods also exist for existing asphalt.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stack">
+      <FeatureSplit
+        image={snowMeltingMatAsphaltCrossSection}
+        alt="Cutaway of an asphalt driveway showing finished asphalt, a snow melt mat, the base coat of asphalt and compacted gravel"
+        credit="Image: WarmlyYours. Cross-section with a snow melt mat. The cable version is at the top of this page"
+        heading="How an asphalt driveway is built for snow melting"
+        bullets={["Finished asphalt (top coat)", "Snow melt mat or cable", "Base coat of asphalt", "Compacted crushed-stone gravel base"]}
+      >
+        <p>The heating elements are part of the paving build-up, protected between two layers of asphalt.</p>
+        <p>Layers, top to bottom</p>
+      </FeatureSplit>
+
+      <div>
+        <h2>How installation goes</h2>
+        <p>The order of work matters: the elements are protected and tested as the surface goes on.</p>
+        <StepList
+          items={[
+            { title: "A solid base", body: "The paving contractor prepares a compacted crushed-stone base ready for the asphalt." },
+            { title: "Base coat", body: "The base (binder) coat of asphalt is laid and rolled smooth. The paver and the electrician agree whether it cools first." },
+            { title: "Elements go down", body: "Mats, or cable fixed to a frame, are laid on the base coat. The electrician routes the cold leads in conduit to a junction box and places the sensor." },
+            { title: "Top coat, with care", body: "The top coat is spread over the elements to at least the manufacturer's minimum thickness, without heavy equipment running over exposed cable." },
+            { title: "Testing throughout", body: "The electrician tests the elements as the asphalt goes on and again once it is finished." },
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>Working with the paving crew</h2>
+        <p>Asphalt is laid hot and fast, so the plan has to be agreed before the trucks arrive.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>One plan for both trades</h3><p>The paving contractor and the electrician need the same layout, the same order of work and the same schedule.</p></li>
+        <li><h3>No heavy machinery over the elements</h3><p>Exposed cable and mats must not have heavy equipment run over them, which affects how the top coat is spread.</p></li>
+        <li><h3>Coverage changes the method</h3><p>Tire-track coverage leaves room for a machine spreader on some driveways; full coverage generally calls for hand spreading.</p></li>
+      </ul>
+      <p style="margin-top:1.5rem;"><a href="/heated-driveways/">Back to heated driveways →</a></p>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mat or cable in asphalt</h2>
+        <p>Both are installed in asphalt. The shape of the area and how the paving is done usually decide which one, or which combination.</p>
+      </div>
+      <div class="cmp">
+        <article class="cmp__col">
+          <p>Open areas</p>
+          <h3>Snow melting mat</h3>
+          <p>Heating cable pre-spaced on a mesh, rolled out over the base coat.</p>
+          <ul>
+            <li>Suited to square or rectangular driveways and walkways</li>
+            <li>The spacing is built into the mat</li>
+            <li>Comes in set widths and lengths</li>
+          </ul>
+        </article>
+        <article class="cmp__col">
+          <p>Shapes and curves</p>
+          <h3>Snow melting cable</h3>
+          <p>Loose heating cable fixed to a frame, laid to the shape of the area.</p>
+          <ul>
+            <li>Suited to curved or irregular layouts and stairways</li>
+            <li>Can be laid at different spacings to raise or lower heat output</li>
+            <li>Takes more installation time</li>
+          </ul>
+        </article>
+      </div>
+      <p style="margin-top:1.5rem;"><a href="/technology/">More about mats, cables and controls →</a></p>
+    </div>
+  </section>
+
+  <Faq heading="Asphalt questions" intro="Direct answers. Your design confirms the details for your property." items={faqItems} />
+
+  <RelatedLinks
+    heading="Other surfaces"
+    dark
+    intro="The installation method changes with the surface."
+    items={[
+      { href: "/snow-melting/concrete/", title: "Concrete", body: "Snow melting in concrete slabs and walkways." },
+      { href: "/snow-melting/pavers/", title: "Pavers and interlock", body: "Snow melting beneath pavers." },
+    ]}
+  />
+  <p style="text-align:center;margin-top:-2rem;padding-bottom:2rem;"><a href="/resources/existing-driveway-retrofit/">Can this go under an existing driveway? See retrofit considerations →</a></p>
+
+  <CtaStrip
+    heading="Planning snow melting for asphalt?"
+    body="Tell us about the surface and the area. We come back with a design and an estimate."
+    primaryHref="/contact/?surface=asphalt"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

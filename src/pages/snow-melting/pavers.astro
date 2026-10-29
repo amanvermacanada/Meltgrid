@@ -1,0 +1,248 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FeatureSplit from "../../components/FeatureSplit.astro";
+import snowMeltingCablePaversCrossSection from "../../assets/images/snow-melting-cable-pavers-cross-section.jpg";
+import StepList from "../../components/StepList.astro";
+import Faq from "../../components/Faq.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import CtaStrip from "../../components/CtaStrip.astro";
+
+const title = "Snow Melting Under Pavers & Interlock | MeltGrid Canada";
+const description =
+  "How snow melting is installed beneath pavers and interlock: the base build-up, mortar or sand beds, paver choice and how the trades coordinate.";
+
+const faqItems = [
+  {
+    q: "Can snow melting be installed under pavers or interlock?",
+    a: ["Yes. Heating mats or cable are laid on the base and covered by a bed of mortar or sand, and the pavers are set on top. The finished surface is your choice of paver."],
+  },
+  {
+    q: "Should the pavers sit on mortar or sand?",
+    a: ["The manufacturer's manual covers both, with different cover depths for each and extra care with sand so pavers are not dropped onto the elements. Your design and the paver installer confirm which suits your project."],
+  },
+  {
+    q: "Does paver thickness matter?",
+    a: ["Yes. The heat has to travel up through the paver, so the manual recommends limiting paver thickness for best results. Choose your paver with the design in mind."],
+  },
+  {
+    q: "Can I add snow melting to an existing paver driveway?",
+    a: ["Generally it means rebuilding the base beneath the pavers — see our full retrofit guide for what that involves and what an assessment checks."],
+  },
+  {
+    q: "What about permeable pavers?",
+    a: ["The manual has a separate method for permeable pavers, because the base is built differently. Tell us if your project uses permeable pavers so the design follows the right method."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/snow-melting/pavers/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Heated driveways", item: "https://meltgridcanada.ca/heated-driveways/" },
+      { "@type": "ListItem", position: 3, name: "Pavers and interlock" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pavers and interlock snow melting",
+    serviceType: "Snow and ice melting system design and installation coordination for pavers and interlock",
+    description,
+    url: "https://meltgridcanada.ca/snow-melting/pavers/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/snow-melting/pavers/" structuredData={structuredData}>
+  <section class="phero phero--split">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Heated driveways", href: "/heated-driveways/" }, { label: "Pavers and interlock" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>Snow melting: Pavers and interlock</p>
+          <h1>Snow melting beneath pavers and interlock</h1>
+          <p>
+            The heating sits in the base build-up under your pavers, so you keep the look of the paver you chose
+            while the surface melts snow.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?surface=pavers">Request my free design &amp; estimate</a>
+            <a class="btn btn--outline btn--lg" href="/how-it-works/">How snow melting works</a>
+          </div>
+        </div>
+        <figure class="phero__frame">
+          <img
+            src="/images/snow-melting-mat-pavers-cross-section.jpg"
+            alt="Cutaway of a paver surface showing pavers, a mortar or sand bed, a snow melt mat and crushed gravel"
+            loading="eager"
+            width="900"
+            height="700"
+          />
+          <figcaption>Image: WarmlyYours</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>Can pavers have snow melting?</p>
+      <div class="answer__body">
+        <p>
+          Yes. Heating mats or cable are laid on the crushed-stone base, covered by a bed of mortar or sand, and
+          the pavers are set on top. It is planned with the paver installer and connected and tested by a
+          qualified electrician.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stack">
+      <div class="sp-diagram">
+        <div class="sp-diagram__copy">
+          <h2>What sits under a heated paver surface</h2>
+          <p>The elements are held on a mesh or attachment grid over the base, then covered by the setting bed and the pavers.</p>
+          <ul>
+            <li>Pavers</li>
+            <li>Mortar or sand setting bed</li>
+            <li>Snow melt mat or cable on a frame or grid</li>
+            <li>Crushed-stone gravel base</li>
+          </ul>
+          <figcaption class="fg-muted" style="font-size:var(--text-sm);">Simplified layer diagram, not to scale</figcaption>
+        </div>
+        <div>
+          <h2>How installation goes</h2>
+          <p>The order of work matters: the elements are protected and tested as the surface goes on.</p>
+          <StepList
+            items={[
+              { title: "A solid base", body: "The installer prepares and compacts a crushed-stone base to receive the heating layer." },
+              { title: "Mesh or grid, then elements", body: "A mesh or embeddable attachment grid is staked flat, and the mat or cable is fixed to it at the design spacing." },
+              { title: "Leads, conduit and sensor", body: "Cold leads run in conduit to a junction box, and the sensor is placed in an open area." },
+              { title: "Setting bed and pavers", body: "The mortar or sand bed goes over the elements, then the pavers, without heavy equipment over exposed elements." },
+              { title: "Testing throughout", body: "The electrician tests the elements as the surface is built and once the mortar has cured." },
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mortar bed or sand bed</h2>
+        <p>Two ways to set the pavers over the heating layer, each with its own points to plan.</p>
+      </div>
+      <div class="cmp">
+        <article class="cmp__col">
+          <p>Solid setting bed</p>
+          <h3>Mortar bed</h3>
+          <p>A layer of mortar covers the elements and the pavers are set in it.</p>
+          <ul>
+            <li>The manufacturer specifies a range of mortar thickness over the elements</li>
+            <li>Testing continues until the mortar has cured</li>
+            <li>Sawcutting or drilling later must avoid buried elements</li>
+          </ul>
+        </article>
+        <article class="cmp__col">
+          <p>Flexible setting bed</p>
+          <h3>Sand bed</h3>
+          <p>A levelled bed of sand covers the elements and the pavers are laid on it.</p>
+          <ul>
+            <li>The manufacturer specifies a cover depth for sand</li>
+            <li>Care is needed not to drop pavers onto the surface</li>
+            <li>Your design confirms which suits the project</li>
+          </ul>
+        </article>
+      </div>
+      <div class="pv-alt">
+        <FeatureSplit
+          image={snowMeltingCablePaversCrossSection}
+          alt="Cutaway of a paver surface showing pavers, a mortar or sand bed, snow melt cable on an attachment grid and crushed gravel"
+          credit="Image: WarmlyYours. Cross-section of pavers over snow melt cable on an attachment grid"
+          heading="Cable version, on an attachment grid"
+          headingLevel="h3"
+          flip
+        >
+          <p>Where the paving has curves or borders, cable is fixed to an attachment grid staked over the crushed-stone base, then covered by the setting bed.</p>
+        </FeatureSplit>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mat or cable under pavers</h2>
+        <p>Both go under pavers. Rectangular runs suit mats; curves, borders and steps suit cable.</p>
+      </div>
+      <div class="cmp">
+        <article class="cmp__col">
+          <p>Open areas</p>
+          <h3>Snow melting mat</h3>
+          <p>Heating cable pre-spaced on a mesh, rolled out over the base.</p>
+          <ul>
+            <li>Suited to rectangular driveways and terraces</li>
+            <li>Spacing is built into the mat</li>
+            <li>Comes in set widths and lengths</li>
+          </ul>
+        </article>
+        <article class="cmp__col">
+          <p>Shapes and borders</p>
+          <h3>Snow melting cable</h3>
+          <p>Loose cable fixed to an attachment grid, laid to the shape of the paving.</p>
+          <ul>
+            <li>Suited to curves, borders and steps</li>
+            <li>Can be laid at different spacings by design</li>
+            <li>Takes more installation time</li>
+          </ul>
+        </article>
+      </div>
+      <p style="margin-top:1.5rem;"><a href="/technology/">More about mats, cables and controls →</a></p>
+    </div>
+  </section>
+
+  <Faq heading="Pavers and interlock questions" intro="Direct answers. Your design confirms the details for your property." items={faqItems} />
+
+  <RelatedLinks
+    heading="Other surfaces"
+    dark
+    intro="The installation method changes with the surface."
+    items={[
+      { href: "/snow-melting/asphalt/", title: "Asphalt", body: "Snow melting under an asphalt driveway." },
+      { href: "/snow-melting/concrete/", title: "Concrete", body: "Snow melting in concrete slabs and walkways." },
+    ]}
+  />
+  <p style="text-align:center;margin-top:-2rem;padding-bottom:2rem;"><a href="/resources/existing-driveway-retrofit/">Can this go under an existing driveway? See retrofit considerations →</a></p>
+
+  <CtaStrip
+    heading="Planning snow melting for pavers and interlock?"
+    body="Tell us about the surface and the area. We come back with a design and an estimate."
+    primaryHref="/contact/?surface=pavers"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

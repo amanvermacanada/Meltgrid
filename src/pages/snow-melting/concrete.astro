@@ -1,0 +1,234 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import StepList from "../../components/StepList.astro";
+import Faq from "../../components/Faq.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import CtaStrip from "../../components/CtaStrip.astro";
+
+const title = "Concrete Snow Melting Systems | MeltGrid Canada";
+const description =
+  "How snow melting is installed in concrete driveways, walkways and steps: where the heating sits in the slab, new pours versus existing slabs, and who does the work.";
+
+const faqItems = [
+  {
+    q: "Can snow melting be installed in a concrete driveway or walkway?",
+    a: ["Yes. In new concrete, heating cable or mats are fixed to reinforcing mesh or rebar near the top of the slab before the concrete is poured, so they end up inside the finished slab."],
+  },
+  {
+    q: "How deep are the heating elements in concrete?",
+    a: ["The manufacturer's method places the elements near the top of the slab, not deep, so the heat reaches the surface. Your design and the concrete contractor confirm the exact depth for your slab."],
+  },
+  {
+    q: "Can I add snow melting to an existing concrete slab?",
+    a: ["Often, yes — see our full retrofit guide for the two routes (a new layer over the slab, or cut grooves) and what an assessment checks."],
+  },
+  {
+    q: "What about expansion joints and railings?",
+    a: ["They are planned in the design. Heating elements are not run across expansion joints, and posts and railings are pre-sleeved so the concrete does not have to be drilled through the heating layer."],
+  },
+  {
+    q: "Who does the work on a concrete surface?",
+    a: ["The concrete contractor prepares the base and pours the slab, and a qualified electrician fixes, connects and tests the heating elements. MeltGrid coordinates the design and both trades."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/snow-melting/concrete/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Heated driveways", item: "https://meltgridcanada.ca/heated-driveways/" },
+      { "@type": "ListItem", position: 3, name: "Concrete" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Concrete snow melting",
+    serviceType: "Snow and ice melting system design and installation coordination for concrete",
+    description,
+    url: "https://meltgridcanada.ca/snow-melting/concrete/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/snow-melting/concrete/" structuredData={structuredData}>
+  <section class="phero phero--split">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Heated driveways", href: "/heated-driveways/" }, { label: "Concrete" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>Snow melting: Concrete</p>
+          <h1>Snow melting in concrete driveways and walkways</h1>
+          <p>
+            In concrete, the heating is tied in near the top of the slab before the pour, then covered by the
+            finished concrete. It is planned alongside the concrete work, not added afterwards.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?surface=concrete">Request my free design &amp; estimate</a>
+            <a class="btn btn--outline btn--lg" href="/how-it-works/">How snow melting works</a>
+          </div>
+        </div>
+        <figure class="phero__frame">
+          <img
+            src="/images/snow-melting-cable-concrete-cross-section.jpg"
+            alt="Cutaway of a concrete slab showing snow melt cable tied to rebar two to three inches below the finished concrete, on compacted gravel"
+            loading="eager"
+            width="900"
+            height="700"
+          />
+          <figcaption>Image: WarmlyYours</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>Can concrete have snow melting?</p>
+      <div class="answer__body">
+        <p>
+          Yes. Heating cable or mats are fixed to reinforcing mesh or rebar near the top of the slab, and the
+          concrete is poured over them. A qualified electrician connects and tests the system. New slabs are the
+          simplest case, and the manual also covers pouring a new layer over an existing slab.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container stack">
+      <div class="sp-diagram">
+        <div class="sp-diagram__copy">
+          <h2>Where the heating sits in a concrete slab</h2>
+          <p>The elements go in near the top of the slab, held on a frame so the spacing stays even while the concrete is poured.</p>
+          <ul>
+            <li>Finished concrete</li>
+            <li>Snow melt cable tied to rebar or a metal frame, near the top of the slab</li>
+            <li>Wire chairs or blocks holding the frame at height</li>
+            <li>Compacted crushed-stone gravel base</li>
+          </ul>
+          <figcaption class="fg-muted" style="font-size:var(--text-sm);">Simplified layer diagram, not to scale</figcaption>
+        </div>
+        <div>
+          <h2>How installation goes</h2>
+          <p>The order of work matters: the elements are protected and tested as the surface goes on.</p>
+          <StepList
+            items={[
+              { title: "Base and reinforcing", body: "The concrete contractor prepares a compacted crushed-stone base and places the mesh or rebar." },
+              { title: "Elements fixed to the frame", body: "The electrician attaches cable or mats to the frame at the design spacing and props the frame to the specified height." },
+              { title: "Leads, conduit and sensor", body: "Cold leads run in conduit to a junction box, and a slab sensor can be placed in an open area at this stage." },
+              { title: "The pour", body: "Concrete is poured with care around the elements, without heavy equipment over exposed cable." },
+              { title: "Testing before and after", body: "The electrician tests the elements during the pour and again once the slab has cured." },
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>New slab or existing slab</h2>
+        <p>The route depends on whether the concrete is about to be poured or is already there.</p>
+      </div>
+      <div class="cmp">
+        <article class="cmp__col">
+          <p>Single pour</p>
+          <h3>New or replacement slab</h3>
+          <p>The elements are fixed to the reinforcing and covered in the same pour as the slab.</p>
+          <ul>
+            <li>Planned with the concrete contractor</li>
+            <li>Elements sit near the top of the slab</li>
+            <li>The simplest case for even heating</li>
+          </ul>
+        </article>
+        <article class="cmp__col">
+          <p>Retrofit</p>
+          <h3>Existing slab</h3>
+          <p>The manufacturer describes two routes for concrete that is already in place.</p>
+          <ul>
+            <li>A new layer of concrete over cable laid on the existing slab</li>
+            <li>Or cable set into cut grooves in the finished concrete</li>
+            <li>Depends on the condition and thickness of the slab</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mat or cable in concrete</h2>
+        <p>Both are installed in concrete. Open rectangles suit mats; shapes, curves and stairs suit cable.</p>
+      </div>
+      <div class="cmp">
+        <article class="cmp__col">
+          <p>Open areas</p>
+          <h3>Snow melting mat</h3>
+          <p>Heating cable pre-spaced on a mesh, laid on the frame across open slabs.</p>
+          <ul>
+            <li>Suited to rectangular driveways, walkways and patios</li>
+            <li>Spacing is built into the mat</li>
+            <li>Comes in set widths and lengths</li>
+          </ul>
+        </article>
+        <article class="cmp__col">
+          <p>Shapes and stairs</p>
+          <h3>Snow melting cable</h3>
+          <p>Loose cable tied to rebar or mesh, laid to the shape of the slab.</p>
+          <ul>
+            <li>Suited to curved layouts, steps and ramps</li>
+            <li>Can be laid at different spacings by design</li>
+            <li>Takes more installation time</li>
+          </ul>
+        </article>
+      </div>
+      <p style="margin-top:1.5rem;"><a href="/technology/">More about mats, cables and controls →</a></p>
+    </div>
+  </section>
+
+  <Faq heading="Concrete questions" intro="Direct answers. Your design confirms the details for your property." items={faqItems} />
+
+  <RelatedLinks
+    heading="Other surfaces"
+    dark
+    intro="The installation method changes with the surface."
+    items={[
+      { href: "/snow-melting/asphalt/", title: "Asphalt", body: "Snow melting under an asphalt driveway." },
+      { href: "/snow-melting/pavers/", title: "Pavers and interlock", body: "Snow melting beneath pavers." },
+    ]}
+  />
+  <p style="text-align:center;margin-top:-2rem;padding-bottom:2rem;"><a href="/resources/existing-driveway-retrofit/">Can this go under an existing driveway? See retrofit considerations →</a></p>
+
+  <CtaStrip
+    heading="Planning snow melting for concrete?"
+    body="Tell us about the surface and the area. We come back with a design and an estimate."
+    primaryHref="/contact/?surface=concrete"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

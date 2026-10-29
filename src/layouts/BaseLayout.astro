@@ -1,0 +1,109 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StickyCta from "../components/StickyCta.astro";
+import AnalyticsEvents from "../components/AnalyticsEvents.astro";
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Pathname beginning and ending with "/", e.g. "/about/" */
+  path: string;
+  /** "overlay" (hero pages that sit under a transparent header) or "solid" */
+  headerVariant?: "overlay" | "solid";
+  ogImage?: string;
+  /** Extra JSON-LD blocks (WebPage/Service/BreadcrumbList/FAQPage/etc.) as objects */
+  structuredData?: Record<string, unknown>[];
+  noindex?: boolean;
+  /** Hide the sticky mobile CTA bar (e.g. on the contact page itself) */
+  hideStickyCta?: boolean;
+}
+
+const {
+  title,
+  description,
+  path,
+  headerVariant = "solid",
+  ogImage = "https://meltgridcanada.ca/og-default.jpg",
+  structuredData = [],
+  noindex = false,
+  hideStickyCta = false,
+} = Astro.props;
+
+const canonical = new URL(path, "https://meltgridcanada.ca").toString();
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "MeltGrid Canada",
+  url: "https://meltgridcanada.ca",
+  email: "info@meltgridcanada.ca",
+  telephone: "+1-437-774-5305",
+  description:
+    "MeltGrid Canada designs and coordinates automatic snow and ice-melting systems for residential and commercial properties, backed by manufacturer technology and design support.",
+};
+
+const gaId = "G-5B3KM8V909";
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#071B35" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/favicon-180.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MeltGrid Canada" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="MeltGrid Canada: automatic snow and ice-melting systems" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="MeltGrid Canada: automatic snow and ice-melting systems" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+    {structuredData.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", gaId);
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <Header variant={headerVariant} />
+    <main id="main" class={headerVariant === "solid" ? "has-solid-header" : ""}>
+      <slot />
+    </main>
+    <Footer />
+    {!hideStickyCta && <StickyCta />}
+    <AnalyticsEvents />
+  </body>
+</html>

@@ -1,0 +1,254 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import StepList from "../components/StepList.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+import { Picture } from "astro:assets";
+import heatedDrivewayWinterDusk from "../assets/images/heated-driveway-winter-dusk.jpg";
+
+const title = "Hydronic Snow Melting Systems | MeltGrid Canada";
+const description =
+  "How hydronic snow melting works: a boiler, a glycol loop and tubing in the surface. Coordinated design and installation for Ontario and GTA properties.";
+
+const faqItems = [
+  {
+    q: "How does a hydronic snow-melting system work?",
+    a: [
+      "A boiler heats a glycol-water mix, a pump circulates it through tubing laid in or beneath the surface, and a snow and ice sensor tells the controller when to run. The warmth from the fluid melts snow and ice on the surface above it.",
+    ],
+  },
+  {
+    q: "Does a hydronic system need a gas line?",
+    a: [
+      "Most hydronic boilers run on natural gas or propane, though electric and other boiler types exist. Whether your property has the gas supply and mechanical room space a given boiler needs is confirmed as part of your design, with the mechanical contractor.",
+    ],
+  },
+  {
+    q: "What is a mechanical room, and do I need one?",
+    a: [
+      "The boiler, pump, manifold and controls need an indoor space with the right clearances, venting and access for service. Most homes and commercial buildings already have a suitable spot — a mechanical room, basement or garage corner — but it is confirmed during your design, not assumed.",
+    ],
+  },
+  {
+    q: "Can hydronic go under asphalt, concrete or pavers?",
+    a: [
+      "Yes. The tubing is laid in the surface build-up the same way electric cable is, with a layout and loop design set for your project. The paving, concrete or interlock contractor and the mechanical contractor work to the same plan.",
+    ],
+  },
+  {
+    q: "What maintenance does a hydronic system need?",
+    a: [
+      "Periodic checks of the boiler, pump, glycol concentration and controls, generally handled by the mechanical contractor as part of routine HVAC-style maintenance. Your design specifies what your system needs and how often.",
+    ],
+  },
+  {
+    q: "Has MeltGrid completed hydronic installations?",
+    a: [
+      "We coordinate hydronic system design and installation through manufacturer design support and qualified mechanical contractors — the same coordination model we use for electric systems. We are upfront about where we are in building out this service, and we will tell you plainly if a project is or isn't a fit for where we are today.",
+    ],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/hydronic-snow-melting/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Hydronic snow melting" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Hydronic snow melting systems",
+    serviceType: "Hydronic snow and ice melting system design and installation coordination",
+    description,
+    url: "https://meltgridcanada.ca/hydronic-snow-melting/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/hydronic-snow-melting/" structuredData={structuredData}>
+  <section class="phero phero--split">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Hydronic snow melting" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>Hydronic snow melting</p>
+          <h1>Hydronic snow melting, coordinated end to end</h1>
+          <p>
+            A hydronic system uses a boiler and a glycol loop, instead of electric cable, to keep a surface clear.
+            It is a real option for Ontario driveways and commercial properties — here is how it works, where it
+            fits, and how we coordinate it.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?intent=hydronic">Talk to us about a hydronic system</a>
+            <a class="btn btn--outline btn--lg" href="/electric-vs-hydronic-snow-melting/">Compare with electric</a>
+          </div>
+        </div>
+        <figure class="phero__frame">
+          <Picture
+            src={heatedDrivewayWinterDusk}
+            alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement wet and clear with snow only along the edge"
+            widths={[450, 675, 900]}
+            sizes="(min-width: 900px) 450px, 100vw"
+            formats={["avif", "webp", "jpeg"]}
+            loading="eager"
+          />
+          <figcaption>Generic winter driveway scene — not a MeltGrid or hydronic-specific installation photo.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>What is hydronic snow melting?</p>
+      <div class="answer__body">
+        <p>
+          A hydronic snow-melting system circulates heated fluid — usually a glycol and water mix — through tubing
+          laid in or beneath a surface. A boiler supplies the heat, a pump keeps the fluid moving, and a snow and
+          ice sensor tells the controller when the system should run. The warmth melts snow and ice on the surface
+          above, the same outcome as an electric system, from a different heat source.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>The parts of a hydronic system</h2>
+        <p>Six components working together, from the heat source to the surface.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Boiler", body: "Heats the glycol-water mix. Sized to the area you want to heat and the climate." },
+          { title: "Glycol loop", body: "A glycol-water mix resists freezing in the tubing when the system is off between runs." },
+          { title: "PEX tubing", body: "Runs through the surface build-up in a loop layout designed for your area." },
+          { title: "Manifold", body: "Splits and balances flow across the tubing loops so heat reaches the whole design area evenly." },
+          { title: "Pump", body: "Circulates the heated fluid through the loop while the system runs." },
+          { title: "Sensor and controller", body: "Detects snow and ice conditions and switches the boiler and pump on and off, the same role as in an electric system." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Where it goes</h2>
+      <p>Tubing is laid in the surface build-up the same way electric heating elements are, with the layout set for your surface and area.</p>
+      <ul class="related-list" style="margin-top:1.5rem;">
+        <li><a href="/snow-melting/asphalt/"><strong>Asphalt</strong> Tubing set between a base coat and the finished asphalt. →</a></li>
+        <li><a href="/snow-melting/concrete/"><strong>Concrete</strong> Tubing tied near the top of the slab before the finish layer. →</a></li>
+        <li><a href="/snow-melting/pavers/"><strong>Pavers and interlock</strong> Tubing in the base build-up beneath the pavers. →</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mechanical room and gas supply</h2>
+        <p>What a hydronic system needs indoors, beyond the surface itself.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Space for the equipment</h3><p>The boiler, pump, manifold and controls need an indoor space with the right clearances and access for service — confirmed during your design, not assumed.</p></li>
+        <li><h3>Gas or other fuel supply</h3><p>Most boilers run on natural gas or propane. Whether your property's supply suits a given boiler is checked as part of planning.</p></li>
+        <li><h3>Venting</h3><p>Boilers vent combustion byproducts to the outside. The mechanical contractor confirms what your equipment and space require.</p></li>
+        <li><h3>Coordinated timing</h3><p>Mechanical work, electrical connections for controls, and the surface build all need to happen in the right order — the part MeltGrid coordinates.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-split">
+      <h2>How we coordinate a hydronic project</h2>
+      <div class="prose about-prose">
+        <p>
+          MeltGrid Canada does not manufacture hydronic equipment, and we do not employ licensed mechanical
+          installers directly. For hydronic systems, as for electric, we coordinate manufacturer-supported design
+          with qualified mechanical contractors and the paving, concrete or interlock trades your project needs —
+          one project relationship instead of several disconnected ones.
+        </p>
+        <p>
+          We are building out hydronic as a core service alongside our existing electric coordination work. If a
+          hydronic project is a good fit for where we are today, we will tell you plainly; if it isn't yet, we will
+          tell you that too, rather than overstate what we can deliver.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq
+    dark
+    heading="Hydronic snow melting questions"
+    intro="Direct answers first. For anything specific to your property, ask us and we will look at it in your design."
+    items={faqItems}
+  />
+
+  <RelatedLinks
+    heading="Keep reading"
+    items={[
+      { href: "/electric-vs-hydronic-snow-melting/", title: "Electric vs. hydronic", body: "How the two systems compare for your property." },
+      { href: "/heated-driveways/", title: "Heated driveways", body: "The electric side of snow melting, and GTA service area." },
+      { href: "/commercial/", title: "Commercial snow melting", body: "Larger properties where hydronic often fits well." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Considering hydronic for your property?"
+    body="Tell us about the project. We'll tell you plainly whether hydronic, electric, or both make sense."
+    primaryHref="/contact/?intent=hydronic"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>
+
+<style>
+  .related-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .related-list a {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    color: var(--fg-muted);
+  }
+  .related-list strong {
+    display: block;
+    color: var(--fg);
+    margin-bottom: 0.3rem;
+  }
+  .about-split {
+    max-width: 48rem;
+  }
+  .about-prose {
+    margin-top: 1rem;
+  }
+</style>

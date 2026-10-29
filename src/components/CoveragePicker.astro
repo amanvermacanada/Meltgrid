@@ -1,0 +1,108 @@
+---
+// A functional coverage picker: selecting an option updates the visible
+// summary panel (CSS-only, via :has()) AND carries the selection into the
+// real lead form as a `coverage` query param on the "Help me choose" link
+// (read by DesignRequestForm.astro's pre-fill logic). Replaces an earlier,
+// purely decorative version of this widget that didn't connect to anything.
+export interface Props {
+  /** Unique radio group name - must be unique if more than one picker is on a page */
+  name: string;
+  /** Contact link base, e.g. "/contact/?intent=coverage-help" or "/contact/?project=residential&intent=coverage-help" */
+  ctaHrefBase: string;
+}
+
+const { name, ctaHrefBase } = Astro.props;
+
+const options = [
+  {
+    value: "full",
+    label: "Full coverage",
+    hint: "Heat the whole driveway so the entire surface stays clear. The most complete result, with the most surface to heat. A good fit when you want no shoveling at all.",
+    summary: "Full coverage: the entire surface heated, so nothing is left to shovel.",
+  },
+  {
+    value: "tracks",
+    label: "Tire tracks",
+    hint: "Heat two strips where the wheels travel. Snow can stay in the centre and along the edges while the wheel paths stay clear, with less area to heat than full coverage.",
+    summary: "Tire tracks: just the two strips where your wheels travel, less area to heat.",
+  },
+  {
+    value: "entrance",
+    label: "Entrance and apron",
+    hint: "Heat the area at the garage door and where the driveway meets the street, so you can get in and out without clearing those spots by hand.",
+    summary: "Entrance and apron: the garage end and street end, where getting stuck matters most.",
+  },
+  {
+    value: "targeted",
+    label: "Targeted areas",
+    hint: "Heat only the spots that matter most: steps, the front walkway, or a steep or shaded stretch. The smallest heated area, focused on safety and access.",
+    summary: "Targeted areas: just the spots that matter most, like steps or a shaded stretch.",
+  },
+];
+---
+
+<div class="cov" data-coverage-picker>
+  <div class="cov__plan" data-coverage-plan>
+    {options.map((opt) => (
+      <p class="cov__summary" data-summary={opt.value}>{opt.summary}</p>
+    ))}
+  </div>
+  <div>
+    <div class="dr__cards" role="radiogroup" aria-label="Coverage options">
+      {options.map((opt, i) => (
+        <label class="opt">
+          <input type="radio" name={name} value={opt.value} checked={i === 0} />
+          <span class="opt__body">
+            <span class="opt__label">{opt.label}</span>
+            <span class="opt__hint">{opt.hint}</span>
+          </span>
+        </label>
+      ))}
+    </div>
+    <div class="cov__help">
+      <p class="fg-muted">The right option depends on your driveway, budget and how you use it. Your design compares them.</p>
+      <a class="btn btn--outline btn--md" data-coverage-cta href={`${ctaHrefBase}&coverage=full`}>Help me choose</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  [data-coverage-plan] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .cov__summary {
+    display: none;
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .cov:has(input[value="full"]:checked) .cov__summary[data-summary="full"],
+  .cov:has(input[value="tracks"]:checked) .cov__summary[data-summary="tracks"],
+  .cov:has(input[value="entrance"]:checked) .cov__summary[data-summary="entrance"],
+  .cov:has(input[value="targeted"]:checked) .cov__summary[data-summary="targeted"] {
+    display: block;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-coverage-picker]").forEach((picker) => {
+    const cta = picker.querySelector<HTMLAnchorElement>("[data-coverage-cta]");
+    if (!cta) return;
+    const baseHref = (cta.getAttribute("href") ?? "").replace(/&coverage=[^&]*/, "");
+
+    function updateHref() {
+      const checked = picker.querySelector<HTMLInputElement>('input[type="radio"]:checked');
+      if (checked && cta) cta.setAttribute("href", `${baseHref}&coverage=${checked.value}`);
+    }
+
+    picker.addEventListener("change", updateHref);
+    updateHref();
+  });
+</script>

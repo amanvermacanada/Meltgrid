@@ -1,0 +1,213 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import FeatureSplit from "../components/FeatureSplit.astro";
+import snowMeltingControllerMultiZone from "../assets/images/snow-melting-controller-multi-zone.jpg";
+import StepList from "../components/StepList.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const title = "Commercial Snow Melting Systems | MeltGrid Canada";
+const description =
+  "Automatic snow and ice melting for commercial entrances, ramps, walkways and high-traffic areas, with zoned controls for larger properties. Request an assessment.";
+
+const faqItems = [
+  {
+    q: "Can commercial entrances, ramps and walkways have snow melting?",
+    a: ["Yes. Entrances, ramps, walkways, steps and other high-traffic areas can be heated. Each area is laid out for its shape and surface, using mats for open areas and cable for shapes, ramps and stairs."],
+  },
+  {
+    q: "Can a large property be heated in sections?",
+    a: ["Yes. Controls can divide a large system into zones that run separately. The manufacturer's multi-zone controller, for example, splits the heating into four zones and runs them independently, so a larger system does not need to run everywhere at once."],
+  },
+  {
+    q: "Who do you work with on a commercial project?",
+    a: ["We coordinate the snow-melting design and the trades it involves: the electrician and the surface contractors. We can work alongside your general contractor, consultant or property manager."],
+  },
+  {
+    q: "What should I send for a commercial assessment?",
+    a: ["The property address, the areas to heat, the surface types, any drawings or site plans, photos, and the electrical information you have. Drawings and photos can be attached to the request form."],
+  },
+  {
+    q: "Can snow melting be added to an existing commercial property?",
+    a: ["Sometimes. It depends on the surface, its condition and the areas involved. The manufacturer's manual includes methods for existing asphalt and concrete, and an assessment confirms what is practical."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/commercial/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Commercial snow melting" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Commercial snow melting systems",
+    serviceType: "Commercial snow and ice melting system design and installation coordination",
+    description,
+    url: "https://meltgridcanada.ca/commercial/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
+    provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/commercial/" structuredData={structuredData}>
+  <section class="phero phero--dark on-dark">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Commercial snow melting" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>For property owners and managers</p>
+          <h1>Commercial snow melting for entrances, ramps and walkways</h1>
+          <p>
+            Automatic systems for the places people have to get in and out of, laid out area by area and
+            controlled in zones on larger properties.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?project=commercial">Request commercial assessment</a>
+            <a class="btn btn--ghost btn--lg" href="/how-it-works/">How it works</a>
+          </div>
+        </div>
+        <figure class="phero__frame">
+          <img
+            src="/images/snow-melting-controller-premium.jpg"
+            alt="Snow and ice melt controller with its weatherproof cover open"
+            loading="eager"
+            width="900"
+            height="700"
+          />
+          <figcaption>Image: WarmlyYours</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <p>What does commercial snow melting cover?</p>
+      <div class="answer__body">
+        <p>
+          Entrances, ramps, walkways, steps and other high-traffic areas of a commercial property. Sensors detect
+          snow and ice conditions and controls switch the heating on, so clearing does not depend on someone being
+          on site.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Where it goes on a commercial property</h2>
+        <p>Each area has its own surface, shape and traffic, so each gets its own layout.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Entrances", body: "The approach and landing at doors, where the most people cross the threshold." },
+          { title: "Ramps", body: "Accessible routes and delivery ramps. Cable follows the slope and the shape of the ramp." },
+          { title: "Walkways", body: "Paths between parking, buildings and entrances, in asphalt, concrete or pavers." },
+          { title: "Steps and stairs", body: "Heating cable is suited to stairways and irregular shapes." },
+          { title: "High-traffic areas", body: "Plazas, drop-off areas and other spaces where snow and ice build up under heavy use." },
+          { title: "Loading and service routes", body: "Routes staff and deliveries rely on. The design sizes the system to the area you choose." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <FeatureSplit
+        image={snowMeltingControllerMultiZone}
+        alt="ZoneBraker touchscreen multi-zone snow-melting controller in a wall-mounted enclosure"
+        heading="Controls that scale to larger properties"
+        bullets={["A multi-zone controller can split a system into separately controlled zones", "Sensors detect conditions so zones run when needed", "Controls and electrical load are specified in the design"]}
+        linkHref="/technology/"
+        linkLabel="Controls and sensors in detail"
+      >
+        <p>
+          Bigger properties mean bigger electrical loads. Zoned control divides the heating into sections that run
+          independently, so the whole system does not have to run at once.
+        </p>
+      </FeatureSplit>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>How a commercial project is run</h2>
+        <p>One point of contact from the first site review to commissioning.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Brief and site details", body: "Send the address, the areas, the surfaces and any drawings or photos." },
+          { title: "Assessment", body: "We review the property, the surfaces, the traffic and the electrical situation." },
+          { title: "System design", body: "Manufacturer-supported design of the layout, zones and controls." },
+          { title: "Trade coordination", body: "We coordinate the electrician and the surface contractors to the design." },
+          { title: "Testing and commissioning", body: "The system is tested and commissioned before you rely on it." },
+          { title: "Handover", body: "You receive a system designed around how the property operates." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What helps us assess your property</h2>
+        <p>You do not need everything at once. Send what you have and we will ask for the rest.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Areas and dimensions</h3><p>Which entrances, ramps and walkways, and roughly how large each is.</p></li>
+        <li><h3>Surface types</h3><p>Asphalt, concrete or pavers, and whether surfaces are new, being replaced or existing.</p></li>
+        <li><h3>Drawings and photos</h3><p>Site plans, sketches and photos of the areas. You can attach them to the form.</p></li>
+        <li><h3>Electrical information</h3><p>Panel details and the distance to the areas, if you have them.</p></li>
+        <li><h3>Schedule</h3><p>Any construction or renovation timeline the snow melting needs to fit.</p></li>
+        <li><h3>Who else is involved</h3><p>General contractor, consultant or property manager we should coordinate with.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq dark heading="Commercial questions" intro="Direct answers for owners, managers and contractors." items={faqItems} />
+
+  <RelatedLinks
+    heading="Related pages"
+    items={[
+      { href: "/technology/", title: "The technology", body: "Mats, cables, controls and sensors." },
+      { href: "/hydronic-snow-melting/", title: "Hydronic snow melting", body: "Often a strong fit at commercial scale." },
+      { href: "/cost/", title: "Cost and planning", body: "What shapes the cost of a project." },
+      { href: "/resources/", title: "Resources", body: "Running cost, electrical requirements and retrofits." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Request a commercial assessment"
+    body="Tell us about the property and the areas. We come back with a design and an estimate."
+    primaryHref="/contact/?project=commercial"
+    primaryLabel="Request commercial assessment"
+  />
+</BaseLayout>

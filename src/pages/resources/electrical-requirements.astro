@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import StepList from "../../components/StepList.astro";
+import Faq from "../../components/Faq.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import CtaStrip from "../../components/CtaStrip.astro";
+
+const title = "Electrical Requirements for Snow Melting | MeltGrid Canada";
+const description =
+  "How power draw scales with heated area, what snow-melting controls are rated for, and what a qualified electrician confirms before installation.";
+
+const faqItems = [
+  {
+    q: "How much power does a heated driveway need?",
+    a: ["Roughly 50 watts per square foot on average, per the WarmlyYours outdoor heating catalog. Multiply that by your heated area for an approximate total, then a qualified electrician confirms what your panel can support."],
+  },
+  {
+    q: "What voltage do snow-melting systems use?",
+    a: ["Both 120V and 240V products exist. Which one suits your project depends on the area, the available supply, and the design."],
+  },
+  {
+    q: "Do larger systems need special electrical equipment?",
+    a: ["Often, yes. Controls have a maximum load they can switch directly; beyond that, a relay panel is used to control larger loads, and a multi-zone controller can split a big system into sections that run independently."],
+  },
+  {
+    q: "Who determines my panel capacity and breaker sizing?",
+    a: ["A qualified electrician, as part of your design. This article explains the factors involved; it is not a substitute for that assessment."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/resources/electrical-requirements/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Resources", item: "https://meltgridcanada.ca/resources/" },
+      { "@type": "ListItem", position: 3, name: "Electrical requirements" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/resources/electrical-requirements/" structuredData={structuredData}>
+  <section class="phero phero--text">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resources", href: "/resources/" }, { label: "Electrical requirements" }]} />
+      <div class="phero__grid phero__grid--solo">
+        <div class="phero__copy">
+          <p>Resources</p>
+          <h1>Electrical requirements for snow-melting systems</h1>
+          <p>
+            Every snow-melting system needs a real electrical connection. Here is how power draw scales with area,
+            and what a qualified electrician confirms before installation.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush-top">
+    <div class="container">
+      <p>The short answer</p>
+      <div class="answer__body">
+        <p>
+          Power draw is roughly proportional to area — about 50 watts per square foot on average — so a larger
+          heated area needs more available power. A qualified electrician confirms panel capacity, breaker sizing
+          and whether a relay panel is needed, as part of your design. This article explains the factors; it does
+          not replace that assessment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>How power draw scales with area</h2>
+        <p>The starting point for any electrical plan.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "About 50 watts per square foot", body: "Cable spacing is designed to provide roughly 50 watts per square foot on average, per the WarmlyYours outdoor heating catalog. A 200 sq ft area is a different electrical job than a 1,000 sq ft one." },
+          { title: "Coverage choice changes the load", body: "Full coverage, tire tracks, or targeted areas each cover a different square footage, which changes the total power involved." },
+          { title: "120V and 240V products", body: "Both exist. Which suits your project depends on the area, the available supply and the design." },
+          { title: "Amps follow from watts and volts", body: "A larger 240V system typically draws fewer amps than the same wattage at 120V — one reason the design matters, not just the area." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>What the controls are rated for</h2>
+        <p>Every control has a maximum load it can switch directly.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Timer control</h3><p>For projects with a smaller amperage draw, usable without a relay panel up to its rated load.</p></li>
+        <li><h3>Automatic controllers</h3><p>Rated for a maximum load, sized to the control — check the specific product for its exact rating.</p></li>
+        <li><h3>Multi-zone controller</h3><p>Splits a larger system into zones that run independently, which reduces the load at any one time — useful when available amperage is limited.</p></li>
+        <li><h3>Relay panel</h3><p>For loads beyond what a controller switches directly, a relay panel (sold separately) extends the controllable load.</p></li>
+      </ul>
+      <p style="margin-top:1.5rem;"><a href="/technology/">Controls and sensors in detail →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What gets confirmed before installation</h2>
+        <p>This is the electrician's part of the design, not a DIY calculation.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Available panel capacity", body: "Whether your existing panel has room for the new load, or whether an upgrade is needed." },
+          { title: "Breaker sizing", body: "Sized to the specific product and control chosen for your design." },
+          { title: "Distance from the panel", body: "How far power needs to run from the panel to the heated area." },
+          { title: "Whether a relay panel is needed", body: "For larger systems beyond a single controller's rated load." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <Faq dark heading="Electrical questions" intro="Direct answers to what people ask before installation." items={faqItems} />
+
+  <RelatedLinks
+    heading="Keep reading"
+    items={[
+      { href: "/resources/heated-driveway-running-cost/", title: "Running cost", body: "What determines cost to operate." },
+      { href: "/technology/", title: "The technology", body: "Mats, cables, controls and sensors." },
+      { href: "/cost/", title: "Cost and planning", body: "What shapes installation cost." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Get an electrical plan for your property"
+    body="Your free design and estimate includes what the electrical connection needs."
+    primaryHref="/contact/"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

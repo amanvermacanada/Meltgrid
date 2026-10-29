@@ -1,0 +1,527 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import CoveragePicker from "../components/CoveragePicker.astro";
+import { Picture } from "astro:assets";
+import winterHomeDusk from "../assets/images/winter-home-dusk.jpg";
+import StepList from "../components/StepList.astro";
+import Faq from "../components/Faq.astro";
+
+const title = "Heated Driveways & Snow Melting Systems | MeltGrid Canada";
+const description =
+  "Automatic snow and ice-melting systems for Canadian driveways, walkways, steps and commercial entrances. Request a free design and estimate from MeltGrid Canada.";
+
+const faqItems = [
+  {
+    q: "How does a heated driveway work?",
+    a: [
+      "A heated driveway uses electric heating elements, either cables or mats, installed in or beneath the driveway surface. A control system with a sensor turns the system on when it detects snow or ice conditions. The heat warms the surface so snow melts instead of building up, and the meltwater drains away.",
+      "The exact design depends on your surface (asphalt, concrete or pavers), the area you want to heat and the controls you choose.",
+    ],
+  },
+  {
+    q: "Does the system turn on automatically?",
+    a: [
+      "It can. With automatic controls and a snow and ice sensor, the system starts when conditions call for it and nobody has to switch anything on. Systems can also run on a timer or be switched on manually.",
+      "During your design we help you choose the control approach that suits how you use the property.",
+    ],
+  },
+  {
+    q: "Can snow melting be installed under an asphalt driveway?",
+    a: [
+      "Yes. The heating elements are placed within the asphalt layers as the driveway is paved, which makes a new or replaced driveway the simplest case. The manufacturer's installation manual also covers cutting grooves into finished asphalt for heating cable, so an existing driveway may be an option.",
+      "The paving contractor and a qualified electrician coordinate the work to your design.",
+    ],
+  },
+  {
+    q: "Can snow melting be installed under concrete?",
+    a: [
+      "Yes. In new concrete, the heating cable or mats are fixed to a frame near the top of the slab before the finished layer is poured, so the system is planned alongside the pour.",
+      "Over an existing slab, the manufacturer's manual describes adding a new layer of concrete over the heating, or cutting grooves into the finished concrete for cable. Your design confirms which suits your project.",
+    ],
+  },
+  {
+    q: "Can snow melting be installed under pavers or interlock?",
+    a: [
+      "Yes. Heating is installed beneath the pavers as part of the base build-up, before the surface is laid. The finished driveway is your choice of paver.",
+      "The interlock contractor and an electrician coordinate the work to the design.",
+    ],
+  },
+  {
+    q: "Do I need to heat the whole driveway?",
+    a: [
+      "No. Options include full coverage, heated tire tracks, heated entrance and apron areas, or targeted areas such as steps and walkways. Heating less area generally means less material to install and less power to run.",
+      "The right choice depends on your driveway, your budget and how you use it. Your design compares the options.",
+    ],
+  },
+  {
+    q: "How much electricity does a heated driveway use?",
+    a: [
+      "It depends on the size of the heated area, the power rating of the system, the controls and how long the system runs. Systems with sensors run when conditions call for it, not all winter.",
+      "We do not publish a single operating-cost figure because it varies by design and by your electricity rates. Your design specifies the system's electrical load so you know what to expect.",
+    ],
+  },
+  {
+    q: "When is the best time to install snow melting?",
+    a: [
+      "Snow-melting systems are installed as part of building or rebuilding a surface, so installation follows the construction schedule for your asphalt, concrete or interlock work.",
+      "Winter is a good time to plan: design, quotation and scheduling can be done before the work begins.",
+    ],
+  },
+  {
+    q: "Can an existing driveway be retrofitted?",
+    a: [
+      "Often, yes. The manufacturer's installation manual includes methods for existing surfaces: heating cable set into cut grooves in finished asphalt or concrete, or a new layer of concrete over heating cable on an existing slab.",
+      "Which method suits your driveway depends on its condition and construction, so an assessment confirms the options.",
+    ],
+  },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+  })),
+};
+---
+
+<BaseLayout title={title} description={description} path="/" headerVariant="overlay" structuredData={[faqLd]}>
+  <section class="hero on-dark" data-hero>
+    <div class="hero__media">
+      <Picture
+        src={winterHomeDusk}
+        alt="Modern stone and glass home at dusk in winter, warmly lit windows, snow on the roof and along the edge of a clear concrete patio"
+        widths={[640, 960, 1280, 1600]}
+        sizes="100vw"
+        formats={["avif", "webp", "jpeg"]}
+        loading="eager"
+      />
+    </div>
+    <div class="hero__scrim"></div>
+    <div class="container hero__inner">
+      <h1>Snow falls. Your driveway stays clear.</h1>
+      <p>Automatic snow and ice-melting systems designed for Canadian homes and businesses.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+        <a class="btn btn--ghost btn--lg" href="#how-it-works">See how it works</a>
+      </div>
+      <p class="hero__credit">Manufacturer imagery courtesy of WarmlyYours</p>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="container">
+      <ul>
+        <li>
+          <p>Manufacturer-backed technology</p>
+          <p>Heating systems from WarmlyYours, with manufacturer design and technical support.</p>
+        </li>
+        <li>
+          <p>Designed for your property</p>
+          <p>Every project starts with a layout based on your surface, size and goals.</p>
+        </li>
+        <li>
+          <p>Qualified trades, coordinated</p>
+          <p>Electricians and surface contractors, coordinated from design to commissioning.</p>
+        </li>
+        <li>
+          <p>Residential and commercial</p>
+          <p>Driveways, walkways, steps, ramps and commercial entrances.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>See how it works</h2>
+        <p>
+          Heating elements in the surface, a sensor and a controller work together, so the system responds to snow
+          without anyone switching it on.
+        </p>
+      </div>
+      <HowItWorks />
+      <p style="margin-top:1.5rem;"><a href="/how-it-works/">Read the full explanation →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What do you want to keep clear?</h2>
+        <p>Snow melting is not only for driveways. Choose the places where snow and ice cause you the most trouble.</p>
+      </div>
+      <div class="keep-grid">
+        <div class="keep-grid__cell keep-grid__cell--0"><a href="/heated-driveways/">Driveways</a></div>
+        <div class="keep-grid__cell keep-grid__cell--1"><a href="/residential/#walkways">Walkways and entrances</a></div>
+        <div class="keep-grid__cell keep-grid__cell--2"><a href="/residential/#steps">Steps</a></div>
+        <div class="keep-grid__cell keep-grid__cell--3"><a href="/residential/#patios">Patios</a></div>
+        <div class="keep-grid__cell keep-grid__cell--4">
+          <a href="/commercial/">Ramps and commercial areas — entrances, ramps and high-traffic walkways for commercial and multi-unit properties. Commercial snow melting →</a>
+        </div>
+      </div>
+      <p class="fg-muted" style="margin-top:1rem;font-size:var(--text-sm);">
+        Photography: manufacturer imagery courtesy of WarmlyYours.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>You don&rsquo;t always need to heat everything</h2>
+        <p>Heat the whole driveway, or only the parts you use most. Pick an option to see the difference.</p>
+      </div>
+      <CoveragePicker name="coverage-preview" ctaHrefBase="/contact/?intent=coverage-help" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Built into your surface</h2>
+        <p>Snow melting is installed as part of the surface itself. Asphalt, concrete and pavers each have their own installation method.</p>
+      </div>
+      <div class="stabs">
+        <input type="radio" name="surface-type" id="stab-asphalt" checked />
+        <input type="radio" name="surface-type" id="stab-concrete" />
+        <input type="radio" name="surface-type" id="stab-pavers" />
+        <div class="stabs__nav">
+          <label for="stab-asphalt">Asphalt</label>
+          <label for="stab-concrete">Concrete</label>
+          <label for="stab-pavers">Pavers and interlock</label>
+        </div>
+        <div class="stabs__panels">
+          <article class="stabs__panel stabs__panel--asphalt">
+            <figure class="stabs__img">
+              <img
+                src="/images/snow-melting-cable-asphalt-cross-section.jpg"
+                alt="Cutaway of an asphalt driveway showing snow melt cable fixed to a metal frame between finished asphalt, a base coat and compacted gravel"
+                loading="lazy"
+                width="640"
+                height="440"
+              />
+              <figcaption>Image: WarmlyYours. Cross-section of a typical build-up.</figcaption>
+            </figure>
+            <div class="stabs__copy">
+              <h3>Asphalt</h3>
+              <p>Heating elements are installed as part of the paving process, set between a base coat and the finished asphalt so they are hidden within the surface.</p>
+              <p>Layers, top to bottom</p>
+              <ul>
+                <li>Finished asphalt</li>
+                <li>Snow melt cable on a metal or rebar frame</li>
+                <li>Base coat of asphalt</li>
+                <li>Compacted gravel</li>
+              </ul>
+              <p><a href="/snow-melting/asphalt/">Asphalt snow melting →</a></p>
+            </div>
+          </article>
+          <article class="stabs__panel stabs__panel--concrete">
+            <figure class="stabs__img">
+              <img
+                src="/images/snow-melting-cable-concrete-cross-section.jpg"
+                alt="Cutaway of a concrete slab showing snow melt cable tied to rebar two to three inches below the finished concrete, on compacted gravel"
+                loading="lazy"
+                width="640"
+                height="440"
+              />
+              <figcaption>Image: WarmlyYours. Cross-section of a typical build-up.</figcaption>
+            </figure>
+            <div class="stabs__copy">
+              <h3>Concrete</h3>
+              <p>Heating elements are planned into the slab, tied to reinforcement near the top of the concrete before the finished layer is poured.</p>
+              <p>Layers, top to bottom</p>
+              <ul>
+                <li>Finished concrete</li>
+                <li>Snow melt cable tied to rebar or a metal frame</li>
+                <li>Concrete blocks holding the frame</li>
+                <li>Compacted gravel</li>
+              </ul>
+              <p><a href="/snow-melting/concrete/">Concrete snow melting →</a></p>
+            </div>
+          </article>
+          <article class="stabs__panel stabs__panel--pavers">
+            <figure class="stabs__img">
+              <img
+                src="/images/snow-melting-mat-pavers-cross-section.jpg"
+                alt="Cutaway of a paver surface showing pavers, a mortar or sand bed, a snow melt mat and crushed gravel"
+                loading="lazy"
+                width="640"
+                height="440"
+              />
+              <figcaption>Image: WarmlyYours. Cross-section of a typical build-up.</figcaption>
+            </figure>
+            <div class="stabs__copy">
+              <h3>Pavers and interlock</h3>
+              <p>Heating sits beneath the pavers as part of the base build-up. The finished surface is your choice of paver.</p>
+              <p>Layers, top to bottom</p>
+              <ul>
+                <li>Pavers</li>
+                <li>Mortar or sand bed</li>
+                <li>Snow melt mat</li>
+                <li>Rebar or metal frame (optional)</li>
+                <li>Crushed gravel</li>
+              </ul>
+              <p><a href="/snow-melting/pavers/">Pavers and interlock snow melting →</a></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="visually-hidden">Residential and commercial snow melting</h2>
+  <div class="split-grid">
+    <section class="split on-dark split--photo">
+      <div class="split__media">
+        <img
+          src="/images/heated-driveway-winter-dusk.jpg"
+          alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement wet and clear with snow only along the edge"
+          loading="lazy"
+          width="900"
+          height="1100"
+        />
+      </div>
+      <div class="split__shade"></div>
+      <div class="split__content">
+        <p>For homeowners</p>
+        <h3>Residential</h3>
+        <ul>
+          <li>Comfort and convenience</li>
+          <li>Clear driveways</li>
+          <li>Walkways</li>
+          <li>Steps</li>
+        </ul>
+        <a class="btn btn--primary btn--md" href="/contact/?project=residential">Request my free design &amp; estimate</a>
+      </div>
+    </section>
+    <section class="split on-dark split--photo">
+      <div class="split__media">
+        <img
+          src="/images/commercial-entrance-winter.jpg"
+          alt="Covered entrance of a modern commercial office building at dusk in winter, with clear wet pavement leading to glass doors, snow banked along the edges and an accessible ramp"
+          loading="lazy"
+          width="900"
+          height="1100"
+        />
+      </div>
+      <div class="split__shade"></div>
+      <div class="split__content">
+        <p>For property owners and managers</p>
+        <h3>Commercial</h3>
+        <ul>
+          <li>Entrances</li>
+          <li>Ramps</li>
+          <li>Walkways</li>
+          <li>High-traffic areas</li>
+          <li>Property operations</li>
+        </ul>
+        <a class="btn btn--primary btn--md" href="/contact/?project=commercial">Request commercial assessment</a>
+      </div>
+    </section>
+  </div>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>The technology under the surface</h2>
+        <p>Heating elements, controls and sensors from WarmlyYours, designed into a system for your project.</p>
+      </div>
+      <div class="layers">
+        <section class="layers__group">
+          <h3>Heating layer</h3>
+          <p>Installed in or beneath the surface</p>
+          <ul>
+            <li>
+              <img src="/images/snow-melting-mat.jpg" alt="Rolled snow melting mat with green heating cable woven through a mesh, and a black cold lead" loading="lazy" width="400" height="260" />
+              <p>Heating mat</p>
+              <h4>Snow Melting Mat</h4>
+              <p>Heating cable pre-spaced on a mesh and rolled out across open areas such as driveways, walkways and patios, in asphalt, concrete or beneath pavers.</p>
+            </li>
+            <li>
+              <img src="/images/snow-melting-cable-coil.jpg" alt="Coil of green snow melting heating cable" loading="lazy" width="400" height="260" />
+              <p>Heating cable</p>
+              <h4>Snow Melting Cable</h4>
+              <p>Flexible cable for unusual shapes, curves and stairways. It can be laid at different spacings, so the design can raise or lower the heat output for the area.</p>
+            </li>
+          </ul>
+        </section>
+        <section class="layers__group">
+          <h3>Sensing and control</h3>
+          <p>Decides when the heat runs</p>
+          <ul>
+            <li>
+              <img src="/images/snow-melting-controller-premium.jpg" alt="Snow and ice melt controller with its weatherproof cover open" loading="lazy" width="400" height="260" />
+              <p>System controls</p>
+              <h4>Controls</h4>
+              <p>Automatic controls with sensors, timer controls and Wi-Fi options. Your design chooses the approach that suits how you use the property.</p>
+            </li>
+            <li>
+              <img src="/images/snow-melting-sensor.jpg" alt="White snow and ice sensor with a conical cap on a short stem" loading="lazy" width="400" height="260" />
+              <p>System sensors</p>
+              <h4>Sensors</h4>
+              <p>Slab and aerial sensors detect temperature and moisture, so the system runs when snow or ice is forming rather than all winter.</p>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <p class="fg-muted" style="margin-top:1.5rem;font-size:var(--text-sm);">Image: WarmlyYours. Heating technology, controls and sensors from WarmlyYours.</p>
+      <p style="margin-top:0.75rem;"><a href="/technology/">Explore the technology →</a></p>
+    </div>
+  </section>
+
+  <section class="vid on-dark">
+    <div class="container vid__inner">
+      <div class="vid__copy">
+        <h2>See snow melting in action.</h2>
+        <p>See how an automatic snow-melting system detects winter conditions and heats asphalt, concrete or paver surfaces — using technology from WarmlyYours.</p>
+        <a class="btn btn--primary btn--md" href="/how-it-works/">See how it works</a>
+      </div>
+      <div>
+        <iframe
+          class="vid__aspect"
+          style="width:100%;border:0;"
+          src="https://customer-ikxw003vtz2iah2s.cloudflarestream.com/cbc8fa1056ea0161d82f48341cfb9f4d/iframe"
+          loading="lazy"
+          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+          allowfullscreen
+          title="Introduction to WarmlyYours Snow Melting Systems"
+        ></iframe>
+        <figcaption class="fg-muted" style="font-size:var(--text-sm);margin-top:0.5rem;">
+          Video: WarmlyYours —
+          <a href="https://www.warmlyyours.com/en-US/snow-melting/cable/videos/snow-melting-systems-installation" style="text-decoration:underline;">
+            WarmlyYours
+          </a>
+        </figcaption>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>How a project works</h2>
+        <p>From your first message to a clear driveway, we coordinate each step.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Tell us about your property", body: "Share the project type, surface, size and any photos or plans." },
+          { title: "Project assessment", body: "We review your property, surfaces and goals." },
+          { title: "System design", body: "Professional, manufacturer-supported design of the heating layout and controls." },
+          { title: "Installation coordination", body: "We coordinate the electrician and surface trades your project needs." },
+          { title: "Testing and commissioning", body: "The system is tested and commissioned before you rely on it." },
+          { title: "Clear surfaces", body: "Snow and ice melt where you chose to heat." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cost">
+      <div class="cost__intro">
+        <h2>What determines the cost of a heated driveway?</h2>
+        <p>
+          The cost depends on the size of the area you heat, how much of it you cover, the surface, the electrical
+          work, the controls and the site's construction conditions. Every property is different, so we do not
+          publish fixed installation prices. A free design and estimate gives you a number for your project.
+        </p>
+        <div class="cost__actions">
+          <a class="btn btn--outline btn--md" href="/cost/">Explore cost &amp; planning</a>
+          <a class="btn btn--primary btn--md" href="/contact/">Request my free design &amp; estimate</a>
+        </div>
+      </div>
+      <dl class="cost__list">
+        <div class="cost__row"><dt>Size</dt><dd>More area means more heating elements, more power and more installation work.</dd></div>
+        <div class="cost__row"><dt>Coverage</dt><dd>Full coverage, tire tracks or targeted areas heat different amounts of surface.</dd></div>
+        <div class="cost__row"><dt>Surface</dt><dd>Asphalt, concrete and pavers are built differently, which shapes the system and the installation approach.</dd></div>
+        <div class="cost__row"><dt>Electrical requirements</dt><dd>Available power, panel capacity and the distance to the driveway all affect the electrical work.</dd></div>
+        <div class="cost__row"><dt>Controls</dt><dd>Sensors and control options change what the system needs and how it runs.</dd></div>
+        <div class="cost__row"><dt>Construction conditions</dt><dd>New build or replacement, access, base preparation and site conditions all play a part.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="proof on-dark">
+    <div class="proof__media">
+      <img src="/images/snow-melting-mat-close-up.jpg" alt="Snow melting mat rolled out over a mesh on grey pavement, the WarmlyYours name printed on the mat tapes" loading="lazy" width="1600" height="900" />
+    </div>
+    <div class="proof__shade"></div>
+    <div class="container proof__inner">
+      <h2>Engineered below. Invisible above.</h2>
+      <p>Once installed, the snow-melting system remains hidden beneath the finished surface, while sensors and controls manage operation based on outdoor conditions.</p>
+      <div class="proof__cta"><a class="btn btn--primary btn--md" href="/technology/">Explore the technology</a></div>
+      <p class="fg-muted" style="margin-top:1rem;font-size:var(--text-sm);">Manufacturer examples from WarmlyYours. These are not MeltGrid installations.</p>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why MeltGrid</h2>
+        <p>We coordinate the design, the technology and the trades, so you are not managing each piece yourself.</p>
+      </div>
+      <ul class="reasons">
+        <li>
+          <h3>01 One point of contact</h3>
+          <p>MeltGrid coordinates the snow-melting system, manufacturer-supported design and the installation trades your project needs, through one project relationship.</p>
+        </li>
+        <li>
+          <h3>02 Manufacturer-backed system design</h3>
+          <p>Projects are developed around WarmlyYours snow-melting technology, with access to manufacturer technical and design support.</p>
+        </li>
+        <li>
+          <h3>03 Built around your project</h3>
+          <p>Surface, coverage, controls, electrical requirements and construction conditions are considered together, rather than treating every property as the same installation.</p>
+        </li>
+        <li>
+          <h4>Canadian and Ontario focus</h4>
+          <p>Built around Canadian winters and construction, starting in Ontario and the GTA.</p>
+        </li>
+        <li>
+          <h4>Residential and commercial</h4>
+          <p>From a single driveway to entrances, ramps and walkways across a commercial property.</p>
+        </li>
+        <li>
+          <h4>Technical support</h4>
+          <p>Manufacturer technical support is available to the project team.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="partner-band">
+    <div class="container partner-band__inner">
+      <div>
+        <h2>Bring snow melting to your next project.</h2>
+        <p>Asphalt, concrete, interlock, electrical and construction professionals can work with MeltGrid to add snow-melting systems to their projects without taking on the system design themselves.</p>
+      </div>
+      <a href="/trade-partners/">Work With MeltGrid</a>
+    </div>
+  </section>
+
+  <Faq heading="Questions about heated driveways" intro="Short answers first. For anything specific to your property, ask us and we will look at it in your design." items={faqItems} />
+
+  <section class="band on-dark">
+    <div class="band__media">
+      <img src="/images/winter-home-dusk.jpg" alt="Modern stone and glass home at dusk in winter, warmly lit windows and a clear patio with snow at its edge" loading="lazy" width="1600" height="1000" />
+    </div>
+    <div class="band__shade"></div>
+    <div class="container band__inner">
+      <div class="band__copy">
+        <h2>Your next snowfall could be different.</h2>
+        <p>Tell us about your property. We come back with a design and an estimate.</p>
+        <div class="band__actions">
+          <a class="btn btn--primary btn--lg" href="/contact/">Design my system</a>
+          <a class="btn btn--ghost btn--lg" href="tel:+14377745305">437-774-5305</a>
+        </div>
+      </div>
+    </div>
+    <p class="fg-muted" style="position:relative;font-size:var(--text-sm);padding:0 0 1rem 0;text-align:center;">
+      Manufacturer imagery courtesy of WarmlyYours
+    </p>
+  </section>
+</BaseLayout>

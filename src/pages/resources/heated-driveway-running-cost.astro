@@ -1,0 +1,176 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import StepList from "../../components/StepList.astro";
+import Faq from "../../components/Faq.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import CtaStrip from "../../components/CtaStrip.astro";
+
+const title = "How Much Does It Cost to Run a Heated Driveway? | MeltGrid Canada";
+const description =
+  "What actually determines the running cost of a heated driveway: power rating, coverage, controls and your electricity rate, with a worked example calculation.";
+
+const faqItems = [
+  {
+    q: "How much does it cost to run a heated driveway?",
+    a: ["It depends on the size of the heated area, the system's power rating, how the controls run it, and your local electricity rate. There is no single figure that applies to every property — a free design and estimate works this out for your specific system."],
+  },
+  {
+    q: "How much power does a snow-melting system use?",
+    a: ["Cable spacing is designed to provide about 50 watts per square foot on average, according to the WarmlyYours outdoor heating catalog. A system's exact power rating depends on the area covered and the product chosen for your design."],
+  },
+  {
+    q: "Does the system run all winter?",
+    a: ["With automatic sensor-based control, no. The system runs when the sensor detects snow or ice conditions, plus a hold-on period afterward to finish clearing moisture, not continuously through the season."],
+  },
+  {
+    q: "Can I reduce running cost?",
+    a: ["Heating less area — tire tracks, the entrance and apron, or targeted areas instead of full coverage — reduces both the system's power rating and how much it costs to run."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/resources/heated-driveway-running-cost/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Resources", item: "https://meltgridcanada.ca/resources/" },
+      { "@type": "ListItem", position: 3, name: "Running cost" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/resources/heated-driveway-running-cost/" structuredData={structuredData}>
+  <section class="phero phero--text">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resources", href: "/resources/" }, { label: "Running cost" }]} />
+      <div class="phero__grid phero__grid--solo">
+        <div class="phero__copy">
+          <p>Resources</p>
+          <h1>How much does it cost to run a heated driveway?</h1>
+          <p>
+            No published price applies to every property, but the calculation behind it is straightforward once
+            you know four numbers. Here is how to work out a rough figure for your own system.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush-top">
+    <div class="container">
+      <p>The short answer</p>
+      <div class="answer__body">
+        <p>
+          Running cost comes down to four things: the size of the heated area, the system's power rating, how
+          long the controls run it in a given winter, and what you pay per kilowatt-hour. We do not publish a
+          single running-cost figure because all four vary by property — but the calculation itself is simple, and
+          a free design and estimate can put real numbers to it for you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>The four numbers that matter</h2>
+        <p>Each one is specific to your design, not a fixed industry figure.</p>
+      </div>
+      <StepList
+        items={[
+          { title: "Heated area", body: "More square footage heated means more total power drawn when the system runs." },
+          { title: "Power rating", body: "Cable spacing is designed to provide about 50 watts per square foot on average, per the WarmlyYours outdoor heating catalog. Your design sets the exact rating for your area and product choice." },
+          { title: "Run time", body: "How many hours the system actually runs in a season depends on your climate and how the controls are set — automatic sensor control only runs when conditions call for it, plus a hold-on period afterward." },
+          { title: "Electricity rate", body: "What you pay per kilowatt-hour, which varies by province and utility. Your own bill has this figure." },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>A worked example</h2>
+        <p>Illustrative numbers only — substitute your own design's rating, your own hours, and your own rate.</p>
+      </div>
+      <div class="rc-example">
+        <ul>
+          <li>
+            Start with the power rating. At roughly 50 watts per square foot, a 500 sq ft heated area works out to
+            about 25,000 watts, or 25 kW, when the system is running at full output.
+          </li>
+          <li>
+            Multiply by hours running. If the system ran for, say, 40 hours over a winter (an example only — your
+            climate and control settings decide the real number), that is 25 kW × 40 hours = 1,000 kWh.
+          </li>
+          <li>
+            Multiply by your electricity rate. Take the 1,000 kWh figure and multiply it by your own rate per kWh
+            (check a recent bill) to get an approximate seasonal cost.
+          </li>
+        </ul>
+        <p>
+          Real systems rarely run at full rated output for every one of those hours — sensor-based control and
+          zoning reduce this further. Treat this as a ceiling estimate, not a prediction, and use your own design's
+          numbers once you have them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What lowers running cost</h2>
+        <p>The choices you make in the design change all four numbers above.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Less coverage</h3><p>Tire tracks, the entrance and apron, or targeted areas instead of full coverage — a smaller heated area draws less power.</p></li>
+        <li><h3>Sensor-based control</h3><p>Runs only when conditions call for it, rather than on a fixed schedule.</p></li>
+        <li><h3>Zoned control on larger systems</h3><p>A multi-zone controller can run sections independently rather than the whole system at once.</p></li>
+        <li><h3>Matching the control to the property</h3><p>Timer, automatic or Wi-Fi control each suit different situations — your design picks the fit.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <Faq dark heading="Running cost questions" intro="Direct answers, without a published price list." items={faqItems} />
+
+  <RelatedLinks
+    heading="Keep reading"
+    items={[
+      { href: "/cost/", title: "Cost and planning", body: "What shapes installation cost." },
+      { href: "/resources/electrical-requirements/", title: "Electrical requirements", body: "Power draw, amps and controls." },
+      { href: "/technology/", title: "The technology", body: "Mats, cables, controls and sensors." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Get real numbers for your property"
+    body="A free design and estimate turns this into an actual figure for your system."
+    primaryHref="/contact/"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>

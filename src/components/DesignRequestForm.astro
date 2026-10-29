@@ -113,6 +113,22 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
       </div>
       <p class="dr__err" data-err="coverage" id="err-coverage" role="alert"></p>
     </div>
+    <div class="dr__group">
+      <p class="dr__q" id="q-systemType">Electric or hydronic?</p>
+      <div aria-describedby="err-systemType" aria-labelledby="q-systemType" class="dr__chips" role="radiogroup">
+        {[
+          ["electric", "Electric"],
+          ["hydronic", "Hydronic"],
+          ["not-sure", "Not sure — want advice"],
+        ].map(([value, label]) => (
+          <label class="chip">
+            <input name="systemType" type="radio" value={value} />
+            <span class="chip__body">{label}</span>
+          </label>
+        ))}
+      </div>
+      <p class="dr__err" data-err="systemType" id="err-systemType" role="alert"></p>
+    </div>
   </fieldset>
 
   <!-- 3. Size + upload -->
@@ -207,6 +223,28 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
         ))}
       </div>
       <p class="dr__err" data-err="timeline" id="err-timeline" role="alert"></p>
+    </div>
+    <div class="dr__group">
+      <p class="dr__q" id="q-budgetRange">What's your estimated project budget?</p>
+      <p class="dr__help" id="help-budgetRange">
+        This helps us bring back a design that fits — it's not a quote, and your real number always comes from a
+        full design and estimate.
+      </p>
+      <div aria-describedby="err-budgetRange help-budgetRange" aria-labelledby="q-budgetRange" class="dr__chips" role="radiogroup">
+        {[
+          ["under-10k", "Under $10,000"],
+          ["10k-25k", "$10,000 – $25,000"],
+          ["25k-50k", "$25,000 – $50,000"],
+          ["50k-plus", "$50,000+"],
+          ["not-sure", "Not sure yet — want guidance"],
+        ].map(([value, label]) => (
+          <label class="chip">
+            <input name="budgetRange" type="radio" value={value} />
+            <span class="chip__body">{label}</span>
+          </label>
+        ))}
+      </div>
+      <p class="dr__err" data-err="budgetRange" id="err-budgetRange" role="alert"></p>
     </div>
   </fieldset>
 
@@ -568,6 +606,7 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
     const project = params.get("project");
     const surface = params.get("surface");
     const intent = params.get("intent");
+    const coverage = params.get("coverage");
 
     if (project) {
       const input = form.querySelector<HTMLInputElement>(`input[name="project"][value="${project}"]`);
@@ -577,8 +616,25 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
       const input = form.querySelector<HTMLInputElement>(`input[name="surface"][value="${surface}"]`);
       if (input) input.checked = true;
     }
-    if (intent === "coverage-help") {
+    // A specific ?coverage= value (e.g. from the homepage/heated-driveways coverage
+    // picker) takes priority; ?intent=coverage-help alone still falls back to "not sure".
+    const COVERAGE_MAP: Record<string, string> = {
+      full: "full",
+      tracks: "tire-tracks",
+      entrance: "entrance-apron",
+      targeted: "targeted",
+    };
+    if (coverage && COVERAGE_MAP[coverage]) {
+      const input = form.querySelector<HTMLInputElement>(`input[name="coverage"][value="${COVERAGE_MAP[coverage]}"]`);
+      if (input) input.checked = true;
+    } else if (intent === "coverage-help") {
       const input = form.querySelector<HTMLInputElement>('input[name="coverage"][value="not-sure"]');
+      if (input) input.checked = true;
+    }
+    // ?intent=hydronic / ?intent=electric (from the hydronic pillar and comparison pages)
+    // pre-selects the new system-type preference question below.
+    if (intent === "hydronic" || intent === "electric") {
+      const input = form.querySelector<HTMLInputElement>(`input[name="systemType"][value="${intent}"]`);
       if (input) input.checked = true;
     }
 
@@ -651,6 +707,9 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
         if (!form!.querySelector<HTMLInputElement>('input[name="coverage"]:checked')) {
           fail("coverage", "Choose a coverage option.");
         }
+        if (!form!.querySelector<HTMLInputElement>('input[name="systemType"]:checked')) {
+          fail("systemType", "Choose electric, hydronic, or “not sure.”");
+        }
       }
 
       if (index === 2) {
@@ -672,6 +731,9 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
         }
         if (!form!.querySelector<HTMLInputElement>('input[name="timeline"]:checked')) {
           fail("timeline", "Choose a timeline.");
+        }
+        if (!form!.querySelector<HTMLInputElement>('input[name="budgetRange"]:checked')) {
+          fail("budgetRange", "Choose the closest estimate, or “not sure yet.”");
         }
       }
 
@@ -857,8 +919,10 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
       const projectType = getValue('input[name="project"]:checked');
       const surface = getValue('input[name="surface"]:checked');
       const coverage = getValue('input[name="coverage"]:checked');
+      const systemType = getValue('input[name="systemType"]:checked');
       const postalCode = getValue("#dr-postal");
       const timeline = getValue('input[name="timeline"]:checked');
+      const budgetRange = getValue('input[name="budgetRange"]:checked');
       const name = getValue("#dr-name");
       const phone = getValue("#dr-phone");
       const email = getValue("#dr-email");
@@ -882,9 +946,11 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
         Areas: getChecked("areas").join(", "),
         Surface: surface,
         Coverage: coverage,
+        "Electric or hydronic": systemType,
         Size: dimensions,
         "Postal code": postalCode,
         Timeline: timeline,
+        "Estimated budget": budgetRange,
         Name: name,
         Phone: phone,
         Email: email,
@@ -931,9 +997,11 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mljdbbqw";
       body.append("areas", getChecked("areas").join(", "));
       body.append("surface", surface);
       body.append("coverage", coverage);
+      body.append("system_type", systemType);
       body.append("dimensions", dimensions);
       body.append("postal_code", postalCode);
       body.append("timeline", timeline);
+      body.append("budget_range", budgetRange);
       body.append("name", name);
       body.append("phone", phone);
       body.append("email", email);

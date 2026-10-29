@@ -6,6 +6,24 @@ const title = "Resources | MeltGrid Canada";
 const description =
   "Direct answers on heated-driveway running cost, electrical requirements and retrofitting an existing driveway, grounded in WarmlyYours technical documentation.";
 
+const guides = [
+  {
+    href: "/resources/heated-driveway-running-cost/",
+    title: "How Much Does It Cost to Run a Heated Driveway?",
+    body: "What actually drives running cost, and how to work out a rough figure for your own property.",
+  },
+  {
+    href: "/resources/electrical-requirements/",
+    title: "Electrical Requirements for Snow-Melting Systems",
+    body: "How power draw scales with area, what the controls are rated for, and what a qualified electrician confirms.",
+  },
+  {
+    href: "/resources/existing-driveway-retrofit/",
+    title: "Can Snow Melting Be Added to an Existing Driveway?",
+    body: "Retrofit methods for asphalt and concrete, and why pavers are a different case.",
+  },
+];
+
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -23,6 +41,19 @@ const structuredData = [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
       { "@type": "ListItem", position: 2, name: "Resources" },
     ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/resources/",
+    hasPart: guides.map((guide) => ({
+      "@type": "Article",
+      headline: guide.title,
+      description: guide.body,
+      url: `https://meltgridcanada.ca${guide.href}`,
+    })),
   },
 ];
 ---
@@ -50,26 +81,19 @@ const structuredData = [
   <section class="section section--flush-top">
     <div class="container">
       <h2>Guides</h2>
-      <p>A short, growing library. We add to it as new questions come up.</p>
+      <p>
+        Each guide below answers one specific question in depth, grounded in how these systems are actually
+        designed and installed. A short, growing library — we add to it as new questions come up.
+      </p>
       <ul class="related-list">
-        <li>
-          <a href="/resources/heated-driveway-running-cost/">
-            <strong>How Much Does It Cost to Run a Heated Driveway?</strong>
-            What actually drives running cost, and how to work out a rough figure for your own property. →
-          </a>
-        </li>
-        <li>
-          <a href="/resources/electrical-requirements/">
-            <strong>Electrical Requirements for Snow-Melting Systems</strong>
-            How power draw scales with area, what the controls are rated for, and what a qualified electrician confirms. →
-          </a>
-        </li>
-        <li>
-          <a href="/resources/existing-driveway-retrofit/">
-            <strong>Can Snow Melting Be Added to an Existing Driveway?</strong>
-            Retrofit methods for asphalt and concrete, and why pavers are a different case. →
-          </a>
-        </li>
+        {guides.map((guide) => (
+          <li>
+            <a href={guide.href}>
+              <strong>{guide.title}</strong>
+              {guide.body} →
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   </section>
@@ -77,9 +101,11 @@ const structuredData = [
   <section class="section section--ice">
     <div class="container">
       <h2>Or start with the basics</h2>
+      <p>Not ready for a deep dive? These cover the fundamentals first.</p>
       <ul class="related-list">
         <li><a href="/how-it-works/"><strong>How it works</strong> Sensors, controls and the heating layer. →</a></li>
         <li><a href="/cost/"><strong>Cost and planning</strong> What shapes the cost of a project. →</a></li>
+        <li><a href="/hydronic-snow-melting/"><strong>Hydronic snow melting</strong> Boilers, glycol loops and where hydronic fits. →</a></li>
         <li><a href="/technology/"><strong>The technology</strong> Mats, cables, controls and sensors. →</a></li>
       </ul>
     </div>

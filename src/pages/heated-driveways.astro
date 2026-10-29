@@ -2,14 +2,17 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import HowItWorks from "../components/HowItWorks.astro";
+import CoveragePicker from "../components/CoveragePicker.astro";
+import { Picture } from "astro:assets";
+import heatedDrivewayWinterDusk from "../assets/images/heated-driveway-winter-dusk.jpg";
 import StepList from "../components/StepList.astro";
 import Faq from "../components/Faq.astro";
 import RelatedLinks from "../components/RelatedLinks.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 
-const title = "Heated Driveways in Canada | MeltGrid Canada";
+const title = "Heated Driveways in Ontario & the GTA | MeltGrid Canada";
 const description =
-  "How a heated driveway works, which surfaces and coverage options exist, and what to plan before you build or resurface. Request a free design and estimate.";
+  "Heated driveway design and installation coordination across Ontario and the Greater Toronto Area. How it works, your surface and coverage options, electric or hydronic.";
 
 const faqItems = [
   {
@@ -42,6 +45,14 @@ const faqItems = [
     q: "How much does a heated driveway cost?",
     a: ["It depends on the size of the area, how much of it you heat, the surface, the electrical work, the controls and the site conditions, so we do not publish fixed prices. A free design and estimate gives you a number for your property."],
   },
+  {
+    q: "Can a heated driveway be hydronic instead of electric?",
+    a: ["Yes. A hydronic system uses a boiler and a glycol loop in place of electric heating cable. It suits some properties and projects better than electric, and some worse — see electric vs. hydronic for how they compare, or ask for a design that looks at both."],
+  },
+  {
+    q: "Do you work with contractors across the GTA?",
+    a: ["Yes. We coordinate heated driveway design and installation for properties across Ontario and the Greater Toronto Area, working with qualified electricians and the paving, concrete or interlock contractor on your project."],
+  },
 ];
 
 const structuredData = [
@@ -69,6 +80,7 @@ const structuredData = [
     serviceType: "Snow and ice melting system design and installation coordination",
     description,
     url: "https://meltgridcanada.ca/heated-driveways/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
     provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
   },
   {
@@ -101,12 +113,13 @@ const structuredData = [
           </div>
         </div>
         <figure class="phero__frame">
-          <img
-            src="/images/heated-driveway-winter-dusk.jpg"
+          <Picture
+            src={heatedDrivewayWinterDusk}
             alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement wet and clear with snow only along the edge"
+            widths={[450, 675, 900]}
+            sizes="(min-width: 900px) 450px, 100vw"
+            formats={["avif", "webp", "jpeg"]}
             loading="eager"
-            width="900"
-            height="700"
           />
           <figcaption>Manufacturer imagery courtesy of WarmlyYours</figcaption>
         </figure>
@@ -156,44 +169,34 @@ const structuredData = [
         <h2>You do not have to heat everything</h2>
         <p>Heat the whole driveway, or only the parts you use most. Heating less area generally means less material to install and less power to run.</p>
       </div>
-      <div class="cov">
-        <div class="cov__plan" aria-hidden="true"></div>
-        <div>
-          <div class="dr__cards" role="radiogroup" aria-label="Coverage options">
-            <label class="opt">
-              <input type="radio" name="coverage-preview-hd" value="full" checked />
-              <span class="opt__body">
-                <span class="opt__label">Full coverage</span>
-                <span class="opt__hint">Heat the whole driveway so the entire surface stays clear. The most complete result, with the most surface to heat. A good fit when you want no shoveling at all.</span>
-              </span>
-            </label>
-            <label class="opt">
-              <input type="radio" name="coverage-preview-hd" value="tracks" />
-              <span class="opt__body">
-                <span class="opt__label">Tire tracks</span>
-                <span class="opt__hint">Heat two strips where the wheels travel. Snow can stay in the centre and along the edges while the wheel paths stay clear, with less area to heat than full coverage.</span>
-              </span>
-            </label>
-            <label class="opt">
-              <input type="radio" name="coverage-preview-hd" value="entrance" />
-              <span class="opt__body">
-                <span class="opt__label">Entrance and apron</span>
-                <span class="opt__hint">Heat the area at the garage door and where the driveway meets the street, so you can get in and out without clearing those spots by hand.</span>
-              </span>
-            </label>
-            <label class="opt">
-              <input type="radio" name="coverage-preview-hd" value="targeted" />
-              <span class="opt__body">
-                <span class="opt__label">Targeted areas</span>
-                <span class="opt__hint">Heat only the spots that matter most: steps, the front walkway, or a steep or shaded stretch. The smallest heated area, focused on safety and access.</span>
-              </span>
-            </label>
-          </div>
-          <div class="cov__help">
-            <p class="fg-muted">The right option depends on your driveway, budget and how you use it. Your design compares them.</p>
-            <a class="btn btn--outline btn--md" href="/contact/?project=residential&amp;intent=coverage-help">Help me choose</a>
-          </div>
-        </div>
+      <CoveragePicker name="coverage-preview-hd" ctaHrefBase="/contact/?project=residential&intent=coverage-help" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Electric or hydronic</h2>
+      <p>
+        Most heated driveways in Canada use electric cable or mats, but hydronic — a boiler and a glycol loop — is
+        a real option, especially for larger driveways. <a href="/hydronic-snow-melting/">See how hydronic snow melting works</a>,
+        or go straight to <a href="/electric-vs-hydronic-snow-melting/">electric vs. hydronic</a> to compare the two for your property.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Serving Ontario and the Greater Toronto Area</h2>
+        <p>Heated driveway projects we design and coordinate across the region.</p>
+      </div>
+      <div class="prose">
+        <p>
+          We coordinate heated driveway design and installation for homeowners and contractors across Ontario and
+          the Greater Toronto Area — Toronto, Mississauga, Vaughan, Markham, Richmond Hill, Brampton, Oakville,
+          Burlington, Aurora, Newmarket, King City and Caledon among them. If you're elsewhere in Ontario, send us
+          the details and we'll tell you what's possible for your property.
+        </p>
       </div>
     </div>
   </section>
@@ -229,7 +232,8 @@ const structuredData = [
     items={[
       { href: "/residential/", title: "Residential snow melting", body: "Driveways, walkways, steps and patios at home." },
       { href: "/cost/", title: "Cost and planning", body: "What shapes the cost of a heated driveway." },
-      { href: "/technology/", title: "The technology", body: "Mats, cables, controls and sensors." },
+      { href: "/hydronic-snow-melting/", title: "Hydronic snow melting", body: "Boilers, glycol and where hydronic fits." },
+      { href: "/resources/", title: "Resources", body: "Running cost, electrical requirements and retrofits." },
     ]}
   />
 

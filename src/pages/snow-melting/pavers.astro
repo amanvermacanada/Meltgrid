@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import FeatureSplit from "../../components/FeatureSplit.astro";
+import snowMeltingCablePaversCrossSection from "../../assets/images/snow-melting-cable-pavers-cross-section.jpg";
 import StepList from "../../components/StepList.astro";
 import Faq from "../../components/Faq.astro";
 import RelatedLinks from "../../components/RelatedLinks.astro";
@@ -26,7 +27,7 @@ const faqItems = [
   },
   {
     q: "Can I add snow melting to an existing paver driveway?",
-    a: ["The elements sit in the base beneath the pavers, so adding them generally means rebuilding that base. Whether that is practical for your project, and what it involves, is something an assessment of your paving would confirm."],
+    a: ["Generally it means rebuilding the base beneath the pavers — see our full retrofit guide for what that involves and what an assessment checks."],
   },
   {
     q: "What about permeable pavers?",
@@ -60,6 +61,7 @@ const structuredData = [
     serviceType: "Snow and ice melting system design and installation coordination for pavers and interlock",
     description,
     url: "https://meltgridcanada.ca/snow-melting/pavers/",
+    areaServed: [{ "@type": "State", name: "Ontario" }, { "@type": "Place", name: "Greater Toronto Area" }],
     provider: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
   },
   {
@@ -179,7 +181,7 @@ const structuredData = [
       </div>
       <div class="pv-alt">
         <FeatureSplit
-          image="/images/snow-melting-cable-pavers-cross-section.jpg"
+          image={snowMeltingCablePaversCrossSection}
           alt="Cutaway of a paver surface showing pavers, a mortar or sand bed, snow melt cable on an attachment grid and crushed gravel"
           credit="Image: WarmlyYours. Cross-section of pavers over snow melt cable on an attachment grid"
           heading="Cable version, on an attachment grid"

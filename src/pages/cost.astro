@@ -6,9 +6,9 @@ import Faq from "../components/Faq.astro";
 import RelatedLinks from "../components/RelatedLinks.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 
-const title = "Heated Driveway Cost & Planning | MeltGrid Canada";
+const title = "Heated Driveway Cost in Ontario & Toronto | MeltGrid Canada";
 const description =
-  "What determines the cost of a heated driveway or snow melting system: size, coverage, surface, electrical work, controls and site conditions.";
+  "What determines the cost of a heated driveway or snow melting system in Ontario and the GTA: size, coverage, surface, electrical work and controls.";
 
 const faqItems = [
   {
@@ -30,6 +30,10 @@ const faqItems = [
   {
     q: "Is the design and estimate really free?",
     a: ["Yes, for a request that is a fit for us. We review every request first; where we can help, the design and estimate that follows is free."],
+  },
+  {
+    q: "Does hydronic cost more than electric?",
+    a: ["It depends on the project, not a fixed rule. Hydronic trades heating-element cost for a boiler and mechanical installation, which tends to change the cost shape rather than simply raising or lowering it. See electric vs. hydronic for how the two compare, or ask for a design that looks at both for your property."],
   },
 ];
 
@@ -138,6 +142,51 @@ const structuredData = [
     </div>
   </section>
 
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>A pricing framework, without a fixed price list</h2>
+        <p>We still won't quote a number here, but this is how cost tends to move, so you can reason about your own project before you ask for a design.</p>
+      </div>
+      <ul class="reasons">
+        <li><h3>Coverage drives cost the most</h3><p>Targeted areas (steps, a walkway) cost the least to heat. Tire tracks and the entrance/apron cost more. Full coverage costs the most, because it heats the most surface.</p></li>
+        <li><h3>Surface changes the installation, not just the material</h3><p>Asphalt, concrete and pavers each need a different sequence with the paving crew, which is why we design by surface rather than quoting one blanket rate.</p></li>
+        <li><h3>Electrical work can be the deciding factor</h3><p>If your panel already has capacity and the driveway is close to it, the electrical work is simpler. A long run or a panel upgrade adds real cost that has nothing to do with the heating system itself.</p></li>
+        <li><h3>Hydronic shifts the cost elsewhere</h3><p>A hydronic system trades heating-element cost for a boiler, manifold and mechanical installation — generally a different cost shape than electric, not simply more or less. See <a href="/electric-vs-hydronic-snow-melting/">electric vs. hydronic</a> for how the two compare.</p></li>
+      </ul>
+      {/*
+        DRAFT NOTE FOR MELTGRID — DO NOT PUBLISH WITHOUT OWNER SIGN-OFF:
+        This research/implementation pass deliberately did not add a $ or $/sqft figure
+        anywhere on this page. If the business wants to publish an indicative range
+        (e.g. a "$X,xxx-$Y,xxx depending on size and surface" style figure, with the same
+        heavy caveats /resources/heated-driveway-running-cost/ already uses for running
+        cost), it belongs as a new paragraph right after the list above. Any number used
+        must be a verified, defensible figure the owner has approved - NOT the internal
+        $30/sqft hydronic contractor indication mentioned in the research brief, which is
+        a single, unverified data point, not a market-wide or confirmed installed price.
+        See docs/seo-research/08-astro-deployment-risk-review.md for the tracked item.
+      */}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Serving Ontario and the Greater Toronto Area</h2>
+        <p>Our project support is built around Canadian winters and construction, starting in Ontario and the GTA.</p>
+      </div>
+      <div class="prose">
+        <p>
+          Heated driveway cost questions look a little different depending on where you are. In Toronto and across
+          the GTA, older driveways and tighter electrical panels come up often, which is why we look at your
+          electrical situation as part of the same conversation as the heating system itself — not as an
+          afterthought. If your property is in Ontario outside the GTA, send us the details and we'll tell you
+          what's possible.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container cost-run">
       <h2>What affects running cost</h2>
@@ -178,7 +227,7 @@ const structuredData = [
     dark
     items={[
       { href: "/heated-driveways/", title: "Heated driveways", body: "How they work and what to plan." },
-      { href: "/how-it-works/", title: "How it works", body: "Sensors, controls and the heating layer." },
+      { href: "/electric-vs-hydronic-snow-melting/", title: "Electric vs. hydronic", body: "How the two systems compare on cost and fit." },
       { href: "/resources/heated-driveway-running-cost/", title: "Running cost, worked example", body: "A step-by-step way to estimate your own number." },
     ]}
   />

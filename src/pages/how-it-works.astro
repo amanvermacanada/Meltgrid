@@ -6,6 +6,9 @@ import FeatureSplit from "../components/FeatureSplit.astro";
 import Faq from "../components/Faq.astro";
 import RelatedLinks from "../components/RelatedLinks.astro";
 import CtaStrip from "../components/CtaStrip.astro";
+import snowMeltingMat from "../assets/images/snow-melting-mat.jpg";
+import snowMeltingSensor from "../assets/images/snow-melting-sensor.jpg";
+import snowMeltingControllerPremium from "../assets/images/snow-melting-controller-premium.jpg";
 
 const title = "How Snow Melting Systems Work | MeltGrid Canada";
 const description =
@@ -60,6 +63,29 @@ const structuredData = [
       name: item.q,
       acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
     })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "How a snow-melting system works",
+    description,
+    step: [
+      {
+        "@type": "HowToStep",
+        name: "The heating layer",
+        text: "Electric heating cable or mats are installed in or beneath the surface, laid out and spaced to your design.",
+      },
+      {
+        "@type": "HowToStep",
+        name: "The sensor",
+        text: "An aerial or slab sensor detects the temperature and moisture conditions that mean snow or ice is forming.",
+      },
+      {
+        "@type": "HowToStep",
+        name: "The controller",
+        text: "The controller reads the sensor and switches the heating on, running long enough to clear remaining moisture before shutting off.",
+      },
+    ],
   },
 ];
 ---
@@ -119,7 +145,7 @@ const structuredData = [
   <section class="section">
     <div class="container stack">
       <FeatureSplit
-        image="/images/snow-melting-mat.jpg"
+        image={snowMeltingMat}
         alt="Rolled snow melting mat with green heating cable woven through a mesh, and a black cold lead"
         eyebrow="Part 1"
         heading="The heating layer"
@@ -134,7 +160,7 @@ const structuredData = [
       </FeatureSplit>
 
       <FeatureSplit
-        image="/images/snow-melting-sensor.jpg"
+        image={snowMeltingSensor}
         alt="White snow and ice sensor with a conical cap on a short stem"
         eyebrow="Part 2"
         heading="The sensor"
@@ -148,7 +174,7 @@ const structuredData = [
       </FeatureSplit>
 
       <FeatureSplit
-        image="/images/snow-melting-controller-premium.jpg"
+        image={snowMeltingControllerPremium}
         alt="Snow and ice melt controller with its weatherproof cover open"
         eyebrow="Part 3"
         heading="The controller"

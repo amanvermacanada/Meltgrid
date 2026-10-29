@@ -1,0 +1,418 @@
+---
+// NEW HOMEPAGE DESIGN CONCEPT — separate from production, for preview only.
+// Not linked from Header/Footer nav, not part of the approved internal-pages
+// deployment package, and excluded from the sitemap (see astro.config.mjs).
+// Inspired by the structure/tone of WarmlyYours Canada's homepage per the
+// owner's written brief (large photographic hero, alternating light/dark/warm
+// sections, image-based application tiles) — not copied from it. All imagery
+// below is real, existing MeltGrid/WarmlyYours product and project photography
+// already used elsewhere on this site; no stock photos, no fabricated
+// testimonials, credentials, completed projects or manufacturer partnerships
+// beyond what the rest of the site already states.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Picture } from "astro:assets";
+import HowItWorks from "../components/HowItWorks.astro";
+import FeatureSplit from "../components/FeatureSplit.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+import heatedDrivewayHero from "../assets/images/heated-driveway-winter-dusk.jpg";
+import heatedWalkway from "../assets/images/heated-walkway-winter-entrance.jpg";
+import heatedSteps from "../assets/images/heated-steps-winter.jpg";
+import heatedPatio from "../assets/images/heated-patio-winter.jpg";
+import cableCoil from "../assets/images/snow-melting-cable-coil.jpg";
+
+const title = "MeltGrid Canada — Heated Driveways & Snow Melting (Homepage Concept)";
+const description =
+  "Design concept for a new MeltGrid Canada homepage, inspired by WarmlyYours' visual presentation. Preview only — not the live site.";
+
+const applications = [
+  {
+    href: "/heated-driveways/",
+    title: "Driveways",
+    body: "Full coverage, tire tracks or entrance and apron areas.",
+  },
+  {
+    href: "/residential/#walkways",
+    title: "Walkways & entrances",
+    body: "Keep the path to your door clear without shovelling.",
+  },
+  {
+    href: "/residential/#steps",
+    title: "Steps",
+    body: "Steps and landings are where slips happen most — heat the ones that matter.",
+  },
+  {
+    href: "/commercial/",
+    title: "Commercial properties",
+    body: "Entrances, ramps and walkways for retail, multi-unit and institutional sites.",
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/homepage-concept/"
+  headerVariant="overlay"
+  noindex={true}
+>
+  <section class="hc-hero on-dark" data-hero>
+    <div class="hc-hero__media">
+      <Picture
+        src={heatedDrivewayHero}
+        alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement clear with snow only along the edge"
+        widths={[640, 960, 1280, 1600]}
+        sizes="100vw"
+        formats={["avif", "webp", "jpeg"]}
+        loading="eager"
+      />
+    </div>
+    <div class="hc-hero__scrim"></div>
+    <div class="container hc-hero__inner">
+      <p class="hc-eyebrow">Residential &amp; commercial · Ontario</p>
+      <h1>Heated driveways and snow-melting systems for Ontario winters.</h1>
+      <p class="hc-hero__lead">
+        MeltGrid coordinates the design, equipment and qualified installation contractors behind
+        automatic snow and ice-melting systems — for homes and businesses across the GTA and
+        Ontario.
+      </p>
+      <div class="hc-hero__actions">
+        <a class="btn btn--primary btn--lg" href="/contact/">Request a Free Design Assessment</a>
+        <a class="btn btn--ghost btn--lg" href="#applications">Explore Snow-Melting Solutions</a>
+      </div>
+    </div>
+    <div class="container hc-hero__video">
+      <div class="hc-video-card">
+        <div class="hc-video-card__frame">
+          <iframe
+            src="https://customer-ikxw003vtz2iah2s.cloudflarestream.com/cbc8fa1056ea0161d82f48341cfb9f4d/iframe"
+            loading="lazy"
+            style="width:100%;height:100%;border:0;"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+            allowfullscreen
+            title="Introduction to WarmlyYours Snow Melting Systems"
+          ></iframe>
+        </div>
+        <p class="hc-video-card__caption">
+          See it in action — Video: WarmlyYours
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Electric and hydronic solutions</h2>
+        <p>Two ways to melt snow at the source. Your design confirms which fits your project.</p>
+      </div>
+      <FeatureSplit
+        image={cableCoil}
+        alt="Coil of green snow melting heating cable"
+        eyebrow="Electric"
+        heading="Electric snow melting"
+        bullets={[
+          "Heating cable or mat installed in or beneath the surface",
+          "No boiler or mechanical room required",
+          "Well suited to driveways, walkways, steps and smaller commercial areas",
+        ]}
+        linkHref="/electric-vs-hydronic-snow-melting/"
+        linkLabel="Compare electric and hydronic"
+      />
+      <FeatureSplit
+        image={heatedDrivewayHero}
+        alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement clear with snow only along the edge"
+        eyebrow="Hydronic"
+        heading="Hydronic snow melting"
+        flip={true}
+        bullets={[
+          "A boiler or heat-pump loop heats fluid circulated through tubing in the surface",
+          "Looks identical to an electric system from above — the difference is what's underneath",
+          "Often considered for larger driveways and commercial-scale projects",
+        ]}
+        linkHref="/hydronic-snow-melting/"
+        linkLabel="Learn about hydronic systems"
+      />
+    </div>
+  </section>
+
+  <section class="section hc-section--warm" id="applications">
+    <div class="container">
+      <div class="section-header">
+        <h2>Applications</h2>
+        <p>Snow melting is not only for driveways. Choose the places where snow and ice cause you the most trouble.</p>
+      </div>
+      <div class="hc-app-grid">
+        {applications.map((app) => (
+          <a class="hc-app-card" href={app.href}>
+            <span class="hc-app-card__media">
+              <Picture
+                src={app.title === "Driveways" ? heatedDrivewayHero : app.title === "Steps" ? heatedSteps : app.title === "Commercial properties" ? heatedPatio : heatedWalkway}
+                alt={app.title}
+                widths={[320, 480, 640]}
+                sizes="(min-width: 900px) 25vw, 50vw"
+                formats={["avif", "webp", "jpeg"]}
+                loading="lazy"
+              />
+            </span>
+            <span class="hc-app-card__shade" aria-hidden="true"></span>
+            <span class="hc-app-card__title">{app.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why MeltGrid?</h2>
+        <p>We bring snow melting to your next project — from first sketch to a commissioned system.</p>
+      </div>
+      <ul class="hc-why-grid">
+        <li>
+          <p class="hc-why-num">01</p>
+          <h3>One point of contact</h3>
+          <p>A single team coordinating design, equipment and the trades on your project, so you're not managing the handoffs yourself.</p>
+        </li>
+        <li>
+          <p class="hc-why-num">02</p>
+          <h3>Manufacturer-backed system design</h3>
+          <p>Layouts and specifications built around WarmlyYours heating technology, matched to your surface, size and goals.</p>
+        </li>
+        <li>
+          <p class="hc-why-num">03</p>
+          <h3>Qualified installation partners</h3>
+          <p>We connect your project with licensed electricians and surface contractors qualified for snow-melting work — MeltGrid coordinates the installation, it does not itself perform licensed electrical or mechanical trade work.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>How it works</h2>
+        <p>From enquiry to a commissioned system, in a few coordinated steps.</p>
+      </div>
+      <HowItWorks />
+      <p style="margin-top:1.5rem;"><a href="/how-it-works/">Read the full explanation →</a></p>
+    </div>
+  </section>
+
+  <section class="section hc-section--ice">
+    <div class="container">
+      <div class="section-header">
+        <h2>Electric vs. hydronic, at a glance</h2>
+        <p>Both melt snow at the source. The right one depends on your project.</p>
+      </div>
+      <div class="hc-compare-grid">
+        <div class="hc-compare-card">
+          <h3>Electric</h3>
+          <p>No boiler or mechanical room. Simpler for most residential driveways, walkways and steps. Installed by a licensed electrician alongside your paving or concrete contractor.</p>
+        </div>
+        <div class="hc-compare-card">
+          <h3>Hydronic</h3>
+          <p>A boiler or heat-pump loop circulates heated fluid through tubing in the surface. Often considered for larger driveways and commercial-scale projects, coordinated with a licensed mechanical contractor.</p>
+        </div>
+      </div>
+      <p style="margin-top:1.5rem;"><a href="/electric-vs-hydronic-snow-melting/">See the full comparison →</a></p>
+    </div>
+  </section>
+
+  <section class="section hc-section--warm">
+    <div class="container">
+      <div class="section-header">
+        <h2>Cost and planning</h2>
+        <p>We don't publish fixed prices — your design gives you a real number for your property, not a range that could mislead.</p>
+      </div>
+      <div class="hc-cost-grid">
+        <div class="hc-cost-card">
+          <h3>Size and coverage</h3>
+          <p>More area, more heating elements. Full coverage, tire tracks, entrance and apron, or targeted areas all change the cost.</p>
+        </div>
+        <div class="hc-cost-card">
+          <h3>Surface</h3>
+          <p>Asphalt, concrete and pavers each install differently, which shapes the system and the installation approach.</p>
+        </div>
+        <div class="hc-cost-card">
+          <h3>Electrical or mechanical requirements</h3>
+          <p>Available power and panel capacity for electric systems, or boiler and mechanical-room space for hydronic, affect scope.</p>
+        </div>
+      </div>
+      <p style="margin-top:1.5rem;"><a href="/cost/">See the full cost and planning guide →</a></p>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Ready to plan your project?"
+    body="Tell us about your property. We come back with a design and an estimate."
+    primaryHref="/contact/"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>
+
+<style>
+  .hc-hero {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 2.5rem;
+  }
+  .hc-hero__media {
+    position: absolute;
+    inset: 0;
+  }
+  .hc-hero__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 60%;
+  }
+  .hc-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 20, 40, 0.75) 0%, rgba(5, 20, 40, 0.55) 45%, rgba(5, 20, 40, 0.92) 100%);
+  }
+  .hc-hero__inner {
+    position: relative;
+    padding-top: 7rem;
+    padding-bottom: 2rem;
+    max-width: 44rem;
+  }
+  .hc-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--text-sm);
+    color: var(--slate-300);
+    margin-bottom: 0.75rem;
+  }
+  .hc-hero__lead {
+    font-size: var(--text-lg);
+    color: var(--slate-300);
+    margin-top: 1rem;
+  }
+  .hc-hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+  .hc-hero__video {
+    position: relative;
+    margin-top: 1rem;
+  }
+  .hc-video-card {
+    max-width: 30rem;
+    background: rgba(5, 20, 40, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius);
+    padding: 1rem;
+    backdrop-filter: blur(2px);
+  }
+  .hc-video-card__frame {
+    aspect-ratio: 16 / 9;
+    border-radius: calc(var(--radius) - 4px);
+    overflow: hidden;
+    background: var(--night-900);
+  }
+  .hc-video-card__caption {
+    font-size: var(--text-sm);
+    color: var(--slate-300);
+    margin-top: 0.6rem;
+  }
+
+  .hc-section--warm {
+    background: #f6f1ea;
+  }
+  .hc-section--ice {
+    background: var(--ice);
+  }
+
+  .hc-app-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (min-width: 900px) {
+    .hc-app-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .hc-app-card {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: block;
+    color: var(--white);
+  }
+  .hc-app-card__media {
+    position: absolute;
+    inset: 0;
+  }
+  .hc-app-card__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hc-app-card__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(5, 20, 40, 0.85) 100%);
+  }
+  .hc-app-card__title {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    right: 1rem;
+    font-weight: 700;
+  }
+
+  .hc-why-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  @media (min-width: 900px) {
+    .hc-why-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .hc-why-grid li {
+    background: #ffffff0a;
+    border: 1px solid #ffffff1f;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .hc-why-num {
+    color: var(--heat);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    margin-bottom: 0.5rem;
+  }
+
+  .hc-compare-grid,
+  .hc-cost-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .hc-compare-grid {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .hc-compare-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 900px) {
+    .hc-cost-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .hc-compare-card,
+  .hc-cost-card {
+    background: var(--white);
+    border: 1px solid #0c274714;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+</style>

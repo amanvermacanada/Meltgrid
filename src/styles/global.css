@@ -563,6 +563,7 @@ h4 {
   position: absolute;
   inset: 0;
   z-index: -2;
+  background: linear-gradient(160deg, var(--night-900) 0%, var(--night-700) 55%, var(--night-600) 100%);
 }
 
 .hero__media img {
@@ -874,6 +875,7 @@ h4 {
   align-items: flex-end;
   overflow: hidden;
   color: var(--white);
+  background: linear-gradient(160deg, var(--night-900) 0%, var(--night-700) 100%);
 }
 
 .split__media {
@@ -1056,6 +1058,7 @@ h4 {
   min-height: 28rem;
   display: flex;
   align-items: center;
+  background: linear-gradient(160deg, var(--night-900) 0%, var(--night-700) 100%);
   overflow: hidden;
   color: var(--white);
 }
@@ -1368,6 +1371,12 @@ h4 {
   }
   .fs--flip .fs__frame {
     order: 2;
+  }
+  .fs--text-only {
+    grid-template-columns: 1fr;
+  }
+  .fs--text-only .fs__copy {
+    max-width: 42rem;
   }
 }
 

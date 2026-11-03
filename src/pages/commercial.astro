@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import FeatureSplit from "../components/FeatureSplit.astro";
-import snowMeltingControllerMultiZone from "../assets/images/snow-melting-controller-multi-zone.jpg";
 import StepList from "../components/StepList.astro";
 import Faq from "../components/Faq.astro";
 import RelatedLinks from "../components/RelatedLinks.astro";
@@ -79,7 +78,7 @@ const structuredData = [
   <section class="phero phero--dark on-dark">
     <div class="container">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Commercial snow melting" }]} />
-      <div class="phero__grid">
+      <div class="phero__grid phero__grid--solo">
         <div class="phero__copy">
           <p>For property owners and managers</p>
           <h1>Commercial snow melting for entrances, ramps and walkways</h1>
@@ -92,16 +91,6 @@ const structuredData = [
             <a class="btn btn--ghost btn--lg" href="/how-it-works/">How it works</a>
           </div>
         </div>
-        <figure class="phero__frame">
-          <img
-            src="/images/snow-melting-controller-premium.jpg"
-            alt="Snow and ice melt controller with its weatherproof cover open"
-            loading="eager"
-            width="900"
-            height="700"
-          />
-          <figcaption>Image: WarmlyYours</figcaption>
-        </figure>
       </div>
     </div>
   </section>
@@ -141,8 +130,6 @@ const structuredData = [
   <section class="section section--ice">
     <div class="container">
       <FeatureSplit
-        image={snowMeltingControllerMultiZone}
-        alt="ZoneBraker touchscreen multi-zone snow-melting controller in a wall-mounted enclosure"
         heading="Controls that scale to larger properties"
         bullets={["A multi-zone controller can split a system into separately controlled zones", "Sensors detect conditions so zones run when needed", "Controls and electrical load are specified in the design"]}
         linkHref="/technology/"

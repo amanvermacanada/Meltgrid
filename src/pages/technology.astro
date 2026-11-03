@@ -2,9 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import FeatureSplit from "../components/FeatureSplit.astro";
-import snowMeltingMat from "../assets/images/snow-melting-mat.jpg";
-import snowMeltingCableCoil from "../assets/images/snow-melting-cable-coil.jpg";
-import snowMeltingSensor from "../assets/images/snow-melting-sensor.jpg";
 import Faq from "../components/Faq.astro";
 import RelatedLinks from "../components/RelatedLinks.astro";
 import CtaStrip from "../components/CtaStrip.astro";
@@ -12,7 +9,7 @@ import StepList from "../components/StepList.astro";
 
 const title = "Snow Melting Mats, Cables & Controls | MeltGrid Canada";
 const description =
-  "The technology under a heated surface: snow melting mats, heating cable, sensors and controls from WarmlyYours, and how each is chosen for your project.";
+  "The technology under a heated surface: snow melting mats, heating cable, sensors and controls, and how each is chosen for your project.";
 
 const faqItems = [
   {
@@ -21,7 +18,7 @@ const faqItems = [
   },
   {
     q: "Who makes the heating technology?",
-    a: ["WarmlyYours is the manufacturer of the heating cable, mats, controls and sensors described here. MeltGrid Canada is not a manufacturer: we coordinate design, the trades and the project."],
+    a: ["These are manufactured by established snow-melting equipment makers. MeltGrid Canada is not a manufacturer: we coordinate design, the trades and the project, and your design specifies the exact products for your property."],
   },
   {
     q: "What controls are available?",
@@ -69,16 +66,6 @@ const structuredData = [
 
 <BaseLayout title={title} description={description} path="/technology/" headerVariant="overlay" structuredData={structuredData}>
   <section class="tech-hero on-dark">
-    <div class="tech-hero__media">
-      <img
-        src="/images/snow-melting-mat-close-up.jpg"
-        alt="Snow melting mat rolled out over a mesh on grey pavement, the WarmlyYours name printed on the mat tapes"
-        loading="eager"
-        width="1600"
-        height="900"
-      />
-    </div>
-    <div class="tech-hero__shade"></div>
     <div class="container tech-hero__inner">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Technology" }]} />
       <p>The technology</p>
@@ -89,7 +76,6 @@ const structuredData = [
         <a class="btn btn--ghost btn--lg" href="/how-it-works/">How it works</a>
       </div>
     </div>
-    <p class="fg-muted" style="position:relative;z-index:1;padding:0 0 1rem;text-align:center;font-size:var(--text-sm);">Image: WarmlyYours</p>
   </section>
 
   <section class="section section--tight">
@@ -98,8 +84,7 @@ const structuredData = [
       <div class="answer__body">
         <p>
           Four things: a heating layer of mats or cable in or beneath the surface, sensors that detect snow and ice
-          conditions, a controller that runs the system, and the electrical connection. All the technology here is
-          from WarmlyYours.
+          conditions, a controller that runs the system, and the electrical connection.
         </p>
       </div>
     </div>
@@ -108,8 +93,6 @@ const structuredData = [
   <section class="section">
     <div class="container stack">
       <FeatureSplit
-        image={snowMeltingMat}
-        alt="Rolled snow melting mat with green heating cable woven through a mesh, and a black cold lead"
         eyebrow="Heating layer"
         heading="Snow Melting Mat"
         bullets={["Installs in asphalt, concrete or beneath pavers", "Available in 2 ft and 3 ft widths and a range of lengths", "Cable spaced 3 in apart on the mat", "Cold lead supplied for connection to the power supply"]}
@@ -121,8 +104,6 @@ const structuredData = [
       </FeatureSplit>
 
       <FeatureSplit
-        image={snowMeltingCableCoil}
-        alt="Coil of green snow melting heating cable"
         eyebrow="Heating layer"
         heading="Snow Melting Cable"
         flip
@@ -141,35 +122,29 @@ const structuredData = [
       </div>
       <ul class="layers__group__list tech-controls">
         <li>
-          <img src="/images/snow-melting-controller-premium.jpg" alt="Snow and ice melt controller with its weatherproof cover open" loading="lazy" width="320" height="220" />
           <h3>Automatic controller, premium</h3>
           <p>Automatic operation with sensors, including a hold-on period after snow stops and support for more than one sensor.</p>
         </li>
         <li>
-          <img src="/images/snow-melting-controller-economy.jpg" alt="Wall-mounted metal snow-melting controller with a digital display" loading="lazy" width="320" height="220" />
           <h3>Automatic controller, economy</h3>
           <p>Automatic detection of temperature and moisture with a digital interface, for straightforward systems.</p>
         </li>
         <li>
-          <img src="/images/snow-melting-timer-control.jpg" alt="Snow and ice melting timer control in a grey enclosure with a rotary timer dial" loading="lazy" width="320" height="220" />
           <h3>Timer control</h3>
           <p>You turn a dial to set how long the system runs. Suited to smaller areas.</p>
         </li>
         <li>
-          <img src="/images/snow-melting-controller-multi-zone.jpg" alt="ZoneBraker touchscreen multi-zone snow-melting controller in a wall-mounted enclosure" loading="lazy" width="320" height="220" />
           <h3>Multi-zone controller</h3>
           <p>Splits a larger system into zones that run independently, for bigger properties.</p>
         </li>
       </ul>
-      <p class="fg-muted" style="margin-top:1.5rem;font-size:var(--text-sm);">Image: WarmlyYours. Wi-Fi control is also available.</p>
+      <p class="fg-muted" style="margin-top:1.5rem;font-size:var(--text-sm);">Wi-Fi control is also available.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <FeatureSplit
-        image={snowMeltingSensor}
-        alt="White snow and ice sensor with a conical cap on a short stem"
         eyebrow="Sensing"
         heading="Sensors"
         bullets={["Aerial-mounted sensors above ground", "Slab and pavement sensors set in the surface", "Placed in an open area where snow falls directly on them"]}

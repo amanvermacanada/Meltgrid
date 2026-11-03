@@ -34,16 +34,8 @@ const steps = [
   <div class="how__stage">
     <div class="how__snow" data-how-snow></div>
     <div class="how__section">
-      <img
-        src="/images/snow-melting-mat-asphalt-cross-section.jpg"
-        alt="Cutaway of an asphalt driveway showing finished asphalt, a snow melt mat, the base coat of asphalt and compacted gravel"
-        loading="lazy"
-        width="640"
-        height="420"
-      />
       <div class="how__heat" data-how-heat></div>
     </div>
-    <p class="how__credit">Image: WarmlyYours</p>
   </div>
   <div class="how__side">
     <ol class="how__list" data-how-list>
@@ -57,25 +49,18 @@ const steps = [
       ))}
     </ol>
     <div class="how__logic">
-      <figure>
-        <img src="/images/snow-melting-sensor.jpg" alt="Snow and ice sensor" loading="lazy" width="200" height="200" />
-        <figcaption>Sensor</figcaption>
-      </figure>
-      <figure>
-        <img
-          src="/images/snow-melting-controller-premium.jpg"
-          alt="Snow and ice melt controller"
-          loading="lazy"
-          width="200"
-          height="200"
-        />
-        <figcaption>Controller</figcaption>
-      </figure>
-      <div class="how__node how__node--heat"></div>
+      <div class="how__node-label">
+        <span class="how__node how__node--sensor" aria-hidden="true"></span>
+        <p>Sensor</p>
+      </div>
+      <div class="how__node-label">
+        <span class="how__node how__node--controller" aria-hidden="true"></span>
+        <p>Controller</p>
+      </div>
     </div>
   </div>
   <button type="button" class="how__pause" data-how-pause>Pause animation</button>
-  <p class="how__fine-print">Components shown are WarmlyYours products. Your design confirms which ones your project uses.</p>
+  <p class="how__fine-print">Your design confirms the exact sensor, controller and heating-element components used for your project.</p>
 </div>
 
 <style>
@@ -89,15 +74,12 @@ const steps = [
     border-radius: var(--radius);
     overflow: hidden;
     background: var(--night-900);
+    aspect-ratio: 640 / 420;
   }
 
   .how__section {
     position: relative;
-  }
-
-  .how__section img {
-    width: 100%;
-    display: block;
+    height: 100%;
   }
 
   .how__heat {
@@ -111,12 +93,6 @@ const steps = [
 
   .how[data-active-step]:not([data-active-step="0"]):not([data-active-step="1"]) .how__heat {
     opacity: 1;
-  }
-
-  .how__credit {
-    padding: 0.5rem 1rem;
-    font-size: var(--text-sm);
-    color: var(--slate-300);
   }
 
   .how__list {
@@ -158,26 +134,34 @@ const steps = [
     margin-top: 1.5rem;
   }
 
-  .how__logic figure {
+  .how__node-label {
     text-align: center;
   }
 
-  .how__logic img {
-    border-radius: var(--radius);
+  .how__node {
+    display: block;
+    border-radius: 999px;
     width: 72px;
     height: 72px;
-    object-fit: cover;
     margin: 0 auto;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
   }
 
-  .how__logic figcaption {
+  .how__node--sensor::before,
+  .how__node--controller::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background: radial-gradient(circle at 50% 42%, var(--heat) 0 8px, transparent 9px);
+  }
+
+  .how__node-label p {
     margin-top: 0.4rem;
     font-size: var(--text-sm);
     color: var(--slate-300);
-  }
-
-  .how__node--heat {
-    display: none;
   }
 
   .how__pause {

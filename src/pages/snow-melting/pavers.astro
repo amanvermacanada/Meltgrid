@@ -2,7 +2,6 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import FeatureSplit from "../../components/FeatureSplit.astro";
-import snowMeltingCablePaversCrossSection from "../../assets/images/snow-melting-cable-pavers-cross-section.jpg";
 import StepList from "../../components/StepList.astro";
 import Faq from "../../components/Faq.astro";
 import RelatedLinks from "../../components/RelatedLinks.astro";
@@ -80,7 +79,7 @@ const structuredData = [
   <section class="phero phero--split">
     <div class="container">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Heated driveways", href: "/heated-driveways/" }, { label: "Pavers and interlock" }]} />
-      <div class="phero__grid">
+      <div class="phero__grid phero__grid--solo">
         <div class="phero__copy">
           <p>Snow melting: Pavers and interlock</p>
           <h1>Snow melting beneath pavers and interlock</h1>
@@ -93,16 +92,6 @@ const structuredData = [
             <a class="btn btn--outline btn--lg" href="/how-it-works/">How snow melting works</a>
           </div>
         </div>
-        <figure class="phero__frame">
-          <img
-            src="/images/snow-melting-mat-pavers-cross-section.jpg"
-            alt="Cutaway of a paver surface showing pavers, a mortar or sand bed, a snow melt mat and crushed gravel"
-            loading="eager"
-            width="900"
-            height="700"
-          />
-          <figcaption>Image: WarmlyYours</figcaption>
-        </figure>
       </div>
     </div>
   </section>
@@ -181,9 +170,6 @@ const structuredData = [
       </div>
       <div class="pv-alt">
         <FeatureSplit
-          image={snowMeltingCablePaversCrossSection}
-          alt="Cutaway of a paver surface showing pavers, a mortar or sand bed, snow melt cable on an attachment grid and crushed gravel"
-          credit="Image: WarmlyYours. Cross-section of pavers over snow melt cable on an attachment grid"
           heading="Cable version, on an attachment grid"
           headingLevel="h3"
           flip

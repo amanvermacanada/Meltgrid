@@ -2,8 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import CoveragePicker from "../components/CoveragePicker.astro";
-import { Picture } from "astro:assets";
-import winterHomeDusk from "../assets/images/winter-home-dusk.jpg";
 import StepList from "../components/StepList.astro";
 import Faq from "../components/Faq.astro";
 
@@ -90,16 +88,7 @@ const faqLd = {
 
 <BaseLayout title={title} description={description} path="/" headerVariant="overlay" structuredData={[faqLd]}>
   <section class="hero on-dark" data-hero>
-    <div class="hero__media">
-      <Picture
-        src={winterHomeDusk}
-        alt="Modern stone and glass home at dusk in winter, warmly lit windows, snow on the roof and along the edge of a clear concrete patio"
-        widths={[640, 960, 1280, 1600]}
-        sizes="100vw"
-        formats={["avif", "webp", "jpeg"]}
-        loading="eager"
-      />
-    </div>
+    <div class="hero__media" aria-hidden="true"></div>
     <div class="hero__scrim"></div>
     <div class="container hero__inner">
       <h1>Snow falls. Your driveway stays clear.</h1>
@@ -108,7 +97,6 @@ const faqLd = {
         <a class="btn btn--primary btn--lg" href="/contact/">Request my free design &amp; estimate</a>
         <a class="btn btn--ghost btn--lg" href="#how-it-works">See how it works</a>
       </div>
-      <p class="hero__credit">Manufacturer imagery courtesy of WarmlyYours</p>
     </div>
   </section>
 
@@ -117,7 +105,7 @@ const faqLd = {
       <ul>
         <li>
           <p>Manufacturer-backed technology</p>
-          <p>Heating systems from WarmlyYours, with manufacturer design and technical support.</p>
+          <p>Heating systems with manufacturer design and technical support.</p>
         </li>
         <li>
           <p>Designed for your property</p>
@@ -164,9 +152,6 @@ const faqLd = {
           <a href="/commercial/">Ramps and commercial areas — entrances, ramps and high-traffic walkways for commercial and multi-unit properties. Commercial snow melting →</a>
         </div>
       </div>
-      <p class="fg-muted" style="margin-top:1rem;font-size:var(--text-sm);">
-        Photography: manufacturer imagery courtesy of WarmlyYours.
-      </p>
     </div>
   </section>
 
@@ -197,16 +182,6 @@ const faqLd = {
         </div>
         <div class="stabs__panels">
           <article class="stabs__panel stabs__panel--asphalt">
-            <figure class="stabs__img">
-              <img
-                src="/images/snow-melting-cable-asphalt-cross-section.jpg"
-                alt="Cutaway of an asphalt driveway showing snow melt cable fixed to a metal frame between finished asphalt, a base coat and compacted gravel"
-                loading="lazy"
-                width="640"
-                height="440"
-              />
-              <figcaption>Image: WarmlyYours. Cross-section of a typical build-up.</figcaption>
-            </figure>
             <div class="stabs__copy">
               <h3>Asphalt</h3>
               <p>Heating elements are installed as part of the paving process, set between a base coat and the finished asphalt so they are hidden within the surface.</p>
@@ -221,16 +196,6 @@ const faqLd = {
             </div>
           </article>
           <article class="stabs__panel stabs__panel--concrete">
-            <figure class="stabs__img">
-              <img
-                src="/images/snow-melting-cable-concrete-cross-section.jpg"
-                alt="Cutaway of a concrete slab showing snow melt cable tied to rebar two to three inches below the finished concrete, on compacted gravel"
-                loading="lazy"
-                width="640"
-                height="440"
-              />
-              <figcaption>Image: WarmlyYours. Cross-section of a typical build-up.</figcaption>
-            </figure>
             <div class="stabs__copy">
               <h3>Concrete</h3>
               <p>Heating elements are planned into the slab, tied to reinforcement near the top of the concrete before the finished layer is poured.</p>
@@ -245,16 +210,6 @@ const faqLd = {
             </div>
           </article>
           <article class="stabs__panel stabs__panel--pavers">
-            <figure class="stabs__img">
-              <img
-                src="/images/snow-melting-mat-pavers-cross-section.jpg"
-                alt="Cutaway of a paver surface showing pavers, a mortar or sand bed, a snow melt mat and crushed gravel"
-                loading="lazy"
-                width="640"
-                height="440"
-              />
-              <figcaption>Image: WarmlyYours. Cross-section of a typical build-up.</figcaption>
-            </figure>
             <div class="stabs__copy">
               <h3>Pavers and interlock</h3>
               <p>Heating sits beneath the pavers as part of the base build-up. The finished surface is your choice of paver.</p>
@@ -277,15 +232,6 @@ const faqLd = {
   <h2 class="visually-hidden">Residential and commercial snow melting</h2>
   <div class="split-grid">
     <section class="split on-dark split--photo">
-      <div class="split__media">
-        <img
-          src="/images/heated-driveway-winter-dusk.jpg"
-          alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement wet and clear with snow only along the edge"
-          loading="lazy"
-          width="900"
-          height="1100"
-        />
-      </div>
       <div class="split__shade"></div>
       <div class="split__content">
         <p>For homeowners</p>
@@ -300,15 +246,6 @@ const faqLd = {
       </div>
     </section>
     <section class="split on-dark split--photo">
-      <div class="split__media">
-        <img
-          src="/images/commercial-entrance-winter.jpg"
-          alt="Covered entrance of a modern commercial office building at dusk in winter, with clear wet pavement leading to glass doors, snow banked along the edges and an accessible ramp"
-          loading="lazy"
-          width="900"
-          height="1100"
-        />
-      </div>
       <div class="split__shade"></div>
       <div class="split__content">
         <p>For property owners and managers</p>
@@ -329,7 +266,7 @@ const faqLd = {
     <div class="container">
       <div class="section-header">
         <h2>The technology under the surface</h2>
-        <p>Heating elements, controls and sensors from WarmlyYours, designed into a system for your project.</p>
+        <p>Heating elements, controls and sensors designed into a system for your project.</p>
       </div>
       <div class="layers">
         <section class="layers__group">
@@ -337,13 +274,11 @@ const faqLd = {
           <p>Installed in or beneath the surface</p>
           <ul>
             <li>
-              <img src="/images/snow-melting-mat.jpg" alt="Rolled snow melting mat with green heating cable woven through a mesh, and a black cold lead" loading="lazy" width="400" height="260" />
               <p>Heating mat</p>
               <h4>Snow Melting Mat</h4>
               <p>Heating cable pre-spaced on a mesh and rolled out across open areas such as driveways, walkways and patios, in asphalt, concrete or beneath pavers.</p>
             </li>
             <li>
-              <img src="/images/snow-melting-cable-coil.jpg" alt="Coil of green snow melting heating cable" loading="lazy" width="400" height="260" />
               <p>Heating cable</p>
               <h4>Snow Melting Cable</h4>
               <p>Flexible cable for unusual shapes, curves and stairways. It can be laid at different spacings, so the design can raise or lower the heat output for the area.</p>
@@ -355,13 +290,11 @@ const faqLd = {
           <p>Decides when the heat runs</p>
           <ul>
             <li>
-              <img src="/images/snow-melting-controller-premium.jpg" alt="Snow and ice melt controller with its weatherproof cover open" loading="lazy" width="400" height="260" />
               <p>System controls</p>
               <h4>Controls</h4>
               <p>Automatic controls with sensors, timer controls and Wi-Fi options. Your design chooses the approach that suits how you use the property.</p>
             </li>
             <li>
-              <img src="/images/snow-melting-sensor.jpg" alt="White snow and ice sensor with a conical cap on a short stem" loading="lazy" width="400" height="260" />
               <p>System sensors</p>
               <h4>Sensors</h4>
               <p>Slab and aerial sensors detect temperature and moisture, so the system runs when snow or ice is forming rather than all winter.</p>
@@ -369,7 +302,6 @@ const faqLd = {
           </ul>
         </section>
       </div>
-      <p class="fg-muted" style="margin-top:1.5rem;font-size:var(--text-sm);">Image: WarmlyYours. Heating technology, controls and sensors from WarmlyYours.</p>
       <p style="margin-top:0.75rem;"><a href="/technology/">Explore the technology →</a></p>
     </div>
   </section>
@@ -378,25 +310,8 @@ const faqLd = {
     <div class="container vid__inner">
       <div class="vid__copy">
         <h2>See snow melting in action.</h2>
-        <p>See how an automatic snow-melting system detects winter conditions and heats asphalt, concrete or paver surfaces — using technology from WarmlyYours.</p>
+        <p>See how an automatic snow-melting system detects winter conditions and heats asphalt, concrete or paver surfaces.</p>
         <a class="btn btn--primary btn--md" href="/how-it-works/">See how it works</a>
-      </div>
-      <div>
-        <iframe
-          class="vid__aspect"
-          style="width:100%;border:0;"
-          src="https://customer-ikxw003vtz2iah2s.cloudflarestream.com/cbc8fa1056ea0161d82f48341cfb9f4d/iframe"
-          loading="lazy"
-          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-          allowfullscreen
-          title="Introduction to WarmlyYours Snow Melting Systems"
-        ></iframe>
-        <figcaption class="fg-muted" style="font-size:var(--text-sm);margin-top:0.5rem;">
-          Video: WarmlyYours —
-          <a href="https://www.warmlyyours.com/en-US/snow-melting/cable/videos/snow-melting-systems-installation" style="text-decoration:underline;">
-            WarmlyYours
-          </a>
-        </figcaption>
       </div>
     </div>
   </section>
@@ -446,15 +361,11 @@ const faqLd = {
   </section>
 
   <section class="proof on-dark">
-    <div class="proof__media">
-      <img src="/images/snow-melting-mat-close-up.jpg" alt="Snow melting mat rolled out over a mesh on grey pavement, the WarmlyYours name printed on the mat tapes" loading="lazy" width="1600" height="900" />
-    </div>
     <div class="proof__shade"></div>
     <div class="container proof__inner">
       <h2>Engineered below. Invisible above.</h2>
       <p>Once installed, the snow-melting system remains hidden beneath the finished surface, while sensors and controls manage operation based on outdoor conditions.</p>
       <div class="proof__cta"><a class="btn btn--primary btn--md" href="/technology/">Explore the technology</a></div>
-      <p class="fg-muted" style="margin-top:1rem;font-size:var(--text-sm);">Manufacturer examples from WarmlyYours. These are not MeltGrid installations.</p>
     </div>
   </section>
 
@@ -471,7 +382,7 @@ const faqLd = {
         </li>
         <li>
           <h3>02 Manufacturer-backed system design</h3>
-          <p>Projects are developed around WarmlyYours snow-melting technology, with access to manufacturer technical and design support.</p>
+          <p>Projects are developed around established snow-melting technology, with access to manufacturer technical and design support.</p>
         </li>
         <li>
           <h3>03 Built around your project</h3>
@@ -506,10 +417,6 @@ const faqLd = {
   <Faq heading="Questions about heated driveways" intro="Short answers first. For anything specific to your property, ask us and we will look at it in your design." items={faqItems} />
 
   <section class="band on-dark">
-    <div class="band__media">
-      <img src="/images/winter-home-dusk.jpg" alt="Modern stone and glass home at dusk in winter, warmly lit windows and a clear patio with snow at its edge" loading="lazy" width="1600" height="1000" />
-    </div>
-    <div class="band__shade"></div>
     <div class="container band__inner">
       <div class="band__copy">
         <h2>Your next snowfall could be different.</h2>
@@ -520,8 +427,5 @@ const faqLd = {
         </div>
       </div>
     </div>
-    <p class="fg-muted" style="position:relative;font-size:var(--text-sm);padding:0 0 1rem 0;text-align:center;">
-      Manufacturer imagery courtesy of WarmlyYours
-    </p>
   </section>
 </BaseLayout>

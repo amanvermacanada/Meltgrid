@@ -3,8 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import CoveragePicker from "../components/CoveragePicker.astro";
-import { Picture } from "astro:assets";
-import heatedDrivewayWinterDusk from "../assets/images/heated-driveway-winter-dusk.jpg";
 import StepList from "../components/StepList.astro";
 import Faq from "../components/Faq.astro";
 import RelatedLinks from "../components/RelatedLinks.astro";
@@ -99,7 +97,7 @@ const structuredData = [
   <section class="phero phero--split">
     <div class="container">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Heated driveways" }]} />
-      <div class="phero__grid">
+      <div class="phero__grid phero__grid--solo">
         <div class="phero__copy">
           <p>Heated driveways</p>
           <h1>Heated driveways for Canadian winters</h1>
@@ -112,17 +110,6 @@ const structuredData = [
             <a class="btn btn--outline btn--lg" href="/how-it-works/">See how it works</a>
           </div>
         </div>
-        <figure class="phero__frame">
-          <Picture
-            src={heatedDrivewayWinterDusk}
-            alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement wet and clear with snow only along the edge"
-            widths={[450, 675, 900]}
-            sizes="(min-width: 900px) 450px, 100vw"
-            formats={["avif", "webp", "jpeg"]}
-            loading="eager"
-          />
-          <figcaption>Manufacturer imagery courtesy of WarmlyYours</figcaption>
-        </figure>
       </div>
     </div>
   </section>

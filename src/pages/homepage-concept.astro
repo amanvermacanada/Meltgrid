@@ -2,28 +2,21 @@
 // NEW HOMEPAGE DESIGN CONCEPT — separate from production, for preview only.
 // Not linked from Header/Footer nav, not part of the approved internal-pages
 // deployment package, and excluded from the sitemap (see astro.config.mjs).
-// Inspired by the structure/tone of WarmlyYours Canada's homepage per the
-// owner's written brief (large photographic hero, alternating light/dark/warm
-// sections, image-based application tiles) — not copied from it. All imagery
-// below is real, existing MeltGrid/WarmlyYours product and project photography
-// already used elsewhere on this site; no stock photos, no fabricated
-// testimonials, credentials, completed projects or manufacturer partnerships
-// beyond what the rest of the site already states.
+// Inspired by the structure/tone of the owner's written brief (large hero,
+// alternating light/dark/warm sections, application tiles) — not copied from
+// any supplier's site. 2026-11-03: a supplier instructed removal of their
+// photographs, video and brand references from this project; this page no
+// longer uses any supplier-sourced imagery, video or branding. No stock
+// photos, no fabricated testimonials, credentials, completed projects or
+// manufacturer partnerships.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Picture } from "astro:assets";
 import HowItWorks from "../components/HowItWorks.astro";
 import FeatureSplit from "../components/FeatureSplit.astro";
 import CtaStrip from "../components/CtaStrip.astro";
 
-import heatedDrivewayHero from "../assets/images/heated-driveway-winter-dusk.jpg";
-import heatedWalkway from "../assets/images/heated-walkway-winter-entrance.jpg";
-import heatedSteps from "../assets/images/heated-steps-winter.jpg";
-import heatedPatio from "../assets/images/heated-patio-winter.jpg";
-import cableCoil from "../assets/images/snow-melting-cable-coil.jpg";
-
 const title = "MeltGrid Canada — Heated Driveways & Snow Melting (Homepage Concept)";
 const description =
-  "Design concept for a new MeltGrid Canada homepage, inspired by WarmlyYours' visual presentation. Preview only — not the live site.";
+  "Design concept for a new MeltGrid Canada homepage. Preview only — not the live site.";
 
 const applications = [
   {
@@ -57,17 +50,7 @@ const applications = [
   noindex={true}
 >
   <section class="hc-hero on-dark" data-hero>
-    <div class="hc-hero__media">
-      <Picture
-        src={heatedDrivewayHero}
-        alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement clear with snow only along the edge"
-        widths={[640, 960, 1280, 1600]}
-        sizes="100vw"
-        formats={["avif", "webp", "jpeg"]}
-        loading="eager"
-      />
-    </div>
-    <div class="hc-hero__scrim"></div>
+    <div class="hc-hero__media" aria-hidden="true"></div>
     <div class="container hc-hero__inner">
       <p class="hc-eyebrow">Residential &amp; commercial · Ontario</p>
       <h1>Heated driveways and snow-melting systems for Ontario winters.</h1>
@@ -81,23 +64,6 @@ const applications = [
         <a class="btn btn--ghost btn--lg" href="#applications">Explore Snow-Melting Solutions</a>
       </div>
     </div>
-    <div class="container hc-hero__video">
-      <div class="hc-video-card">
-        <div class="hc-video-card__frame">
-          <iframe
-            src="https://customer-ikxw003vtz2iah2s.cloudflarestream.com/cbc8fa1056ea0161d82f48341cfb9f4d/iframe"
-            loading="lazy"
-            style="width:100%;height:100%;border:0;"
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-            allowfullscreen
-            title="Introduction to WarmlyYours Snow Melting Systems"
-          ></iframe>
-        </div>
-        <p class="hc-video-card__caption">
-          See it in action — Video: WarmlyYours
-        </p>
-      </div>
-    </div>
   </section>
 
   <section class="section">
@@ -107,8 +73,6 @@ const applications = [
         <p>Two ways to melt snow at the source. Your design confirms which fits your project.</p>
       </div>
       <FeatureSplit
-        image={cableCoil}
-        alt="Coil of green snow melting heating cable"
         eyebrow="Electric"
         heading="Electric snow melting"
         bullets={[
@@ -120,8 +84,6 @@ const applications = [
         linkLabel="Compare electric and hydronic"
       />
       <FeatureSplit
-        image={heatedDrivewayHero}
-        alt="Driveway in front of a two-car garage at dusk while snow falls, the pavement clear with snow only along the edge"
         eyebrow="Hydronic"
         heading="Hydronic snow melting"
         flip={true}
@@ -145,18 +107,8 @@ const applications = [
       <div class="hc-app-grid">
         {applications.map((app) => (
           <a class="hc-app-card" href={app.href}>
-            <span class="hc-app-card__media">
-              <Picture
-                src={app.title === "Driveways" ? heatedDrivewayHero : app.title === "Steps" ? heatedSteps : app.title === "Commercial properties" ? heatedPatio : heatedWalkway}
-                alt={app.title}
-                widths={[320, 480, 640]}
-                sizes="(min-width: 900px) 25vw, 50vw"
-                formats={["avif", "webp", "jpeg"]}
-                loading="lazy"
-              />
-            </span>
-            <span class="hc-app-card__shade" aria-hidden="true"></span>
             <span class="hc-app-card__title">{app.title}</span>
+            <span class="hc-app-card__body">{app.body}</span>
           </a>
         ))}
       </div>
@@ -178,7 +130,7 @@ const applications = [
         <li>
           <p class="hc-why-num">02</p>
           <h3>Manufacturer-backed system design</h3>
-          <p>Layouts and specifications built around WarmlyYours heating technology, matched to your surface, size and goals.</p>
+          <p>Layouts and specifications built around established snow-melting heating technology, matched to your surface, size and goals.</p>
         </li>
         <li>
           <p class="hc-why-num">03</p>
@@ -256,27 +208,17 @@ const applications = [
   .hc-hero {
     position: relative;
     overflow: hidden;
-    padding-bottom: 2.5rem;
+    padding-bottom: 3rem;
   }
   .hc-hero__media {
     position: absolute;
     inset: 0;
-  }
-  .hc-hero__media :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 60%;
-  }
-  .hc-hero__scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(5, 20, 40, 0.75) 0%, rgba(5, 20, 40, 0.55) 45%, rgba(5, 20, 40, 0.92) 100%);
+    background: linear-gradient(160deg, var(--night-900) 0%, var(--night-700) 55%, var(--night-600) 100%);
   }
   .hc-hero__inner {
     position: relative;
     padding-top: 7rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
     max-width: 44rem;
   }
   .hc-eyebrow {
@@ -297,29 +239,6 @@ const applications = [
     flex-wrap: wrap;
     margin-top: 1.75rem;
   }
-  .hc-hero__video {
-    position: relative;
-    margin-top: 1rem;
-  }
-  .hc-video-card {
-    max-width: 30rem;
-    background: rgba(5, 20, 40, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--radius);
-    padding: 1rem;
-    backdrop-filter: blur(2px);
-  }
-  .hc-video-card__frame {
-    aspect-ratio: 16 / 9;
-    border-radius: calc(var(--radius) - 4px);
-    overflow: hidden;
-    background: var(--night-900);
-  }
-  .hc-video-card__caption {
-    font-size: var(--text-sm);
-    color: var(--slate-300);
-    margin-top: 0.6rem;
-  }
 
   .hc-section--warm {
     background: #f6f1ea;
@@ -339,33 +258,22 @@ const applications = [
     }
   }
   .hc-app-card {
-    position: relative;
-    aspect-ratio: 3 / 4;
-    border-radius: var(--radius);
-    overflow: hidden;
     display: block;
-    color: var(--white);
-  }
-  .hc-app-card__media {
-    position: absolute;
-    inset: 0;
-  }
-  .hc-app-card__media :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .hc-app-card__shade {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(5, 20, 40, 0.85) 100%);
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid #0c274714;
+    padding: 1.5rem;
+    color: inherit;
   }
   .hc-app-card__title {
-    position: absolute;
-    left: 1rem;
-    bottom: 1rem;
-    right: 1rem;
+    display: block;
     font-weight: 700;
+  }
+  .hc-app-card__body {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: var(--text-sm);
+    color: var(--fg-muted);
   }
 
   .hc-why-grid {

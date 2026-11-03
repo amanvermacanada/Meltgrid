@@ -1,0 +1,52 @@
+---
+---
+
+<div class="sticky-cta on-dark" data-sticky-cta data-visible="false" inert>
+  <a class="sticky-cta__main" href="/contact/">Request free design</a>
+  <a aria-label="Call 437-774-5305" class="sticky-cta__call" href="tel:+14377745305">
+    <svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="22"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg>
+  </a>
+</div>
+
+<script>
+  const cta = document.querySelector<HTMLElement>("[data-sticky-cta]");
+  if (cta) {
+    const heroEl = document.querySelector("[data-hero]");
+    const finalCtaEl = document.querySelector("[data-cta-final]");
+    let pastHero = false;
+    let nearFooter = false;
+
+    const sync = () => {
+      const visible = pastHero && !nearFooter;
+      cta.dataset.visible = String(visible);
+      cta.toggleAttribute("inert", !visible);
+    };
+
+    if (heroEl) {
+      new IntersectionObserver(([entry]) => {
+        pastHero = !entry.isIntersecting;
+        sync();
+      }).observe(heroEl);
+    } else {
+      const onScroll = () => {
+        pastHero = window.scrollY > 400;
+        sync();
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+
+    const footerEl = document.querySelector("footer");
+    const nearby = new Set<Element>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) nearby.add(entry.target);
+        else nearby.delete(entry.target);
+      }
+      nearFooter = nearby.size > 0;
+      sync();
+    });
+    if (finalCtaEl) observer.observe(finalCtaEl);
+    if (footerEl) observer.observe(footerEl);
+  }
+</script>

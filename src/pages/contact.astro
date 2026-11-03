@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import DesignRequestForm from "../components/DesignRequestForm.astro";
+
+const title = "Request a Free Design & Estimate | MeltGrid Canada";
+const description =
+  "Request a free snow-melting design and estimate from MeltGrid Canada. Tell us about the project, surface, size and timing, and attach photos or plans.";
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/contact/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Request a design & estimate" },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/contact/" structuredData={structuredData} hideStickyCta>
+  <section class="contact">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Request a design & estimate" }]} />
+      <div class="contact__head">
+        <h1 class="h-display contact__title">Request my free design &amp; estimate</h1>
+        <p class="contact__lead">
+          Tell us about the property in five short steps. We review every request and follow up, with a design and
+          an estimate where it&rsquo;s a fit. Photos or a plan help, but are optional.
+        </p>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__main">
+          <DesignRequestForm />
+          <p class="contact__privacy">
+            We use what you submit here, including any photos or plans, only to review your request and prepare
+            your design and estimate. We don&rsquo;t sell it, and we don&rsquo;t share it except with the trades
+            involved in your own project. See our <a href="/privacy/">privacy policy</a> for details.
+          </p>
+        </div>
+        <aside aria-label="Other ways to reach us" class="contact__aside">
+          <div class="contact__card">
+            <h2>Prefer to talk?</h2>
+            <p><a class="contact__line" href="tel:+14377745305">437-774-5305</a></p>
+            <p><a class="contact__line" href="mailto:info@meltgridcanada.ca">info@meltgridcanada.ca</a></p>
+          </div>
+          <div class="contact__card">
+            <h2>Helpful to have ready</h2>
+            <ul>
+              <li>Which areas you want to keep clear</li>
+              <li>The surface: asphalt, concrete or pavers</li>
+              <li>Rough length and width</li>
+              <li>A photo or a plan, if you have one</li>
+            </ul>
+          </div>
+          <div class="contact__card">
+            <h2>What happens next</h2>
+            <ol>
+              <li>We review your request and confirm it's a fit for us.</li>
+              <li>We follow up for anything we still need.</li>
+              <li>We prepare a manufacturer-supported design.</li>
+              <li>We come back with the design and an estimate.</li>
+            </ol>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

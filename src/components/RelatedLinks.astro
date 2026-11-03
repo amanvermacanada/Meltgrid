@@ -1,0 +1,64 @@
+---
+export interface LinkItem {
+  href: string;
+  title: string;
+  body: string;
+}
+
+export interface Props {
+  heading: string;
+  items: LinkItem[];
+  dark?: boolean;
+  intro?: string;
+}
+
+const { heading, items, dark = false, intro } = Astro.props;
+---
+
+<section class={`section ${dark ? "section--ice" : ""}`}>
+  <div class="container">
+    <h2>{heading}</h2>
+    {intro && <p>{intro}</p>}
+    <ul class="related-list">
+      {items.map((item) => (
+        <li>
+          <a href={item.href}>
+            <strong>{item.title}</strong> {item.body} →
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .related-list {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .related-list a {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    color: var(--fg-muted);
+  }
+
+  .related-list strong {
+    display: block;
+    color: var(--fg);
+    margin-bottom: 0.3rem;
+  }
+
+  .section--dark .related-list a {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--slate-300);
+  }
+
+  .section--dark .related-list strong {
+    color: var(--white);
+  }
+</style>

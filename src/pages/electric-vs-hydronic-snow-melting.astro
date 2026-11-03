@@ -1,0 +1,239 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Faq from "../components/Faq.astro";
+import RelatedLinks from "../components/RelatedLinks.astro";
+import CtaStrip from "../components/CtaStrip.astro";
+
+const title = "Electric vs. Hydronic Snow Melting | MeltGrid Canada";
+const description =
+  "Electric or hydronic snow melting: how the two compare on cost, installation and fit, so you know what to ask for in your design.";
+
+const comparisonRows = [
+  {
+    label: "Heat source",
+    electric: "Electric cable or mats in the surface",
+    hydronic: "A boiler heating a glycol loop, circulated through tubing in the surface",
+  },
+  {
+    label: "Typical upfront cost tendency",
+    electric: "Tends to be lower for smaller or targeted areas",
+    hydronic: "Tends to be lower per square foot at larger scale, once a boiler is in place",
+  },
+  {
+    label: "Typical running-cost tendency",
+    electric: "Depends on your electricity rate and how often the system runs",
+    hydronic: "Depends on your gas or fuel rate and system efficiency — often favoured for very large heated areas",
+  },
+  {
+    label: "Best-fit area",
+    electric: "Smaller to mid-size areas: steps, walkways, entrances, most residential driveways",
+    hydronic: "Larger areas, especially full-coverage commercial properties, or where a boiler already serves the building",
+  },
+  {
+    label: "Installation complexity",
+    electric: "Electrical connection; no mechanical room or fuel supply needed",
+    hydronic: "Needs a mechanical room, a boiler, and usually a gas or other fuel supply",
+  },
+  {
+    label: "Who connects it",
+    electric: "A qualified electrician",
+    hydronic: "A qualified mechanical contractor, alongside electrical work for controls",
+  },
+  {
+    label: "Maintenance",
+    electric: "Periodic checks of controls and sensors",
+    hydronic: "Periodic boiler, pump, glycol and controls service — similar to routine HVAC maintenance",
+  },
+];
+
+const faqItems = [
+  {
+    q: "Is hydronic cheaper to run than electric?",
+    a: ["It depends on your property's gas and electricity rates, the size of the area, and the system's efficiency. Neither is categorically cheaper — your design compares real numbers for your situation."],
+  },
+  {
+    q: "Is electric cheaper to install than hydronic?",
+    a: ["Often, for smaller areas, because there's no boiler or mechanical room to add. At larger scale the comparison can shift. This is exactly the kind of question a design settles for your specific project."],
+  },
+  {
+    q: "Can I mix systems, like electric steps and a hydronic driveway?",
+    a: ["Yes. It's common to match the system to the area — electric for smaller, targeted spots and hydronic for a large full-coverage area, for example. Your design lays out what fits best."],
+  },
+  {
+    q: "Which works better for a very large commercial property?",
+    a: ["Hydronic is often favoured at commercial scale, particularly where a building's existing boiler plant can be extended. It isn't automatic, though — size, layout and your mechanical room all factor in."],
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: "https://meltgridcanada.ca/electric-vs-hydronic-snow-melting/",
+    isPartOf: { "@type": "WebSite", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+    publisher: { "@type": "Organization", name: "MeltGrid Canada", url: "https://meltgridcanada.ca" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://meltgridcanada.ca/" },
+      { "@type": "ListItem", position: 2, name: "Electric vs. hydronic" },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a.join(" ") },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/electric-vs-hydronic-snow-melting/" structuredData={structuredData}>
+  <section class="phero phero--text">
+    <div class="container">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Electric vs. hydronic" }]} />
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p>Electric vs. hydronic</p>
+          <h1>Electric or hydronic? Here's how to decide</h1>
+          <p>
+            Both systems clear snow and ice from a surface automatically. They get there differently, and each
+            tends to suit different properties and areas. Here is how they compare, so you know what to ask for in
+            your design.
+          </p>
+          <div class="phero__actions">
+            <a class="btn btn--primary btn--lg" href="/contact/?intent=coverage-help">Not sure which fits? Get a free design that compares both</a>
+          </div>
+        </div>
+        <div class="phero__aside">
+          <div class="hfacts">
+            <p><strong>Electric</strong> — Cable or mats in the surface. Often simpler for smaller areas.</p>
+            <p><strong>Hydronic</strong> — A boiler and glycol loop. Often favoured at larger scale.</p>
+            <p><strong>Your design compares both</strong> — for your property, not a generic rule.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush-top">
+    <div class="container">
+      <div class="section-header">
+        <h2>Side by side</h2>
+        <p>Every row below is a tendency, not a guarantee — your property's specifics decide the real answer.</p>
+      </div>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">Electric</th>
+              <th scope="col">Hydronic</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td>{row.electric}</td>
+                <td>{row.hydronic}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container about-split">
+      <h2>How we help you choose</h2>
+      <div class="prose about-prose">
+        <p>
+          MeltGrid Canada coordinates both electric and hydronic system design — we're not selling you toward one
+          product line. We look at your surface, the area you want to heat, your property's electrical and
+          mechanical situation, and how you use the space, then bring back a design that recommends the system (or
+          combination) that actually fits.
+        </p>
+        <p>
+          We do not manufacture either system's equipment, and for hydronic specifically, we coordinate licensed
+          mechanical contractors rather than employing them directly — the same coordination model we use for
+          electric and the surface trades.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Faq heading="Electric vs. hydronic questions" intro="Straight answers to the comparison questions we hear most." items={faqItems} />
+
+  <RelatedLinks
+    heading="Keep reading"
+    dark
+    items={[
+      { href: "/hydronic-snow-melting/", title: "Hydronic snow melting", body: "How it works, in detail." },
+      { href: "/heated-driveways/", title: "Heated driveways", body: "The electric side of snow melting." },
+      { href: "/cost/", title: "Cost and planning", body: "What shapes the cost of either system." },
+    ]}
+  />
+
+  <CtaStrip
+    heading="Get a design that compares both"
+    body="Tell us about your property. We'll recommend what actually fits, electric or hydronic."
+    primaryHref="/contact/?intent=coverage-help"
+    primaryLabel="Request my free design & estimate"
+  />
+</BaseLayout>
+
+<style>
+  .compare-table-wrap {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  .compare-table thead th {
+    background: var(--ice);
+    font-weight: 700;
+  }
+
+  .compare-table tbody th {
+    font-weight: 700;
+    white-space: nowrap;
+    background: var(--ice);
+  }
+
+  .compare-table tbody tr:last-child th,
+  .compare-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .about-split {
+    max-width: 48rem;
+  }
+  .about-prose {
+    margin-top: 1rem;
+  }
+</style>

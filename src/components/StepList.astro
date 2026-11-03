@@ -1,0 +1,22 @@
+---
+export interface StepItem {
+  title: string;
+  body: string;
+}
+
+export interface Props {
+  items: StepItem[];
+  numbered?: boolean;
+}
+
+const { items, numbered = true } = Astro.props;
+---
+
+<ul class="steps">
+  {items.map((item, i) => (
+    <li>
+      <h3>{numbered ? `${String(i + 1).padStart(2, "0")} ${item.title}` : item.title}</h3>
+      <p>{item.body}</p>
+    </li>
+  ))}
+</ul>

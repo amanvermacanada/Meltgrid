@@ -1,0 +1,23 @@
+---
+export interface Props {
+  heading: string;
+  body: string;
+  primaryHref: string;
+  primaryLabel: string;
+  dark?: boolean;
+}
+const { heading, body, primaryHref, primaryLabel } = Astro.props;
+---
+
+<section class="cta-strip on-dark" data-cta-final>
+  <div class="container cta-strip__inner">
+    <div class="cta-strip__copy">
+      <h2>{heading}</h2>
+      <p>{body}</p>
+    </div>
+    <div class="cta-strip__actions">
+      <a class="btn btn--primary btn--lg" href={primaryHref}>{primaryLabel}</a>
+      <a class="btn btn--ghost btn--lg" href="tel:+14377745305">437-774-5305</a>
+    </div>
+  </div>
+</section>

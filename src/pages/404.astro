@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Page not found | MeltGrid Canada";
+const description =
+  "This page could not be found. Find heated driveways, cost and planning, or request a free design and estimate from MeltGrid Canada.";
+---
+
+<BaseLayout title={title} description={description} path="/404/" noindex hideStickyCta>
+  <section class="nf">
+    <div class="container nf__inner">
+      <p class="nf__eyebrow">404</p>
+      <h1 class="h-display nf__title">We can&rsquo;t find that page</h1>
+      <p class="nf__lead">The page you were looking for may have moved or no longer exists. Here are a few places to start instead.</p>
+      <div class="nf__actions">
+        <a class="btn btn--primary btn--lg" href="/">Go to homepage</a>
+        <a class="btn btn--outline btn--lg" href="/contact/">Request my free design &amp; estimate</a>
+      </div>
+      <ul class="nf__links">
+        <li><a href="/heated-driveways/">Heated driveways</a></li>
+        <li><a href="/cost/">Cost &amp; planning</a></li>
+      </ul>
+      <p class="nf__help">Or call <a href="tel:+14377745305">437-774-5305</a> and we&rsquo;ll point you the right way.</p>
+    </div>
+  </section>
+</BaseLayout>
